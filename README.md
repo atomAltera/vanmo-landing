@@ -1,43 +1,110 @@
-# Astro Starter Kit: Minimal
+# VANMO Landing Page
 
-```sh
-npm create astro@latest -- --template minimal
+Static website for VANMO — a sports mafia game club in Tbilisi, Georgia.
+
+Built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com).
+
+## Tech Stack
+
+- **Astro** — Static Site Generator (SSG)
+- **Tailwind CSS v4** — Styling
+- **YAML** — Content management
+- **TypeScript** — Type safety
+
+## Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Start dev server
+npm run dev
+
+# Build for production
+npm run build
+
+# Preview production build
+npm run preview
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Dev server runs at `http://localhost:4321`
 
-## 🚀 Project Structure
+## Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```
+src/
+├── components/     # Astro components
+│   ├── Header.astro
+│   ├── Footer.astro
+│   ├── Hero.astro
+│   ├── About.astro
+│   ├── FAQ.astro
+│   ├── Map.astro
+│   └── ...
+├── data/           # YAML content files
+│   ├── site.yaml   # Site name, contact, social links
+│   ├── hero.yaml   # Hero section content
+│   ├── faq.yaml    # FAQ items
+│   ├── rules.yaml  # Club rules
+│   └── pages.yaml  # SEO metadata per page
+├── layouts/
+│   └── BaseLayout.astro
+├── pages/
+│   ├── index.astro
+│   ├── rules.astro
+│   └── contacts.astro
+└── styles/
+    └── global.css
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Content Management
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+All editable content is in `src/data/*.yaml` files. Edit these to update site content without touching components.
 
-Any static assets, like images, can be placed in the `public/` directory.
+### site.yaml
+```yaml
+name: "VANMO"
+tagline: "Клуб спортивной мафии"
+contact:
+  phone: "+995 593 527 310"
+  email: "contact@vanmo.ge"
+social:
+  telegram: "https://t.me/vanmo_mafia"
+  instagram: "https://www.instagram.com/vanmo_mafia/"
+```
 
-## 🧞 Commands
+### hero.yaml
+```yaml
+headline: "Добро пожаловать в VANMO"
+subtext: "Клуб спортивной мафии..."
+cta:
+  text: "Группа в Телеграме"
+  link: "https://t.me/vanmo_mafia"
+```
 
-All commands are run from the root of the project, from a terminal:
+## Deployment
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+### Cloudflare Pages (Recommended)
 
-## 👀 Want to learn more?
+1. Push to GitHub
+2. Connect repo in [Cloudflare Pages](https://pages.cloudflare.com)
+3. Configure:
+   - Build command: `npm run build`
+   - Output directory: `dist`
+4. Deploy
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+### Other platforms
+
+Works with Vercel, Netlify, GitHub Pages, or any static hosting.
+
+## Features
+
+- Pure static HTML/CSS output
+- SEO optimized (meta tags, OG tags, sitemap.xml, robots.txt)
+- Mobile responsive
+- Contact info obfuscation (anti-scraping)
+- Google Maps integration
+
+## License
+
+MIT
