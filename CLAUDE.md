@@ -33,3 +33,4 @@ Components read YAML at build time via `js-yaml` and `fs.readFileSync`.
 - No client-side JS unless explicitly requested
 - Sitemap auto-generated via @astrojs/sitemap
 - Update `site` in `astro.config.mjs` before deploying
+- Always commit after changes you have made. generate commit message based on what you have changed. avoid to run `git diff` if you remember what you have done. try use breaf commit messages
