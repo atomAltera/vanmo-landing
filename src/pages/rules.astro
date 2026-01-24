@@ -21,24 +21,27 @@ const rulesData = yaml.load(readFileSync('src/data/rules.yaml', 'utf8')) as {
 ---
 
 <BaseLayout title={pagesData.rules.title} description={pagesData.rules.description}>
-  <section class="py-16 md:py-20">
-    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-      <h1 class="text-4xl font-bold text-white text-center mb-6">
-        {rulesData.title}
-      </h1>
-      <p class="text-lg text-gray-300 text-center mb-12">
-        {rulesData.intro}
-      </p>
-      <ol class="space-y-6">
+  <section class="section-edge py-16 md:py-20">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 reveal">
+        <p class="kicker mb-2">Регламент</p>
+        <h1 class="text-4xl md:text-5xl font-display text-white">
+          {rulesData.title}
+        </h1>
+        <p class="text-lg text-gray-300 mt-4">
+          {rulesData.intro}
+        </p>
+      </div>
+      <ol class="grid gap-6">
         {rulesData.rules.map((rule, index) => (
-          <li class="bg-neutral-950 rounded-lg p-6 border border-white/10">
-            <h2 class="text-xl font-semibold text-white mb-2 flex items-center gap-3">
-              <span class="flex-shrink-0 w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                {index + 1}
+          <li class="glass-card rounded-2xl p-6 md:p-7 reveal">
+            <h2 class="text-xl font-semibold text-white mb-2 flex items-center gap-4">
+              <span class="flex-shrink-0 w-10 h-10 border border-red-500/60 text-red-100 rounded-full flex items-center justify-center text-sm font-bold">
+                {(index + 1).toString().padStart(2, '0')}
               </span>
               {rule.title}
             </h2>
-            <p class="text-gray-300 ml-11">
+            <p class="text-gray-300 ml-14">
               {rule.description}
             </p>
           </li>

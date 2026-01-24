@@ -18,11 +18,17 @@ const { title, description } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <link rel="preconnect" href="https://maps.googleapis.com" />
     <link rel="preconnect" href="https://maps.gstatic.com" crossorigin />
     <SEO title={title} description={description} />
   </head>
-  <body class="min-h-screen flex flex-col bg-neutral-900 text-white font-sans antialiased">
+  <body class="site-shell min-h-screen flex flex-col text-white font-sans antialiased">
     <a href="#main-content" class="skip-link">Перейти к содержимому</a>
     <Header />
     <main id="main-content" class="flex-grow">
