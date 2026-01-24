@@ -27,6 +27,13 @@ Components read YAML at build time via `js-yaml` and `fs.readFileSync`.
 
 **Pages**: `/` (landing), `/rules`, `/contacts` - each imports components and page-specific SEO from `pages.yaml`.
 
+## ⚠️ IMPORTANT: Content Language
+
+**ALL content must be in Russian.** This includes:
+- All YAML data files (site.yaml, hero.yaml, faq.yaml, rules.yaml, pages.yaml)
+- UI text in components (navigation, buttons, headings)
+- SEO metadata (titles, descriptions)
+
 ## Constraints
 
 - Pure static HTML/CSS output - no React/Vue/Svelte

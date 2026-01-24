@@ -21,17 +21,17 @@ const socialLabels: Record<string, string> = {
 };
 ---
 
-<section class="py-12 bg-gray-50">
+<section class="py-12 bg-[--color-brand-darker]">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <h2 class="text-2xl font-bold text-gray-900 mb-6">Connect With Us</h2>
-    <ul class="flex justify-center space-x-6" aria-label="Social media links">
+    <h2 class="text-2xl font-bold text-white mb-6">Мы в социальных сетях</h2>
+    <ul class="flex justify-center space-x-6" aria-label="Социальные сети">
       {Object.entries(siteData.social).map(([platform, url]) => (
         <li>
           <a
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors"
+            class="inline-flex items-center gap-2 text-gray-400 hover:text-[--color-brand-red] transition-colors"
             aria-label={socialLabels[platform] || platform}
           >
             <Fragment set:html={socialIcons[platform] || ''} />

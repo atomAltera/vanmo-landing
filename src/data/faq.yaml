@@ -1,11 +1,11 @@
-- question: "What is this service?"
-  answer: "This is a brief explanation of what we offer and how it works."
+- question: "Что такое спортивная мафия?"
+  answer: "Спортивная мафия — это командная психологическая игра с чёткими правилами и судейством. В отличие от обычной мафии, здесь важны логика, аргументация и умение читать людей."
 
-- question: "How do I get started?"
-  answer: "Simply visit our contacts page and reach out to us. We'll guide you through the process."
+- question: "Нужен ли опыт игры?"
+  answer: "Нет, мы рады как опытным игрокам, так и новичкам. Перед первой игрой мы объясним все правила и поможем освоиться."
 
-- question: "What are the rules?"
-  answer: "Please check our [rules page](/rules) for complete guidelines."
+- question: "Как часто проходят игры?"
+  answer: "Игры проводятся регулярно. Следите за анонсами в нашем [Telegram-канале](https://t.me/vanmo_club)."
 
-- question: "How can I contact you?"
-  answer: "You can reach us through our social media channels or visit our [contacts page](/contacts)."
+- question: "Сколько стоит участие?"
+  answer: "Информацию о стоимости и расписании вы найдёте в наших социальных сетях или на странице [контактов](/contacts)."

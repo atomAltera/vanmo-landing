@@ -7,9 +7,9 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
 };
 ---
 
-<section class="py-16 md:py-20 bg-white">
+<section class="py-16 md:py-20">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-    <p class="text-lg text-gray-600 leading-relaxed text-center">
+    <p class="text-lg text-gray-300 leading-relaxed text-center">
       {siteData.about}
     </p>
   </div>

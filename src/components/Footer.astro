@@ -17,23 +17,23 @@ const socialIcons: Record<string, string> = {
 };
 ---
 
-<footer class="bg-gray-900 text-gray-300 py-8">
+<footer class="bg-[--color-brand-darker] text-gray-400 py-8 border-t border-white/10">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col md:flex-row justify-between items-center gap-4">
       <p class="text-sm">
-        &copy; {currentYear} {siteData.name}. All rights reserved.
+        &copy; {currentYear} {siteData.name}. Все права защищены.
       </p>
 
       {Object.keys(siteData.social).length > 0 && (
-        <ul class="flex space-x-4" aria-label="Social media links">
+        <ul class="flex space-x-4" aria-label="Социальные сети">
           {Object.entries(siteData.social).map(([platform, url]) => (
             <li>
               <a
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-gray-400 hover:text-white transition-colors"
-                aria-label={`Follow us on ${platform}`}
+                class="text-gray-400 hover:text-[--color-brand-red] transition-colors"
+                aria-label={`Мы в ${platform}`}
               >
                 <Fragment set:html={socialIcons[platform] || platform} />
               </a>

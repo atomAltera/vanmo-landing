@@ -1,15 +1,21 @@
-title: "Rules"
-intro: "Please follow these guidelines to ensure a great experience for everyone."
+title: "Правила клуба"
+intro: "Соблюдение правил помогает создать комфортную атмосферу для всех участников."
 
 rules:
-  - title: "Be Respectful"
-    description: "Treat others with courtesy and respect at all times."
+  - title: "Уважайте других игроков"
+    description: "Относитесь к соперникам и партнёрам с уважением. Личные оскорбления недопустимы."
 
-  - title: "Follow Instructions"
-    description: "Listen to organizers and follow their guidance."
+  - title: "Приходите вовремя"
+    description: "Игра начинается строго по расписанию. Опоздавшие могут не попасть в текущий раунд."
 
-  - title: "Be On Time"
-    description: "Arrive at the scheduled time. Late arrivals may not be accommodated."
+  - title: "Следуйте указаниям ведущего"
+    description: "Ведущий — главный судья игры. Его решения обязательны для всех участников."
 
-  - title: "Have Fun"
-    description: "Enjoy yourself and help create a positive atmosphere for everyone."
+  - title: "Не разглашайте роли"
+    description: "Во время игры запрещено показывать свою карту или раскрывать роль до окончания партии."
+
+  - title: "Отключите телефоны"
+    description: "Использование телефонов во время игры отвлекает и нарушает атмосферу."
+
+  - title: "Получайте удовольствие"
+    description: "Главная цель — хорошо провести время. Играйте честно и наслаждайтесь процессом!"

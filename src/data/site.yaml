@@ -1,21 +1,19 @@
-name: "Your Site Name"
-tagline: "Your tagline here"
+name: "VANMO"
+tagline: "Клуб спортивной мафии"
 
 about: |
-  A brief description about your organization or service.
-  This text appears in the about section on the landing page.
+  VANMO — это клуб для любителей классической спортивной мафии.
+  Мы проводим регулярные игры для новичков и опытных игроков.
+  Присоединяйтесь к нам и откройте для себя увлекательный мир психологической игры!
 
 address:
-  street: "123 Main Street"
-  city: "City, Country"
-  postalCode: "12345"
+  street: "ул. Примерная, 123"
+  city: "Москва"
+  postalCode: "123456"
   coordinates:
-    lat: 40.7128
-    lng: -74.0060
+    lat: 55.7558
+    lng: 37.6173
 
 social:
-  telegram: "https://t.me/yourhandle"
-  instagram: "https://instagram.com/yourhandle"
-  # Add more social links as needed:
-  # facebook: "https://facebook.com/yourpage"
-  # twitter: "https://twitter.com/yourhandle"
+  telegram: "https://t.me/vanmo_club"
+  instagram: "https://instagram.com/vanmo_club"

@@ -7,16 +7,16 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
 };
 
 const navItems = [
-  { href: '/', label: 'Home' },
-  { href: '/rules', label: 'Rules' },
-  { href: '/contacts', label: 'Contacts' },
+  { href: '/', label: 'Главная' },
+  { href: '/rules', label: 'Правила' },
+  { href: '/contacts', label: 'Контакты' },
 ];
 ---
 
-<header class="bg-white border-b border-gray-200">
-  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Main navigation">
+<header class="bg-[--color-brand-darker] border-b border-white/10">
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Главное меню">
     <div class="flex justify-between items-center h-16">
-      <a href="/" class="text-xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
+      <a href="/" class="text-xl font-bold text-white hover:text-[--color-brand-red] transition-colors">
         {siteData.name}
       </a>
       <ul class="flex space-x-8">
@@ -24,7 +24,7 @@ const navItems = [
           <li>
             <a
               href={item.href}
-              class="text-gray-600 hover:text-gray-900 transition-colors font-medium"
+              class="text-gray-300 hover:text-white transition-colors font-medium"
             >
               {item.label}
             </a>
