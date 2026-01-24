@@ -1,6 +1,7 @@
 ---
 import yaml from 'js-yaml';
 import { readFileSync } from 'fs';
+import fiimLogo from '../assets/images/fiim-logo.png';
 
 const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
   name: string;
@@ -28,7 +29,7 @@ const socialIcons: Record<string, string> = {
         aria-label="FIIM - Mafia World Tour"
       >
         <img
-          src="https://mafiaworldtour.org/images/fiim-long.png"
+          src={fiimLogo.src}
           alt="FIIM"
           class="h-8"
           loading="lazy"
