@@ -14,6 +14,12 @@ address:
     lat: 41.6991979
     lng: 44.8042032
 
+contact:
+  phone: "+995 593 527 310"
+  name: "Константин Алиханов"
+  email: "contact@vanmo.ge"
+  telegram: "ak_alera"
+
 social:
   telegram: "https://t.me/vanmo_mafia"
   instagram: "https://www.instagram.com/vanmo_mafia/"
