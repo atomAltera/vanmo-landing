@@ -3,7 +3,6 @@ import yaml from 'js-yaml';
 import { readFileSync } from 'fs';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Map from '../components/Map.astro';
-import SocialLinks from '../components/SocialLinks.astro';
 
 const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
   contacts: {
@@ -67,6 +66,5 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
     </div>
   </section>
 
-  <SocialLinks />
   <Map />
 </BaseLayout>
