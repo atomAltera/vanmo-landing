@@ -39,6 +39,10 @@ Components read YAML at build time via `js-yaml` and `fs.readFileSync`.
 - UI text in components (navigation, buttons, headings)
 - SEO metadata (titles, descriptions)
 
+## Official Links
+
+- Telegram: https://t.me/vanmo_mafia
+
 ## Constraints
 
 - Pure static HTML/CSS output - no React/Vue/Svelte
