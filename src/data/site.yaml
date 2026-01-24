@@ -10,7 +10,6 @@ address:
   street: "20/4 Vakhtang Orbeliani St"
   venue: "Join Bar"
   city: "Tbilisi"
-  postalCode: "0108"
   coordinates:
     lat: 41.6991979
     lng: 44.8042032

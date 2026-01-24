@@ -26,8 +26,7 @@ const mapUrl = `https://www.google.com/maps?q=${lat},${lng}&z=17&output=embed`;
     </h2>
     <address class="text-center text-gray-300 mb-8 not-italic">
       {siteData.address.venue && <p class="font-semibold text-white">{siteData.address.venue}</p>}
-      <p>{siteData.address.street}</p>
-      <p>{siteData.address.city} {siteData.address.postalCode}</p>
+      <p>{siteData.address.street}, {siteData.address.city}</p>
     </address>
     <div class="aspect-video rounded-lg overflow-hidden border border-white/10">
       <iframe
