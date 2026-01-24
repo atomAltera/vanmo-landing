@@ -1,4 +1,7 @@
 ---
+import yaml from 'js-yaml';
+import { readFileSync } from 'fs';
+
 interface Props {
   title: string;
   description: string;
@@ -6,16 +9,75 @@ interface Props {
   ogImage?: string;
 }
 
+const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
+  name: string;
+  tagline: string;
+  address: {
+    street: string;
+    venue: string;
+    city: string;
+    coordinates: {
+      lat: number;
+      lng: number;
+    };
+  };
+  contact: {
+    phone: string;
+    email: string;
+    telegram: string;
+  };
+  social: Record<string, string>;
+};
+
 const { title, description, canonical, ogImage } = Astro.props;
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') || '';
 const canonicalUrl = canonical || Astro.url.href;
 const ogImageUrl = ogImage || `${siteUrl}/og-image.png`;
+
+// JSON-LD structured data for local business
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SportsClub",
+  "name": siteData.name,
+  "description": siteData.tagline,
+  "url": siteUrl,
+  "logo": `${siteUrl}/logo.png`,
+  "image": ogImageUrl,
+  "telephone": siteData.contact.phone,
+  "email": siteData.contact.email,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": siteData.address.street,
+    "addressLocality": siteData.address.city,
+    "addressCountry": "GE"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": siteData.address.coordinates.lat,
+    "longitude": siteData.address.coordinates.lng
+  },
+  "sameAs": Object.values(siteData.social)
+};
 ---
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
+<meta name="robots" content="index, follow" />
+<meta name="language" content="Russian" />
+<meta name="author" content={siteData.name} />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Theme Color -->
+<meta name="theme-color" content="#0a0a0a" />
+<meta name="msapplication-TileColor" content="#dc2626" />
+
+<!-- Geo Tags -->
+<meta name="geo.region" content="GE-TB" />
+<meta name="geo.placename" content="Tbilisi" />
+<meta name="geo.position" content={`${siteData.address.coordinates.lat};${siteData.address.coordinates.lng}`} />
+<meta name="ICBM" content={`${siteData.address.coordinates.lat}, ${siteData.address.coordinates.lng}`} />
 
 <!-- Canonical -->
 <link rel="canonical" href={canonicalUrl} />
@@ -26,10 +88,17 @@ const ogImageUrl = ogImage || `${siteUrl}/og-image.png`;
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content={siteData.name} />
+<meta property="og:locale" content="ru_RU" />
 
 <!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={canonicalUrl} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={ogImageUrl} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalUrl} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

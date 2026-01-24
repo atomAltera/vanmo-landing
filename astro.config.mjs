@@ -6,7 +6,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com', // TODO: Replace with your actual domain
+  site: 'https://vanmo.ge',
   server: {
     host: '0.0.0.0',
     port: 4321
