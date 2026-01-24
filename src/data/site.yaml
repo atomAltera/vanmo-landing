@@ -12,8 +12,8 @@ address:
   city: "Tbilisi"
   postalCode: "0108"
   coordinates:
-    lat: 41.6992188
-    lng: 44.8044101
+    lat: 41.6991979
+    lng: 44.8042032
 
 social:
   telegram: "https://t.me/vanmo_mafia"
