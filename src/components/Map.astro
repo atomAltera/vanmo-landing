@@ -5,6 +5,7 @@ import { readFileSync } from 'fs';
 const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
   address: {
     street: string;
+    venue?: string;
     city: string;
     postalCode: string;
     coordinates: {
@@ -24,6 +25,7 @@ const mapUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3000!2d${l
       Как нас найти
     </h2>
     <address class="text-center text-gray-300 mb-8 not-italic">
+      {siteData.address.venue && <p class="font-semibold text-white">{siteData.address.venue}</p>}
       <p>{siteData.address.street}</p>
       <p>{siteData.address.city} {siteData.address.postalCode}</p>
     </address>

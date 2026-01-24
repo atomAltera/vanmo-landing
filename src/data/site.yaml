@@ -7,12 +7,13 @@ about: |
   Присоединяйтесь к нам и откройте для себя увлекательный мир психологической игры!
 
 address:
-  street: "ул. Примерная, 123"
-  city: "Москва"
-  postalCode: "123456"
+  street: "20/4 Vakhtang Orbeliani St"
+  venue: "Join Bar"
+  city: "Tbilisi"
+  postalCode: "0108"
   coordinates:
-    lat: 55.7558
-    lng: 37.6173
+    lat: 41.6992188
+    lng: 44.8044101
 
 social:
   telegram: "https://t.me/vanmo_mafia"
