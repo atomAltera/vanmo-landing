@@ -12,7 +12,10 @@ export default defineConfig({
     port: 4321
   },
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    server: {
+      allowedHosts: ['host.docker.internal']
+    }
   },
 
   integrations: [sitemap()]
