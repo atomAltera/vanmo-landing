@@ -14,7 +14,7 @@ const heroData = yaml.load(readFileSync('src/data/hero.yaml', 'utf8')) as {
 
 <section class="section-edge bg-neutral-950 py-20 md:py-32">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 lg:grid-cols-[1.2fr,0.8fr] items-center">
-    <div class="reveal">
+    <div>
       <p class="kicker mb-4">Игра в мафию</p>
       <h1 class="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-6 leading-tight">
         {heroData.headline}
@@ -23,7 +23,7 @@ const heroData = yaml.load(readFileSync('src/data/hero.yaml', 'utf8')) as {
         {heroData.subtext}
       </p>
     </div>
-    <div class="glass-card rounded-2xl p-8 reveal">
+    <div class="glass-card rounded-2xl p-8">
       <p class="text-sm uppercase tracking-[0.24em] text-white/60 mb-3">Закрытая регистрация</p>
       <p class="text-lg text-white mb-6">
         Забронируйте участие заранее и получите место за лучшим столом.

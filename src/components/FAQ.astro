@@ -15,7 +15,7 @@ function parseLinks(text: string): string {
 
 <section class="section-edge py-16 md:py-20 bg-neutral-950/80">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12 reveal">
+    <div class="text-center mb-12">
       <p class="kicker mb-2">FAQ</p>
       <h2 class="text-3xl md:text-4xl font-display text-white">
         Часто задаваемые вопросы
@@ -23,7 +23,7 @@ function parseLinks(text: string): string {
     </div>
     <dl class="grid gap-6 md:grid-cols-2">
       {faqData.map((item, index) => (
-        <div class="glass-card rounded-2xl p-6 reveal">
+        <div class="glass-card rounded-2xl p-6">
           <dt class="flex items-start gap-4">
             <span class="text-4xl font-display text-white/60 leading-none">
               {(index + 1).toString().padStart(2, '0')}

@@ -21,13 +21,13 @@ const mapUrl = `https://www.google.com/maps?q=${lat},${lng}&z=17&output=embed`;
 
 <section class="section-edge py-16 md:py-20">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-8 reveal">
+    <div class="text-center mb-8">
       <p class="kicker mb-2">Локация</p>
       <h2 class="text-3xl md:text-4xl font-display text-white">
         Как нас найти
       </h2>
     </div>
-    <div class="glass-card rounded-2xl p-6 md:p-8 reveal">
+    <div class="glass-card rounded-2xl p-6 md:p-8">
       <address class="text-center text-gray-200 mb-6 not-italic">
         {siteData.address.venue && <p class="font-semibold text-white">{siteData.address.venue}</p>}
         <p>{siteData.address.street}, {siteData.address.city}</p>
