@@ -1,0 +1,39 @@
+---
+import yaml from 'js-yaml';
+import { readFileSync } from 'fs';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Map from '../components/Map.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+
+const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
+  contacts: {
+    title: string;
+    description: string;
+  };
+};
+
+const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
+  name: string;
+  address: {
+    street: string;
+    city: string;
+    postalCode: string;
+  };
+};
+---
+
+<BaseLayout title={pagesData.contacts.title} description={pagesData.contacts.description}>
+  <section class="py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-4xl font-bold text-gray-900 mb-6">
+        Contact Us
+      </h1>
+      <p class="text-lg text-gray-600 mb-8">
+        We'd love to hear from you. Reach out through social media or visit us at our location.
+      </p>
+    </div>
+  </section>
+
+  <SocialLinks />
+  <Map />
+</BaseLayout>

@@ -1,0 +1,5 @@
+headline: "Welcome to Our Site"
+subtext: "A compelling value proposition that explains what you offer and why visitors should care."
+cta:
+  text: "Get Started"
+  link: "/contacts"

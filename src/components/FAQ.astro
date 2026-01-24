@@ -1,0 +1,32 @@
+---
+import yaml from 'js-yaml';
+import { readFileSync } from 'fs';
+
+const faqData = yaml.load(readFileSync('src/data/faq.yaml', 'utf8')) as Array<{
+  question: string;
+  answer: string;
+}>;
+
+// Simple markdown link parser for FAQ answers
+function parseLinks(text: string): string {
+  return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-gray-900 underline hover:no-underline">$1</a>');
+}
+---
+
+<section class="py-16 md:py-20 bg-gray-50">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 class="text-3xl font-bold text-gray-900 text-center mb-12">
+      Frequently Asked Questions
+    </h2>
+    <dl class="space-y-8">
+      {faqData.map((item) => (
+        <div class="bg-white rounded-lg p-6 shadow-sm">
+          <dt class="text-lg font-semibold text-gray-900 mb-2">
+            {item.question}
+          </dt>
+          <dd class="text-gray-600" set:html={parseLinks(item.answer)} />
+        </div>
+      ))}
+    </dl>
+  </div>
+</section>

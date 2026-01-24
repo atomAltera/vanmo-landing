@@ -1,0 +1,25 @@
+---
+import yaml from 'js-yaml';
+import { readFileSync } from 'fs';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import FAQ from '../components/FAQ.astro';
+import Map from '../components/Map.astro';
+import SocialLinks from '../components/SocialLinks.astro';
+
+const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
+  home: {
+    title: string;
+    description: string;
+  };
+};
+---
+
+<BaseLayout title={pagesData.home.title} description={pagesData.home.description}>
+  <Hero />
+  <About />
+  <FAQ />
+  <SocialLinks />
+  <Map />
+</BaseLayout>

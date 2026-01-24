@@ -1,0 +1,21 @@
+name: "Your Site Name"
+tagline: "Your tagline here"
+
+about: |
+  A brief description about your organization or service.
+  This text appears in the about section on the landing page.
+
+address:
+  street: "123 Main Street"
+  city: "City, Country"
+  postalCode: "12345"
+  coordinates:
+    lat: 40.7128
+    lng: -74.0060
+
+social:
+  telegram: "https://t.me/yourhandle"
+  instagram: "https://instagram.com/yourhandle"
+  # Add more social links as needed:
+  # facebook: "https://facebook.com/yourpage"
+  # twitter: "https://twitter.com/yourhandle"

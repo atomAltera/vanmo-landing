@@ -1,0 +1,49 @@
+---
+import yaml from 'js-yaml';
+import { readFileSync } from 'fs';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
+  rules: {
+    title: string;
+    description: string;
+  };
+};
+
+const rulesData = yaml.load(readFileSync('src/data/rules.yaml', 'utf8')) as {
+  title: string;
+  intro: string;
+  rules: Array<{
+    title: string;
+    description: string;
+  }>;
+};
+---
+
+<BaseLayout title={pagesData.rules.title} description={pagesData.rules.description}>
+  <section class="py-16 md:py-20">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h1 class="text-4xl font-bold text-gray-900 text-center mb-6">
+        {rulesData.title}
+      </h1>
+      <p class="text-lg text-gray-600 text-center mb-12">
+        {rulesData.intro}
+      </p>
+      <ol class="space-y-6">
+        {rulesData.rules.map((rule, index) => (
+          <li class="bg-white rounded-lg p-6 shadow-sm border border-gray-100">
+            <h2 class="text-xl font-semibold text-gray-900 mb-2 flex items-center gap-3">
+              <span class="flex-shrink-0 w-8 h-8 bg-gray-900 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                {index + 1}
+              </span>
+              {rule.title}
+            </h2>
+            <p class="text-gray-600 ml-11">
+              {rule.description}
+            </p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+</BaseLayout>
