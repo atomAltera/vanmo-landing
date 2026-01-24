@@ -10,6 +10,11 @@ npm run build    # Build to ./dist/
 npm run preview  # Preview production build
 ```
 
+## Playwright (Browser Preview)
+
+Playwright runs in Docker, so use `host.docker.internal` instead of `localhost`:
+- Dev server: `http://host.docker.internal:4321/`
+
 ## Architecture
 
 Static Astro site (SSG) with Tailwind CSS. No client-side JavaScript.
