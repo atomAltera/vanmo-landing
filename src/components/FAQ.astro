@@ -9,18 +9,18 @@ const faqData = yaml.load(readFileSync('src/data/faq.yaml', 'utf8')) as Array<{
 
 // Simple markdown link parser for FAQ answers
 function parseLinks(text: string): string {
-  return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-[--color-brand-red] underline hover:no-underline">$1</a>');
+  return text.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-red-500 underline hover:no-underline">$1</a>');
 }
 ---
 
-<section class="py-16 md:py-20 bg-[--color-brand-darker]">
+<section class="py-16 md:py-20 bg-neutral-950">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="text-3xl font-bold text-white text-center mb-12">
       Часто задаваемые вопросы
     </h2>
     <dl class="space-y-6">
       {faqData.map((item) => (
-        <div class="bg-[--color-brand-dark] rounded-lg p-6 border border-white/10">
+        <div class="bg-neutral-900 rounded-lg p-6 border border-white/10">
           <dt class="text-lg font-semibold text-white mb-2">
             {item.question}
           </dt>

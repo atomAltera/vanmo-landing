@@ -17,7 +17,7 @@ const socialIcons: Record<string, string> = {
 };
 ---
 
-<footer class="bg-[--color-brand-darker] text-gray-400 py-8 border-t border-white/10">
+<footer class="bg-neutral-950 text-gray-400 py-8 border-t border-white/10">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col md:flex-row justify-between items-center gap-4">
       <p class="text-sm">
@@ -32,7 +32,7 @@ const socialIcons: Record<string, string> = {
                 href={url}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="text-gray-400 hover:text-[--color-brand-red] transition-colors"
+                class="text-gray-400 hover:text-red-500 transition-colors"
                 aria-label={`Мы в ${platform}`}
               >
                 <Fragment set:html={socialIcons[platform] || platform} />

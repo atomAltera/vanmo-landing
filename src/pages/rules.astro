@@ -31,9 +31,9 @@ const rulesData = yaml.load(readFileSync('src/data/rules.yaml', 'utf8')) as {
       </p>
       <ol class="space-y-6">
         {rulesData.rules.map((rule, index) => (
-          <li class="bg-[--color-brand-darker] rounded-lg p-6 border border-white/10">
+          <li class="bg-neutral-950 rounded-lg p-6 border border-white/10">
             <h2 class="text-xl font-semibold text-white mb-2 flex items-center gap-3">
-              <span class="flex-shrink-0 w-8 h-8 bg-[--color-brand-red] text-white rounded-full flex items-center justify-center text-sm font-bold">
+              <span class="flex-shrink-0 w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
                 {index + 1}
               </span>
               {rule.title}
