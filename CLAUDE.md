@@ -42,6 +42,7 @@ Components read YAML at build time via `js-yaml` and `fs.readFileSync`.
 ## Official Links
 
 - Telegram: https://t.me/vanmo_mafia
+- Instagram: https://www.instagram.com/vanmo_mafia/
 
 ## Constraints
 
