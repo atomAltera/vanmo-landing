@@ -10,14 +10,32 @@ const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
   };
 };
 
-const rulesData = yaml.load(readFileSync('src/data/rules.yaml', 'utf8')) as {
-  title: string;
-  intro: string;
-  rules: Array<{
-    title: string;
-    description: string;
-  }>;
-};
+const rules = [
+  {
+    title: "Уважайте других игроков",
+    description: "Относитесь к соперникам и партнёрам с уважением. Личные оскорбления недопустимы."
+  },
+  {
+    title: "Приходите вовремя",
+    description: "Игра начинается строго по расписанию. Опоздавшие могут не попасть в текущий раунд."
+  },
+  {
+    title: "Следуйте указаниям ведущего",
+    description: "Ведущий — главный судья игры. Его решения обязательны для всех участников."
+  },
+  {
+    title: "Не разглашайте роли",
+    description: "Во время игры запрещено показывать свою карту или раскрывать роль до окончания партии."
+  },
+  {
+    title: "Отключите телефоны",
+    description: "Использование телефонов во время игры отвлекает и нарушает атмосферу."
+  },
+  {
+    title: "Получайте удовольствие",
+    description: "Главная цель — хорошо провести время. Играйте честно и наслаждайтесь процессом!"
+  }
+];
 ---
 
 <BaseLayout title={pagesData.rules.title} description={pagesData.rules.description}>
@@ -26,14 +44,14 @@ const rulesData = yaml.load(readFileSync('src/data/rules.yaml', 'utf8')) as {
       <div class="text-center mb-12">
         <p class="kicker mb-2">Регламент</p>
         <h1 class="text-4xl md:text-5xl font-display text-white">
-          {rulesData.title}
+          Правила клуба
         </h1>
         <p class="text-lg text-gray-300 mt-4">
-          {rulesData.intro}
+          Соблюдение правил помогает создать комфортную атмосферу для всех участников.
         </p>
       </div>
       <ol class="grid gap-6">
-        {rulesData.rules.map((rule, index) => (
+        {rules.map((rule, index) => (
           <li class="glass-card rounded-2xl p-6 md:p-7">
             <h2 class="text-xl font-semibold text-white mb-2 flex items-center gap-4">
               <span class="flex-shrink-0 w-10 h-10 border border-red-500/60 text-red-100 rounded-full flex items-center justify-center text-sm font-bold">
