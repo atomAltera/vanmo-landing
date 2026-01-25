@@ -1,5 +1,5 @@
 ---
-import logoWhite from '../assets/images/vanmo-logo-white.png';
+import headerLogo from '../assets/images/vanmo-header-logo.png';
 
 const navItems = [
   { href: '/', label: 'Главная' },
@@ -11,9 +11,8 @@ const navItems = [
 <header class="bg-neutral-950/70 border-b border-white/10 backdrop-blur">
   <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Главное меню">
     <div class="flex justify-between items-center h-16">
-      <a href="/" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
-        <img src={logoWhite.src} alt="" class="h-8 w-auto" />
-        <span class="text-2xl font-semibold text-white">VANMO</span>
+      <a href="/" class="block hover:opacity-80 transition-opacity">
+        <img src={headerLogo.src} alt="VANMO" class="h-8 w-auto" />
       </a>
       <ul class="flex space-x-8 text-sm uppercase tracking-[0.18em]">
         {navItems.map((item) => (
