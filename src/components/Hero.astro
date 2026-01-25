@@ -2,9 +2,9 @@
 import yaml from 'js-yaml';
 import { readFileSync } from 'fs';
 
-const heroData = yaml.load(readFileSync('src/data/hero.yaml', 'utf8')) as {
-  cta: {
-    link: string;
+const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
+  social: {
+    telegram: string;
   };
 };
 ---
@@ -26,7 +26,7 @@ const heroData = yaml.load(readFileSync('src/data/hero.yaml', 'utf8')) as {
         Забронируйте участие заранее и получите место за лучшим столом.
       </p>
       <a
-        href={heroData.cta.link}
+        href={siteData.social.telegram}
         target="_blank"
         rel="noopener noreferrer"
         class="cta-button inline-flex items-center gap-3 bg-red-600 text-white px-7 py-4 rounded-lg text-lg font-semibold hover:bg-red-700 transition-colors focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-neutral-950"

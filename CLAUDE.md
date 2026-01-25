@@ -21,7 +21,6 @@ Static Astro site (SSG) with Tailwind CSS. No client-side JavaScript.
 
 **Content System**: All editable content lives in YAML files under `src/data/`:
 - `site.yaml` - Site name, about text, address, social links
-- `hero.yaml` - Landing page hero section
 - `faq.yaml` - FAQ items array
 - `pages.yaml` - SEO metadata (title/description) per page
 - `rules.yaml` - Rules page content
@@ -35,7 +34,7 @@ Components read YAML at build time via `js-yaml` and `fs.readFileSync`.
 ## ⚠️ IMPORTANT: Content Language
 
 **ALL content must be in Russian.** This includes:
-- All YAML data files (site.yaml, hero.yaml, faq.yaml, rules.yaml, pages.yaml)
+- All YAML data files (site.yaml, faq.yaml, rules.yaml, pages.yaml)
 - UI text in components (navigation, buttons, headings)
 - SEO metadata (titles, descriptions)
 

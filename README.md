@@ -43,7 +43,6 @@ src/
 │   └── ...
 ├── data/           # YAML content files
 │   ├── site.yaml   # Site name, contact, social links
-│   ├── hero.yaml   # Hero section content
 │   ├── faq.yaml    # FAQ items
 │   ├── rules.yaml  # Club rules
 │   └── pages.yaml  # SEO metadata per page
@@ -71,15 +70,6 @@ contact:
 social:
   telegram: "https://t.me/vanmo_mafia"
   instagram: "https://www.instagram.com/vanmo_mafia/"
-```
-
-### hero.yaml
-```yaml
-headline: "Добро пожаловать в VANMO"
-subtext: "Клуб спортивной мафии..."
-cta:
-  text: "Группа в Телеграме"
-  link: "https://t.me/vanmo_mafia"
 ```
 
 ## Deployment
