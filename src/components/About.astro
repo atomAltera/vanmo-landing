@@ -1,10 +1,4 @@
 ---
-import yaml from 'js-yaml';
-import { readFileSync } from 'fs';
-
-const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
-  about: string;
-};
 ---
 
 <section class="section-edge py-16 md:py-20">
@@ -15,7 +9,9 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
         Атмосфера, где решает психология
       </h2>
       <p class="text-lg text-gray-200 leading-relaxed">
-        {siteData.about}
+        VANMO — это клуб для любителей классической спортивной мафии.
+        Мы проводим регулярные игры для новичков и опытных игроков.
+        Присоединяйтесь к нам и откройте для себя увлекательный мир психологической игры!
       </p>
     </div>
   </div>

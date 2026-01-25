@@ -11,7 +11,6 @@ interface Props {
 
 const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
   name: string;
-  tagline: string;
   address: {
     street: string;
     venue: string;
@@ -39,7 +38,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SportsClub",
   "name": siteData.name,
-  "description": siteData.tagline,
+  "description": "Клуб спортивной мафии",
   "url": siteUrl,
   "logo": `${siteUrl}/logo.png`,
   "image": ogImageUrl,
