@@ -52,12 +52,12 @@ body.site-shell::before {
 .section-edge::after {
   content: "";
   position: absolute;
-  left: -5%;
-  right: -5%;
-  bottom: -30px;
-  height: 60px;
-  background: linear-gradient(135deg, transparent 0%, rgba(192, 24, 33, 0.25) 35%, transparent 70%);
-  transform: skewY(-2.5deg);
+  left: 8%;
+  right: 8%;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, rgba(192, 24, 33, 0.35) 20%, rgba(200, 169, 106, 0.35) 50%, rgba(192, 24, 33, 0.35) 80%, transparent 100%);
+  transform: none;
 }
 
 .glass-card {
