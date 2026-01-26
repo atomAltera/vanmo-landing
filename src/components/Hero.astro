@@ -164,19 +164,21 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
 
   // Generate the full pattern SVG
   function generatePattern(): string {
-    const iconSize = 24;
+    const iconSize = 18;  // Actual icon size
+    const gap = 8;        // Gap between icons
+    const cellSize = iconSize + gap;
     const cols = 10;
     const rows = 4;
-    const width = cols * iconSize;
-    const height = rows * iconSize;
+    const width = cols * cellSize;
+    const height = rows * cellSize;
 
     let content = '';
 
     for (let row = 0; row < rows; row++) {
       const iconRow = createIconRow();
       for (let col = 0; col < cols; col++) {
-        const x = col * iconSize;
-        const y = row * iconSize;
+        const x = col * cellSize + gap / 2;
+        const y = row * cellSize + gap / 2;
         content += renderIcon(iconRow[col], x, y, iconSize);
       }
     }
