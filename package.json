@@ -10,8 +10,11 @@
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.0",
+    "@iconify-json/game-icons": "^1.2.3",
+    "@iconify-json/mdi": "^1.2.3",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.15",
+    "astro-icon": "^1.1.5",
     "js-yaml": "^4.1.1",
     "tailwindcss": "^4.1.18"
   },

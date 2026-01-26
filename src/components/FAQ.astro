@@ -1,4 +1,6 @@
 ---
+import NumberedCard from './NumberedCard.astro';
+
 // FAQ content hardcoded directly in component
 const faqData = [
   {
@@ -30,17 +32,7 @@ const faqData = [
     </div>
     <dl class="grid gap-6 md:grid-cols-2">
       {faqData.map((item, index) => (
-        <div class="glass-card rounded-2xl p-6">
-          <dt class="flex items-start gap-4">
-            <span class="text-4xl font-display text-white/60 leading-none">
-              {(index + 1).toString().padStart(2, '0')}
-            </span>
-            <span class="text-lg font-semibold text-white">
-              {item.question}
-            </span>
-          </dt>
-          <dd class="text-gray-300 mt-3" set:html={item.answer} />
-        </div>
+        <NumberedCard index={index} title={item.question} bodyHtml={item.answer} />
       ))}
     </dl>
   </div>
