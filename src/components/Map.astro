@@ -27,8 +27,8 @@ const mapUrl = `https://www.google.com/maps?q=${lat},${lng}&z=17&output=embed`;
         Как нас найти
       </h2>
     </div>
-    <div class="glass-card rounded-2xl p-6 md:p-8">
-      <address class="flex flex-wrap items-center justify-start gap-x-2 gap-y-1 text-left text-gray-200 mb-6 not-italic">
+    <div class="rounded-2xl p-0">
+      <address class="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center text-gray-200 mb-4 not-italic">
         {siteData.address.venue && <span class="font-semibold text-white">{siteData.address.venue}</span>}
         <span>{siteData.address.street}, {siteData.address.city}</span>
       </address>
