@@ -113,16 +113,17 @@ const icons = {
 
   .pattern-layer {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+    inset: -75%;
+    width: 250%;
+    height: 250%;
     z-index: 0;
     pointer-events: none;
     display: grid;
     grid-template-columns: repeat(auto-fill, 26px);
     grid-template-rows: repeat(auto-fill, 26px);
     justify-content: center;
-    overflow: hidden;
+    align-content: center;
+    transform: rotate(-35deg);
   }
 
   .pattern-layer svg {
@@ -176,8 +177,9 @@ const icons = {
     if (!container) return;
 
     const cellSize = 26;
-    const cols = Math.ceil(window.innerWidth / cellSize) + 2;
-    const rows = Math.ceil(container.offsetHeight / cellSize) + 2;
+    // Extra icons to cover rotated area (250% size)
+    const cols = Math.ceil(window.innerWidth * 2.5 / cellSize) + 2;
+    const rows = Math.ceil(window.innerHeight * 2.5 / cellSize) + 2;
 
     // Create grid of icons
     const allIcons: SVGSVGElement[][] = [];
