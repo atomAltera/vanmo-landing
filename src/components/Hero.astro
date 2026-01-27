@@ -182,50 +182,13 @@ const icons = {
       }
     }
 
-    // Matrix rain effect - uniform speed, staggered columns
-    const trailLength = 6;
-    const speed = 0.08; // Uniform speed for all columns
-    const baseOpacity = 0.04;
-    const peakOpacity = 0.25;
-
-    // Initialize drops with staggered starting positions
-    const drops = new Array(cols).fill(0).map((_, col) => ({
-      // Stagger start positions so drops are evenly distributed
-      headRow: -trailLength - (col % 5) * (rows / 5) - Math.random() * (rows / 5),
-      delay: 0 // No delay, all moving
-    }));
-
-    function animate() {
+    // Static random opacity pattern
+    for (let row = 0; row < rows; row++) {
       for (let col = 0; col < cols; col++) {
-        const drop = drops[col];
-
-        // Move drop down
-        drop.headRow += speed;
-
-        // Reset when drop exits bottom
-        if (drop.headRow > rows + trailLength) {
-          drop.headRow = -trailLength - Math.random() * 4;
-        }
-
-        // Update icon opacities for this column
-        for (let row = 0; row < rows; row++) {
-          const distFromHead = row - drop.headRow;
-          let opacity = baseOpacity;
-
-          // Trail effect: head is brightest, fades behind
-          if (distFromHead >= 0 && distFromHead < trailLength) {
-            const trailProgress = distFromHead / trailLength;
-            // Smooth fade from peak at head to base at tail
-            opacity = baseOpacity + (peakOpacity - baseOpacity) * (1 - trailProgress);
-          }
-
-          allIcons[row][col].style.opacity = opacity.toString();
-        }
+        const opacity = 0.03 + Math.random() * 0.08;
+        allIcons[row][col].style.opacity = opacity.toString();
       }
-      requestAnimationFrame(animate);
     }
-
-    animate();
   }
 
   // Run on page load
