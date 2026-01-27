@@ -116,9 +116,21 @@ const icons = {
     inset: 0;
     width: 100%;
     height: 100%;
-    background-repeat: repeat;
     z-index: 0;
     pointer-events: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 26px);
+    grid-template-rows: repeat(auto-fill, 26px);
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .pattern-layer svg {
+    width: 18px;
+    height: 18px;
+    fill: white;
+    opacity: 0.05;
+    transition: opacity 0.3s ease;
   }
 
   .hero-section > div:not(.pattern-layer) {
@@ -131,78 +143,95 @@ const icons = {
   // Get icons loaded from files at build time
   const icons = (window as any).__PATTERN_ICONS__ as Record<string, { viewBox: string; content: string }>;
 
-  // Shuffle array using Fisher-Yates
-  function shuffle<T>(array: T[]): T[] {
-    const arr = [...array];
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
+  // Icon distribution
+  const iconPool = ['pistol', 'pistol', 'tie', 'tie', 'tie', 'tie', 'tie', 'tie', 'ring', 'star'];
+
+  function getRandomIcon(): string {
+    return iconPool[Math.floor(Math.random() * iconPool.length)];
   }
 
-  // Create a row of 10 icons: 2 pistols, 6 ties, 1 ring, 1 star
-  function createIconRow(): string[] {
-    const row = [
-      'pistol', 'pistol',
-      'tie', 'tie', 'tie', 'tie', 'tie', 'tie',
-      'ring',
-      'star'
-    ];
-    return shuffle(row);
-  }
-
-  // Generate SVG content for an icon
-  function renderIcon(iconName: string, x: number, y: number, size: number): string {
+  // Create SVG element for an icon
+  function createIconSvg(iconName: string): SVGSVGElement {
     const icon = icons[iconName];
-    const [, , vbW, vbH] = icon.viewBox.split(' ').map(Number);
-
-    // Scale to fit in size while maintaining aspect ratio
-    const scale = size / Math.max(vbW, vbH);
-    const offsetX = (size - vbW * scale) / 2;
-    const offsetY = (size - vbH * scale) / 2;
-
-    return `<g transform="translate(${x + offsetX}, ${y + offsetY}) scale(${scale})">${icon.content}</g>`;
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', icon.viewBox);
+    svg.setAttribute('width', '18');
+    svg.setAttribute('height', '18');
+    svg.innerHTML = icon.content;
+    return svg;
   }
 
-  // Generate the full pattern SVG
-  function generatePattern(): string {
-    const iconSize = 18;  // Actual icon size
-    const gap = 8;        // Gap between icons
-    const cellSize = iconSize + gap;
-    const cols = 10;
-    const rows = 6;
-    const width = cols * cellSize;
-    const height = rows * cellSize;
+  // Initialize the grid and animation
+  function initMatrixRain() {
+    const container = document.querySelector('.pattern-layer') as HTMLElement;
+    if (!container) return;
 
-    let content = '';
+    const cellSize = 26;
+    const cols = Math.ceil(window.innerWidth / cellSize) + 2;
+    const rows = Math.ceil(container.offsetHeight / cellSize) + 2;
+
+    // Create grid of icons
+    const allIcons: SVGSVGElement[][] = [];
 
     for (let row = 0; row < rows; row++) {
-      const iconRow = createIconRow();
+      allIcons[row] = [];
       for (let col = 0; col < cols; col++) {
-        const x = col * cellSize + gap / 2;
-        const y = row * cellSize + gap / 2;
-        content += renderIcon(iconRow[col], x, y, iconSize);
+        const svg = createIconSvg(getRandomIcon());
+        container.appendChild(svg);
+        allIcons[row][col] = svg;
       }
     }
 
-    return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
-      <g fill="white" fill-opacity="0.04">${content}</g>
-    </svg>`;
-  }
+    // Matrix rain effect - uniform speed, staggered columns
+    const trailLength = 6;
+    const speed = 0.08; // Uniform speed for all columns
+    const baseOpacity = 0.04;
+    const peakOpacity = 0.25;
 
-  // Apply pattern to background
-  function applyPattern() {
-    const svg = generatePattern();
-    const encoded = encodeURIComponent(svg);
-    const dataUrl = `url("data:image/svg+xml,${encoded}")`;
+    // Initialize drops with staggered starting positions
+    const drops = new Array(cols).fill(0).map((_, col) => ({
+      // Stagger start positions so drops are evenly distributed
+      headRow: -trailLength - (col % 5) * (rows / 5) - Math.random() * (rows / 5),
+      delay: 0 // No delay, all moving
+    }));
 
-    const patternLayer = document.querySelector('.pattern-layer') as HTMLElement;
-    if (patternLayer) {
-      patternLayer.style.backgroundImage = dataUrl;
+    function animate() {
+      for (let col = 0; col < cols; col++) {
+        const drop = drops[col];
+
+        // Move drop down
+        drop.headRow += speed;
+
+        // Reset when drop exits bottom
+        if (drop.headRow > rows + trailLength) {
+          drop.headRow = -trailLength - Math.random() * 4;
+        }
+
+        // Update icon opacities for this column
+        for (let row = 0; row < rows; row++) {
+          const distFromHead = row - drop.headRow;
+          let opacity = baseOpacity;
+
+          // Trail effect: head is brightest, fades behind
+          if (distFromHead >= 0 && distFromHead < trailLength) {
+            const trailProgress = distFromHead / trailLength;
+            // Smooth fade from peak at head to base at tail
+            opacity = baseOpacity + (peakOpacity - baseOpacity) * (1 - trailProgress);
+          }
+
+          allIcons[row][col].style.opacity = opacity.toString();
+        }
+      }
+      requestAnimationFrame(animate);
     }
+
+    animate();
   }
 
   // Run on page load
-  applyPattern();
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMatrixRain);
+  } else {
+    initMatrixRain();
+  }
 </script>
