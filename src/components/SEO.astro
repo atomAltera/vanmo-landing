@@ -31,7 +31,7 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
 const { title, description, canonical, ogImage } = Astro.props;
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') || '';
 const canonicalUrl = canonical || Astro.url.href;
-const ogImageUrl = ogImage || `${siteUrl}/og-image.png`;
+const ogImageUrl = ogImage || `${siteUrl}/og-image.jpg`;
 
 // JSON-LD structured data for local business
 const jsonLd = {
@@ -87,8 +87,8 @@ const jsonLd = {
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImageUrl} />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+<meta property="og:image:width" content="879" />
+<meta property="og:image:height" content="400" />
 <meta property="og:site_name" content={siteData.name} />
 <meta property="og:locale" content="ru_RU" />
 
