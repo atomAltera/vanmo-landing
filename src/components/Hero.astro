@@ -150,6 +150,14 @@ const icons = {
     return iconPool[Math.floor(Math.random() * iconPool.length)];
   }
 
+  // Icon colors
+  const iconColors: Record<string, string> = {
+    tie: '#ef4444',      // red
+    pistol: '#ffffff',   // white
+    star: '#eab308',     // gold
+    ring: '#a855f7',     // violet
+  };
+
   // Create SVG element for an icon
   function createIconSvg(iconName: string): SVGSVGElement {
     const icon = icons[iconName];
@@ -157,6 +165,7 @@ const icons = {
     svg.setAttribute('viewBox', icon.viewBox);
     svg.setAttribute('width', '18');
     svg.setAttribute('height', '18');
+    svg.style.fill = iconColors[iconName] || 'white';
     svg.innerHTML = icon.content;
     return svg;
   }
