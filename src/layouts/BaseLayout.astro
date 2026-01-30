@@ -31,6 +31,17 @@ const { title, description } = Astro.props;
     <link rel="preconnect" href="https://maps.googleapis.com" />
     <link rel="preconnect" href="https://maps.gstatic.com" crossorigin />
     <SEO title={title} description={description} />
+    {import.meta.env.PROD && (
+      <>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-CL9PMY2N5Y"></script>
+        <script is:inline>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-CL9PMY2N5Y');
+        </script>
+      </>
+    )}
   </head>
   <body class="site-shell min-h-screen flex flex-col text-white font-sans antialiased">
     <a href="#main-content" class="skip-link">Перейти к содержимому</a>
