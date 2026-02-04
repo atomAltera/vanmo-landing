@@ -17,7 +17,8 @@
       "Bash(curl:*)",
       "mcp__playwright__browser_close",
       "mcp__playwright__browser_console_messages",
-      "Bash(sips:*)"
+      "Bash(sips:*)",
+      "Skill(frontend-design)"
     ]
   }
 }
