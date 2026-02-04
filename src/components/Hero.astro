@@ -124,17 +124,23 @@ const icons = {
 
 <style>
   .hero-section {
-    background-color: #171717;
-    background-image: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(120, 20, 20, 0.12) 0%, transparent 60%);
+    background-color: #0b0b0b;
+    background-image:
+      radial-gradient(900px 520px at 18% -10%, rgba(227, 67, 67, 0.12), transparent 60%),
+      radial-gradient(700px 480px at 80% 10%, rgba(255, 255, 255, 0.05), transparent 65%),
+      linear-gradient(180deg, #0b0b0b 0%, #0e0e0e 55%, #0b0b0b 100%);
   }
 
   .pattern-layer {
     position: absolute;
-    inset: -100%;
-    width: 300%;
-    height: 300%;
-    background-repeat: repeat;
-    transform: rotate(-35deg);
+    inset: -40%;
+    width: 180%;
+    height: 180%;
+    background-image:
+      repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0px, rgba(255, 255, 255, 0.035) 1px, transparent 1px, transparent 12px),
+      repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 1px, transparent 1px, transparent 16px);
+    opacity: 0.35;
+    transform: rotate(-8deg);
     z-index: 0;
     pointer-events: none;
   }
