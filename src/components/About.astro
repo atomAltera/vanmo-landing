@@ -1,15 +1,18 @@
 ---
 ---
 
-<section class="relative py-20 md:py-28">
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<section class="section-edge py-20 md:py-28 relative overflow-hidden bg-neutral-950/40">
+  <!-- Subtle radial glow -->
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_70%_50%,rgba(200,169,106,0.04),transparent)] pointer-events-none"></div>
+
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid md:grid-cols-12 gap-8 md:gap-12 items-start">
       <!-- Left column - Label and accent -->
       <div class="md:col-span-4 lg:col-span-3">
-        <div class="sticky top-8">
-          <span class="kicker block mb-4">О клубе</span>
-          <div class="hidden md:block w-full h-px bg-gradient-to-r from-accent-gold/60 to-transparent"></div>
-          <span class="hidden md:block mt-4 font-display text-6xl lg:text-7xl text-accent-gold/20 leading-none select-none" aria-hidden="true">
+        <div class="md:sticky md:top-8">
+          <p class="kicker mb-4">О клубе</p>
+          <div class="hidden md:block w-16 h-px bg-gradient-to-r from-[#c8a96a]/50 to-transparent"></div>
+          <span class="hidden md:block mt-6 font-display text-6xl lg:text-7xl text-white/[0.03] leading-none select-none" aria-hidden="true">
             VM
           </span>
         </div>
@@ -18,29 +21,29 @@
       <!-- Right column - Content -->
       <div class="md:col-span-8 lg:col-span-9">
         <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-white leading-snug mb-6">
-          Атмосфера, где решает<br class="hidden lg:block" /> психология
+          Атмосфера, где решает психология
         </h2>
 
-        <div class="space-y-6 text-gray-300">
-          <p class="text-lg md:text-xl leading-relaxed">
+        <div class="space-y-5">
+          <p class="text-lg md:text-xl text-gray-300 leading-relaxed">
             VANMO — клуб для любителей классической спортивной мафии в&nbsp;Тбилиси.
           </p>
 
-          <p class="text-base md:text-lg leading-relaxed text-gray-400">
+          <p class="text-base md:text-lg text-gray-400 leading-relaxed">
             Мы проводим регулярные игры для новичков и опытных игроков. Присоединяйтесь к&nbsp;нам
             и&nbsp;откройте для себя увлекательный мир психологической игры, где каждый ход имеет значение.
           </p>
         </div>
 
-        <!-- Subtle stats or highlights -->
-        <div class="mt-10 pt-8 border-t border-white/10 flex flex-wrap gap-x-12 gap-y-4">
-          <div>
+        <!-- Stats -->
+        <div class="mt-10 pt-8 border-t border-white/10 flex flex-wrap gap-x-10 gap-y-4">
+          <div class="flex items-baseline gap-2">
             <span class="text-2xl md:text-3xl font-display text-white">2×</span>
-            <span class="ml-2 text-sm text-gray-500">в неделю</span>
+            <span class="text-sm text-gray-500">в неделю</span>
           </div>
-          <div>
+          <div class="flex items-baseline gap-2">
             <span class="text-2xl md:text-3xl font-display text-white">10+</span>
-            <span class="ml-2 text-sm text-gray-500">игроков за столом</span>
+            <span class="text-sm text-gray-500">игроков за столом</span>
           </div>
         </div>
       </div>
