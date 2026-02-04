@@ -13,9 +13,10 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
   <!-- Subtle background variation -->
   <div class="absolute inset-0 bg-gradient-to-b from-neutral-950/50 via-transparent to-neutral-950/30 pointer-events-none"></div>
 
-  <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Section heading with consistent styling -->
-    <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-white text-center leading-tight mb-6">
+  <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <p class="kicker mb-6">Об игре</p>
+
+    <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-white leading-tight mb-6">
       Мафия — это игра<br class="hidden sm:block" />
       <span class="text-[#E34343]">на грани правды и лжи</span>
     </h2>
