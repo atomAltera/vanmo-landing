@@ -22,13 +22,16 @@ const faqData = [
 ];
 ---
 
-<section class="section-edge py-16 md:py-20 bg-neutral-950/80">
+<section class="section-edge py-16 md:py-20 faq-section">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <p class="kicker mb-2">FAQ</p>
+    <div class="mb-12">
+      <p class="kicker mb-3">FAQ</p>
       <h2 class="text-3xl md:text-4xl font-display text-white">
-        Часто задаваемые вопросы
+        Частые вопросы о клубе
       </h2>
+      <p class="text-gray-400 mt-4 max-w-2xl">
+        Короткие ответы для тех, кто планирует первую игру или хочет узнать детали.
+      </p>
     </div>
     <dl class="grid gap-6 md:grid-cols-2">
       {faqData.map((item, index) => (
@@ -37,3 +40,13 @@ const faqData = [
     </dl>
   </div>
 </section>
+
+<style>
+  .faq-section {
+    background: linear-gradient(180deg, rgba(12, 12, 12, 0.5), rgba(0, 0, 0, 0));
+  }
+
+  .faq-section.section-edge::after {
+    opacity: 0.2;
+  }
+</style>

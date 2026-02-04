@@ -1,63 +1,97 @@
 ---
 ---
 
-<section class="section-edge section-padding relative overflow-hidden bg-neutral-950/40">
-  <div class="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_50%_0%,rgba(227,67,67,0.04),transparent)] pointer-events-none"></div>
+<section class="section-edge section-padding relative overflow-hidden about-section">
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_70%_40%_at_60%_0%,rgba(227,67,67,0.05),transparent)] pointer-events-none"></div>
 
-  <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-    <p class="kicker mb-6">О клубе</p>
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid gap-12 lg:grid-cols-[1fr,1fr] items-start">
+      <div>
+        <p class="kicker mb-6">О клубе</p>
+        <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-white leading-snug mb-8">
+          Место, где сходятся<br class="hidden sm:block" />
+          <span class="text-[#E34343]">стратегия и интуиция</span>
+        </h2>
 
-    <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-white leading-snug mb-8">
-      Место, где сходятся<br class="hidden sm:block" />
-      <span class="text-[#E34343]">стратегия и интуиция</span>
-    </h2>
-
-    <p class="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl mx-auto mb-12">
-      VANMO — клуб для любителей классической спортивной мафии в&nbsp;Тбилиси.
-      Мы проводим регулярные игры для новичков и опытных игроков.
-    </p>
-
-    <!-- Club features grid -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
-      <div class="flex flex-col items-center">
-        <span class="w-12 h-12 rounded-full bg-red-600/20 text-red-500 flex items-center justify-center mb-3">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
-          </svg>
-        </span>
-        <span class="text-white font-medium text-sm">2 раза в неделю</span>
-        <span class="text-xs text-gray-500 mt-1">ПН и СБ</span>
+        <p class="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl">
+          VANMO — клуб для любителей классической спортивной мафии в&nbsp;Тбилиси.
+          Мы проводим регулярные игры для новичков и опытных игроков.
+        </p>
       </div>
 
-      <div class="flex flex-col items-center">
-        <span class="w-12 h-12 rounded-full bg-red-600/20 text-red-500 flex items-center justify-center mb-3">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
-          </svg>
-        </span>
-        <span class="text-white font-medium text-sm">Спокойная</span>
-        <span class="text-xs text-gray-500 mt-1">атмосфера</span>
-      </div>
+      <div class="space-y-6">
+        <div class="about-item">
+          <span class="about-icon">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
+            </svg>
+          </span>
+          <div>
+            <p class="text-white font-display text-2xl mb-1">2 раза в неделю</p>
+            <p class="text-sm text-gray-400 uppercase tracking-[0.14em]">понедельник и суббота</p>
+          </div>
+        </div>
 
-      <div class="flex flex-col items-center">
-        <span class="w-12 h-12 rounded-full bg-red-600/20 text-red-500 flex items-center justify-center mb-3">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819" />
-          </svg>
-        </span>
-        <span class="text-white font-medium text-sm">Уютная</span>
-        <span class="text-xs text-gray-500 mt-1">локация</span>
-      </div>
+        <div class="about-item">
+          <span class="about-icon">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75zm-.375 0h.008v.015h-.008V9.75zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75zm-.375 0h.008v.015h-.008V9.75z" />
+            </svg>
+          </span>
+          <div>
+            <p class="text-white font-display text-2xl mb-1">Спокойная атмосфера</p>
+            <p class="text-sm text-gray-400 uppercase tracking-[0.14em]">комфортно новичкам</p>
+          </div>
+        </div>
 
-      <div class="flex flex-col items-center">
-        <span class="w-12 h-12 rounded-full bg-red-600/20 text-red-500 flex items-center justify-center mb-3">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.87c1.355 0 2.697.055 4.024.165C17.155 8.51 18 9.473 18 10.608v2.513m-3-4.87v-1.5m-6 1.5v-1.5m12 9.75l-1.5.75a3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0L3 16.5m15-3.38a48.474 48.474 0 00-6-.37c-2.032 0-4.034.125-6 .37m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.17c0 .62-.504 1.124-1.125 1.124H4.125A1.125 1.125 0 013 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 016 13.12M12.265 3.11a.375.375 0 11-.53 0L12 2.845l.265.265zm-3 0a.375.375 0 11-.53 0L9 2.845l.265.265zm6 0a.375.375 0 11-.53 0L15 2.845l.265.265z" />
-          </svg>
-        </span>
-        <span class="text-white font-medium text-sm">Вкусная</span>
-        <span class="text-xs text-gray-500 mt-1">еда</span>
+        <div class="about-item">
+          <span class="about-icon">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 21v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21m0 0h4.5V3.545M12.75 21h7.5V10.75M2.25 21h1.5m18 0h-18M2.25 9l4.5-1.636M18.75 3l-1.5.545m0 6.205l3 1m1.5.5l-1.5-.5M6.75 7.364V3h-3v18m3-13.636l10.5-3.819" />
+            </svg>
+          </span>
+          <div>
+            <p class="text-white font-display text-2xl mb-1">Уютная локация</p>
+            <p class="text-sm text-gray-400 uppercase tracking-[0.14em]">удобно добраться</p>
+          </div>
+        </div>
+
+        <div class="about-item">
+          <span class="about-icon">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8.25v-1.5m0 1.5c-1.355 0-2.697.056-4.024.166C6.845 8.51 6 9.473 6 10.608v2.513m6-4.87c1.355 0 2.697.055 4.024.165C17.155 8.51 18 9.473 18 10.608v2.513m-3-4.87v-1.5m-6 1.5v-1.5m12 9.75l-1.5.75a3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0 3.354 3.354 0 00-3 0 3.354 3.354 0 01-3 0L3 16.5m15-3.38a48.474 48.474 0 00-6-.37c-2.032 0-4.034.125-6 .37m12 0c.39.049.777.102 1.163.16 1.07.16 1.837 1.094 1.837 2.175v5.17c0 .62-.504 1.124-1.125 1.124H4.125A1.125 1.125 0 013 20.625v-5.17c0-1.08.768-2.014 1.837-2.174A47.78 47.78 0 016 13.12M12.265 3.11a.375.375 0 11-.53 0L12 2.845l.265.265zm-3 0a.375.375 0 11-.53 0L9 2.845l.265.265zm6 0a.375.375 0 11-.53 0L15 2.845l.265.265z" />
+            </svg>
+          </span>
+          <div>
+            <p class="text-white font-display text-2xl mb-1">Вкусная еда</p>
+            <p class="text-sm text-gray-400 uppercase tracking-[0.14em]">перерывы с пользой</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  .about-item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .about-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(227, 67, 67, 0.12);
+    color: #f1b2b2;
+  }
+
+  .about-section.section-edge::after {
+    opacity: 0.25;
+  }
+</style>

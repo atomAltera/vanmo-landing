@@ -24,12 +24,12 @@ const {
 const Wrapper = as;
 const formattedIndex = (index + 1).toString().padStart(2, '0');
 const baseTitleClass = 'text-lg md:text-xl font-semibold text-white flex items-start gap-4';
-const baseBodyClass = 'text-gray-300 ml-14 mt-3';
+const baseBodyClass = 'text-gray-300 ml-12 mt-3 leading-relaxed';
 ---
 
-<Wrapper class={`glass-card rounded-2xl p-6 md:p-7 ${className}`.trim()}>
+<Wrapper class={`faq-card rounded-2xl p-6 md:p-7 ${className}`.trim()}>
   <div class={`${baseTitleClass} ${titleClass}`.trim()}>
-    <span class="flex-shrink-0 w-10 h-10 border border-red-500/60 text-red-100 rounded-full flex items-center justify-center text-sm font-bold">
+    <span class="faq-index">
       {formattedIndex}
     </span>
     <span class="pt-1">{title}</span>
@@ -44,3 +44,22 @@ const baseBodyClass = 'text-gray-300 ml-14 mt-3';
     </div>
   )}
 </Wrapper>
+
+<style>
+  .faq-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0));
+  }
+
+  .faq-index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 9999px;
+    background: rgba(227, 67, 67, 0.12);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+</style>

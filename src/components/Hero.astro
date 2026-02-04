@@ -29,26 +29,31 @@ const icons = {
 };
 ---
 
-<section class="hero-section section-edge py-20 md:py-32 relative overflow-hidden">
+<section class="hero-section section-edge hero-divider py-20 md:py-32 relative overflow-hidden">
   <div class="pattern-layer"></div>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 lg:grid-cols-[1.2fr,0.8fr] items-center">
     <div>
+      <p class="kicker mb-6">Клуб VANMO</p>
       <h1 class="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-6 leading-tight">
         Клуб спортивной мафии в Тбилиси
       </h1>
-      <p class="text-lg md:text-xl text-gray-300 max-w-2xl">
-        Мы играем регулярно по понедельникам и субботам, присоединяйтесь!
+      <p class="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed">
+        Регулярные игры по понедельникам и субботам. Приходите знакомиться и играть вместе.
       </p>
     </div>
-    <div class="glass-card rounded-2xl p-8">
-      <p class="text-sm uppercase tracking-[0.24em] text-white/60 mb-4">Как поучаствовать</p>
+    <div class="hero-panel rounded-2xl p-7 md:p-8">
+      <p class="text-xs uppercase tracking-[0.28em] text-white/60 mb-5">Как поучаствовать</p>
 
       <!-- 4-step instruction -->
-      <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-4 mb-8">
+      <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-3 mb-8">
         <!-- Step 1 -->
         <div class="flex items-center gap-3">
-          <span class="flex-shrink-0 w-6 h-6 rounded-full bg-red-600/20 text-red-500 text-xs font-bold flex items-center justify-center">1</span>
-          <p class="text-sm text-white">Вступить в группу</p>
+          <span class="step-icon">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h8M8 14h4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+          </span>
+          <p class="text-sm text-white">1. Вступить в группу</p>
         </div>
 
         <!-- Arrow -->
@@ -58,8 +63,12 @@ const icons = {
 
         <!-- Step 2 -->
         <div class="flex items-center gap-3">
-          <span class="flex-shrink-0 w-6 h-6 rounded-full bg-red-600/20 text-red-500 text-xs font-bold flex items-center justify-center">2</span>
-          <p class="text-sm text-white">Дождаться анонса</p>
+          <span class="step-icon">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l3 3M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </span>
+          <p class="text-sm text-white">2. Дождаться анонса</p>
         </div>
 
         <!-- Arrow -->
@@ -69,8 +78,12 @@ const icons = {
 
         <!-- Step 3 -->
         <div class="flex items-center gap-3">
-          <span class="flex-shrink-0 w-6 h-6 rounded-full bg-red-600/20 text-red-500 text-xs font-bold flex items-center justify-center">3</span>
-          <p class="text-sm text-white">Отметиться в опросе</p>
+          <span class="step-icon">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+          </span>
+          <p class="text-sm text-white">3. Отметиться в опросе</p>
         </div>
 
         <!-- Arrow -->
@@ -80,8 +93,12 @@ const icons = {
 
         <!-- Step 4 -->
         <div class="flex items-center gap-3">
-          <span class="flex-shrink-0 w-6 h-6 rounded-full bg-red-600/20 text-red-500 text-xs font-bold flex items-center justify-center">4</span>
-          <p class="text-sm text-white">Прийти и играть</p>
+          <span class="step-icon">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M15 8l4 4-4 4"/>
+            </svg>
+          </span>
+          <p class="text-sm text-white">4. Прийти и играть</p>
         </div>
       </div>
 
@@ -89,7 +106,7 @@ const icons = {
         href={siteData.social.telegram}
         target="_blank"
         rel="noopener noreferrer"
-        class="cta-button inline-flex items-center gap-3 bg-red-600 text-white px-7 py-4 rounded-lg text-lg font-semibold border border-white/10 shadow-lg shadow-red-900/30 transition-colors transition-shadow hover:bg-red-700 hover:border-white/20 hover:shadow-red-900/45 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
+        class="cta-button inline-flex items-center gap-3 bg-red-600 text-white px-7 py-4 rounded-lg text-lg font-semibold transition-colors hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
       >
         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
           <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
@@ -108,7 +125,7 @@ const icons = {
 <style>
   .hero-section {
     background-color: #171717;
-    background-image: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(120, 20, 20, 0.15) 0%, transparent 60%);
+    background-image: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(120, 20, 20, 0.12) 0%, transparent 60%);
   }
 
   .pattern-layer {
@@ -125,6 +142,26 @@ const icons = {
   .hero-section > div:not(.pattern-layer) {
     position: relative;
     z-index: 1;
+  }
+
+  .hero-panel {
+    background: linear-gradient(140deg, rgba(24, 24, 24, 0.9), rgba(14, 14, 14, 0.85));
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  }
+
+  .step-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    background: rgba(227, 67, 67, 0.14);
+    color: #f3b6b6;
+  }
+
+  .hero-divider.section-edge::after {
+    opacity: 0.45;
   }
 </style>
 
@@ -188,7 +225,7 @@ const icons = {
     }
 
     return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
-      <g fill="white" fill-opacity="0.04">${content}</g>
+      <g fill="white" fill-opacity="0.025">${content}</g>
     </svg>`;
   }
 
