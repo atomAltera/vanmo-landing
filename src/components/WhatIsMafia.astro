@@ -1,20 +1,23 @@
 ---
+import yaml from 'js-yaml';
+import { readFileSync } from 'fs';
+
+const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
+  social: {
+    telegram: string;
+  };
+};
 ---
 
-<section class="section-edge py-20 md:py-28 relative overflow-hidden">
+<section class="section-edge section-padding relative overflow-hidden">
   <!-- Subtle background variation -->
   <div class="absolute inset-0 bg-gradient-to-b from-neutral-950/50 via-transparent to-neutral-950/30 pointer-events-none"></div>
 
   <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-    <!-- Decorative accent line -->
-    <div class="flex justify-center mb-10">
-      <div class="w-px h-12 bg-gradient-to-b from-transparent via-[#c8a96a]/60 to-transparent"></div>
-    </div>
-
-    <!-- Large editorial heading -->
-    <h2 class="font-display text-4xl md:text-5xl lg:text-6xl text-white text-center leading-tight mb-6">
+    <!-- Section heading with consistent styling -->
+    <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-white text-center leading-tight mb-6">
       Мафия — это игра<br class="hidden sm:block" />
-      <span class="text-[#c8a96a]">на грани правды и лжи</span>
+      <span class="text-[#E34343]">на грани правды и лжи</span>
     </h2>
 
     <!-- Body text - elegant centered prose -->
@@ -24,22 +27,48 @@
         Днём город голосует, чтобы вычислить преступников. Ночью мафия тайно устраняет жителей.
       </p>
 
-      <!-- Key points as refined list -->
-      <div class="mt-12 flex flex-col sm:flex-row justify-center gap-8 sm:gap-12 text-center">
-        <div class="group">
-          <span class="block text-[#c8a96a] font-display text-2xl md:text-3xl mb-1">Логика</span>
-          <span class="text-xs text-gray-500 uppercase tracking-[0.2em]">анализ и дедукция</span>
+      <!-- Key features with consistent layout -->
+      <div class="features mt-12">
+        <div class="feature">
+          <span class="flex-shrink-0 w-10 h-10 rounded-full bg-red-600/20 text-red-500 text-sm font-bold flex items-center justify-center mx-auto mb-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+          </span>
+          <span class="block text-white font-display text-xl md:text-2xl mb-1">Логика</span>
+          <span class="text-xs text-gray-500 uppercase tracking-[0.15em]">анализ и дедукция</span>
         </div>
-        <div class="hidden sm:block w-px bg-white/10"></div>
-        <div class="group">
-          <span class="block text-[#c8a96a] font-display text-2xl md:text-3xl mb-1">Психология</span>
-          <span class="text-xs text-gray-500 uppercase tracking-[0.2em]">чтение людей</span>
+        <div class="feature">
+          <span class="flex-shrink-0 w-10 h-10 rounded-full bg-red-600/20 text-red-500 text-sm font-bold flex items-center justify-center mx-auto mb-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </span>
+          <span class="block text-white font-display text-xl md:text-2xl mb-1">Психология</span>
+          <span class="text-xs text-gray-500 uppercase tracking-[0.15em]">чтение людей</span>
         </div>
-        <div class="hidden sm:block w-px bg-white/10"></div>
-        <div class="group">
-          <span class="block text-[#c8a96a] font-display text-2xl md:text-3xl mb-1">Интуиция</span>
-          <span class="text-xs text-gray-500 uppercase tracking-[0.2em]">решения под давлением</span>
+        <div class="feature">
+          <span class="flex-shrink-0 w-10 h-10 rounded-full bg-red-600/20 text-red-500 text-sm font-bold flex items-center justify-center mx-auto mb-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </span>
+          <span class="block text-white font-display text-xl md:text-2xl mb-1">Интуиция</span>
+          <span class="text-xs text-gray-500 uppercase tracking-[0.15em]">решения под давлением</span>
         </div>
+      </div>
+
+      <!-- CTA Button matching hero section -->
+      <div class="mt-12 text-center">
+        <a
+          href="/rules"
+          class="cta-button inline-flex items-center gap-3 bg-red-600 text-white px-7 py-4 rounded-lg text-lg font-semibold border border-white/10 shadow-lg shadow-red-900/30 transition-colors transition-shadow hover:bg-red-700 hover:border-white/20 hover:shadow-red-900/45 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+          Узнать правила
+        </a>
       </div>
     </div>
   </div>

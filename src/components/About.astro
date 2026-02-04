@@ -2,9 +2,9 @@
 import headerLogo from '../assets/images/vanmo-header-logo.png';
 ---
 
-<section class="section-edge py-20 md:py-28 relative overflow-hidden bg-neutral-950/40">
+<section class="section-edge section-padding relative overflow-hidden bg-neutral-950/40">
   <!-- Subtle radial glow -->
-  <div class="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_70%_50%,rgba(200,169,106,0.04),transparent)] pointer-events-none"></div>
+  <div class="absolute inset-0 bg-[radial-gradient(ellipse_60%_40%_at_70%_50%,rgba(227,67,67,0.03),transparent)] pointer-events-none"></div>
 
   <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid md:grid-cols-12 gap-8 md:gap-12 items-start">
@@ -12,12 +12,12 @@ import headerLogo from '../assets/images/vanmo-header-logo.png';
       <div class="md:col-span-4 lg:col-span-3">
         <div class="md:sticky md:top-8">
           <p class="kicker mb-4">О клубе</p>
-          <div class="hidden md:block w-16 h-px bg-gradient-to-r from-[#c8a96a]/50 to-transparent"></div>
+          <div class="hidden md:block w-16 h-px bg-gradient-to-r from-red-600/50 to-transparent"></div>
           <img
             src={headerLogo.src}
             alt=""
             aria-hidden="true"
-            class="hidden md:block mt-6 w-24 lg:w-28 opacity-50 select-none"
+            class="hidden md:block mt-6 w-24 lg:w-28 opacity-15 select-none"
           />
         </div>
       </div>
@@ -25,7 +25,7 @@ import headerLogo from '../assets/images/vanmo-header-logo.png';
       <!-- Right column - Content -->
       <div class="md:col-span-8 lg:col-span-9">
         <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-white leading-snug mb-6">
-          Атмосфера, где решает психология
+          Атмосфера, где решает <span class="text-[#E34343]">психология</span>
         </h2>
 
         <div class="space-y-5">

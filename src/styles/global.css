@@ -7,10 +7,21 @@
   /* VANMO Brand Colors */
   --color-brand: #121212;
   --color-brand-dark: #090909;
-  --color-accent: #c01821;
-  --color-accent-dark: #8f1117;
+  --color-accent: #E34343;
+  --color-accent-dark: #c01821;
   --color-accent-gold: #c8a96a;
   --color-paper: #f4f1ea;
+
+  /* Typography Scale */
+  --font-size-h1: 3rem;
+  --font-size-h2: 2.25rem;
+  --font-size-h3: 1.5rem;
+  --font-size-body: 1rem;
+  --font-size-sm: 0.875rem;
+
+  /* Section Spacing */
+  --section-padding-y: 5rem;
+  --section-padding-y-md: 7rem;
 }
 
 body.site-shell {
@@ -56,8 +67,42 @@ body.site-shell::before {
   right: 8%;
   bottom: 0;
   height: 2px;
-  background: linear-gradient(90deg, transparent 0%, rgba(192, 24, 33, 0.35) 20%, rgba(200, 169, 106, 0.35) 50%, rgba(192, 24, 33, 0.35) 80%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(227, 67, 67, 0.35) 20%, rgba(227, 67, 67, 0.25) 50%, rgba(227, 67, 67, 0.35) 80%, transparent 100%);
   transform: none;
+}
+
+/* Standard section padding */
+.section-padding {
+  padding-top: var(--section-padding-y);
+  padding-bottom: var(--section-padding-y);
+}
+
+@media (min-width: 768px) {
+  .section-padding {
+    padding-top: var(--section-padding-y-md);
+    padding-bottom: var(--section-padding-y-md);
+  }
+}
+
+/* Features grid layout */
+.features {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.feature {
+  flex: 1;
+  max-width: 200px;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .features {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
 }
 
 .glass-card {
