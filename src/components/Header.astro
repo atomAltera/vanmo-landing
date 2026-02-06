@@ -24,17 +24,21 @@ const navItems = [
         <button
           id="theme-toggle-desktop"
           onclick="window.toggleTheme()"
-          class="theme-switch hidden md:flex"
+          class="theme-toggle theme-toggle-centered"
           aria-label="Переключить тему"
         >
-          <span class="theme-switch-track">
-            <span class="theme-switch-thumb"></span>
-            <svg class="theme-switch-icon sun-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-            </svg>
-            <svg class="theme-switch-icon moon-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-            </svg>
+          <span class="theme-toggle-track">
+            <span class="theme-toggle-orb"></span>
+            <span class="theme-toggle-icon theme-toggle-moon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+              </svg>
+            </span>
+            <span class="theme-toggle-icon theme-toggle-sun" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+              </svg>
+            </span>
           </span>
         </button>
 
@@ -101,20 +105,7 @@ const navItems = [
       ))}
     </ul>
     <div class="px-6 mt-8 pt-6 border-t border-white/10">
-      <button
-        id="theme-toggle-mobile"
-        onclick="window.toggleTheme()"
-        class="theme-toggle flex items-center gap-3"
-        aria-label="Переключить тему"
-      >
-        <svg class="sun-icon w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-        <svg class="moon-icon w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-        </svg>
-        <span class="theme-label text-sm uppercase tracking-[0.18em]">Ночь</span>
-      </button>
+      <span class="text-xs uppercase tracking-[0.18em] text-gray-500">Тема</span>
     </div>
   </div>
 </div>
@@ -150,48 +141,6 @@ const navItems = [
     background-color: var(--theme-text-muted) !important;
   }
 
-  /* Theme toggle button */
-  .theme-toggle {
-    color: var(--theme-text-muted);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    transition: color 0.2s ease, background 0.2s ease;
-  }
-
-  .theme-toggle:hover {
-    color: var(--theme-text);
-    background: var(--theme-card-bg);
-  }
-
-  /* Show moon in night mode, sun in day mode */
-  .theme-toggle .sun-icon {
-    display: none;
-  }
-  .theme-toggle .moon-icon {
-    display: block;
-  }
-
-  :root.day-mode .theme-toggle .sun-icon {
-    display: block;
-  }
-  :root.day-mode .theme-toggle .moon-icon {
-    display: none;
-  }
-
-  /* Theme label for mobile */
-  .theme-label::after {
-    content: 'Ночь';
-  }
-  :root.day-mode .theme-label::after {
-    content: 'День';
-  }
-  .theme-label {
-    font-size: 0;
-  }
-
   /* Mobile menu */
   #mobile-menu-toggle:checked ~ header nav .hamburger-line:nth-child(1) {
     transform: rotate(45deg) translateY(6px);
@@ -219,79 +168,117 @@ const navItems = [
     border-color: var(--theme-border);
   }
 
-  /* Theme Switch - Pill Toggle */
-  .theme-switch {
+  /* Theme Toggle - Capsule Switch */
+  .theme-toggle {
     background: transparent;
     border: none;
     cursor: pointer;
     padding: 0;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
   }
 
-  .theme-switch-track {
-    position: relative;
-    width: 64px;
-    height: 32px;
-    background: var(--theme-card-bg);
-    border: 1px solid var(--theme-border);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 6px;
-    transition: background 0.3s ease, border-color 0.3s ease;
-  }
-
-  .theme-switch:hover .theme-switch-track {
-    background: var(--theme-card-hover);
-  }
-
-  .theme-switch-thumb {
+  .theme-toggle-centered {
     position: absolute;
-    width: 24px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+  }
+
+  .theme-toggle-track {
+    position: relative;
+    width: 80px;
+    height: 32px;
+    border-radius: 9999px;
+    padding: 3px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
+    background: radial-gradient(circle at 20% 20%, rgba(120, 180, 255, 0.35), transparent 55%),
+      linear-gradient(135deg, rgba(15, 15, 18, 0.98), rgba(4, 4, 8, 0.9));
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 8px 20px rgba(0, 0, 0, 0.35);
+    transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    --orb-x: 0px;
+  }
+
+  .theme-toggle:hover .theme-toggle-track {
+    border-color: rgba(255, 255, 255, 0.35);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 10px 24px rgba(0, 0, 0, 0.45);
+  }
+
+  .theme-toggle-orb {
+    position: absolute;
+    width: 34px;
     height: 24px;
-    background: var(--theme-text);
-    border-radius: 50%;
-    top: 3px;
+    border-radius: 9999px;
     left: 3px;
-    transition: transform 0.3s ease, background 0.3s ease;
+    top: 4px;
+    transform: translateX(var(--orb-x));
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05));
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+    transition: transform 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
     z-index: 1;
   }
 
-  /* Day mode: thumb on right */
-  :root.day-mode .theme-switch-thumb {
-    transform: translateX(32px);
-  }
-
-  .theme-switch-icon {
-    width: 16px;
-    height: 16px;
+  .theme-toggle-icon {
     position: relative;
     z-index: 2;
-    transition: opacity 0.3s ease, color 0.3s ease;
+    width: 14px;
+    height: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.6);
+    transition: color 0.35s ease, transform 0.35s ease;
+    pointer-events: none;
   }
 
-  /* Night mode: sun visible (left), moon hidden */
-  .theme-switch .sun-icon {
-    color: var(--theme-text-muted);
-    opacity: 0.6;
+  .theme-toggle-icon svg {
+    width: 14px;
+    height: 14px;
   }
 
-  .theme-switch .moon-icon {
-    color: var(--theme-bg);
-    opacity: 1;
+  .theme-toggle-moon {
+    justify-self: center;
   }
 
-  /* Day mode: moon visible (right), sun hidden */
-  :root.day-mode .theme-switch .sun-icon {
-    color: var(--theme-bg);
-    opacity: 1;
+  .theme-toggle-sun {
+    justify-self: center;
   }
 
-  :root.day-mode .theme-switch .moon-icon {
-    color: var(--theme-text-muted);
-    opacity: 0.6;
+  :root:not(.day-mode) .theme-toggle-moon {
+    color: #f3c176;
+    transform: translateX(1px) scale(1.03);
+  }
+
+  :root:not(.day-mode) .theme-toggle-sun {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* Day mode: move orb right to sun */
+  :root.day-mode .theme-toggle-track {
+    --orb-x: 40px;
+    background: radial-gradient(circle at 80% 20%, rgba(255, 223, 128, 0.45), transparent 55%),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(230, 234, 240, 0.92));
+    border-color: rgba(17, 24, 39, 0.2);
+    box-shadow: inset 0 0 0 1px rgba(17, 24, 39, 0.06), 0 10px 20px rgba(15, 23, 42, 0.18);
+  }
+
+  :root.day-mode .theme-toggle-orb {
+    background: linear-gradient(145deg, rgba(17, 24, 39, 0.14), rgba(17, 24, 39, 0.04));
+    box-shadow: 0 6px 12px rgba(15, 23, 42, 0.16), inset 0 0 0 1px rgba(17, 24, 39, 0.08);
+  }
+
+  :root.day-mode .theme-toggle-moon {
+    color: rgba(17, 24, 39, 0.45);
+  }
+
+  :root.day-mode .theme-toggle-sun {
+    color: rgba(17, 24, 39, 0.95);
+    transform: translateX(-1px) scale(1.03);
   }
 </style>
