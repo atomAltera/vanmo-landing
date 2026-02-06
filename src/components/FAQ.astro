@@ -1,6 +1,4 @@
 ---
-import NumberedCard from './NumberedCard.astro';
-
 // FAQ content hardcoded directly in component
 const faqData = [
   {
@@ -33,9 +31,15 @@ const faqData = [
         Короткие ответы для тех, кто планирует первую игру или хочет узнать детали.
       </p>
     </div>
-    <dl class="grid gap-6 md:grid-cols-2">
+    <dl class="space-y-8">
       {faqData.map((item, index) => (
-        <NumberedCard index={index} title={item.question} bodyHtml={item.answer} />
+        <div class="faq-row">
+          <dt class="faq-title">
+            <span class="faq-index">{(index + 1).toString().padStart(2, '0')}</span>
+            <span>{item.question}</span>
+          </dt>
+          <dd class="faq-body" set:html={item.answer} />
+        </div>
       ))}
     </dl>
   </div>
@@ -48,5 +52,45 @@ const faqData = [
 
   .faq-section.section-edge::after {
     opacity: 0.2;
+  }
+
+  .faq-row {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .faq-row:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .faq-title {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  .faq-index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 9999px;
+    background: rgba(227, 67, 67, 0.12);
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  .faq-body {
+    margin-left: 3.25rem;
+    margin-top: 0.75rem;
+    color: #c7c7c7;
+    line-height: 1.7;
   }
 </style>
