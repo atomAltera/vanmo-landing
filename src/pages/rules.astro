@@ -12,30 +12,29 @@ const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
 ---
 
 <BaseLayout title={pagesData.rules.title} description={pagesData.rules.description}>
-  <section class="section-edge py-16 md:py-20">
+  <section class="section-edge section-padding rules-header">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="kicker mb-3">Регламент</p>
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-6">
+        Правила спортивной мафии
+      </h1>
+      <p class="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed">
+        Официальные правила игры в спортивную мафию для турниров и рейтинговых игр.
+      </p>
+    </div>
+  </section>
 
-      <!-- Header -->
-      <div class="text-center mb-12">
-        <p class="kicker mb-2">Регламент</p>
-        <h1 class="text-4xl md:text-5xl font-display text-white">
-          Правила спортивной мафии
-        </h1>
-        <p class="text-lg text-gray-300 mt-4">
-          Официальные правила игры в спортивную мафию для турниров и рейтинговых игр.
-        </p>
-      </div>
-
-      <!-- Sections -->
-      <div class="space-y-12">
+  <section class="section-edge py-12 md:py-16">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="space-y-16">
 
         <!-- 1. Overview -->
         <article id="overview" class="scroll-mt-24">
-          <h2 class="text-2xl md:text-3xl font-display text-white mb-6 flex items-center gap-3">
-            <span class="flex-shrink-0 w-10 h-10 border border-red-500/60 text-red-100 rounded-full flex items-center justify-center text-sm font-bold">01</span>
-            Общие положения
-          </h2>
-          <div class="glass-card rounded-2xl p-6 md:p-8 space-y-4 text-gray-300">
+          <div class="rule-header">
+            <span class="rule-index">01</span>
+            <h2 class="text-2xl md:text-3xl font-display text-white">Общие положения</h2>
+          </div>
+          <div class="rule-content">
             <p>
               Спортивная мафия — командная психологическая игра. Игроки делятся на две команды: мафию и мирных жителей. Команды не знают точный состав друг друга.
             </p>
@@ -56,15 +55,15 @@ const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
 
         <!-- 2. Roles -->
         <article id="roles" class="scroll-mt-24">
-          <h2 class="text-2xl md:text-3xl font-display text-white mb-6 flex items-center gap-3">
-            <span class="flex-shrink-0 w-10 h-10 border border-red-500/60 text-red-100 rounded-full flex items-center justify-center text-sm font-bold">02</span>
-            Роли
-          </h2>
+          <div class="rule-header">
+            <span class="rule-index">02</span>
+            <h2 class="text-2xl md:text-3xl font-display text-white">Роли</h2>
+          </div>
 
-          <div class="space-y-4">
+          <div class="space-y-6 mt-6">
             <!-- Mafia Team -->
-            <div class="glass-card rounded-2xl p-6 md:p-8">
-              <h3 class="text-xl font-semibold text-blue-400 mb-4">Команда мафии (3 игрока)</h3>
+            <div class="team-card team-mafia">
+              <h3 class="text-xl font-display text-white mb-4">Команда мафии <span class="text-gray-500 font-normal text-base">(3 игрока)</span></h3>
               <div class="space-y-4 text-gray-300">
                 <div>
                   <p class="text-white font-medium">Рядовые мафиози (2 игрока)</p>
@@ -72,14 +71,14 @@ const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
                 </div>
                 <div>
                   <p class="text-white font-medium">Дон мафии (1 игрок)</p>
-                  <p>Глава мафии. Помимо участия в ночном убийстве, каждую ночь проверяет одного игрока на наличие роли Шерифа. Ведущий отвечает «да» или «нет».</p>
+                  <p>Глава мафии. Помимо участия в ночном убийстве, каждую ночь проверяет одного игрока на наличие роли Шерифа.</p>
                 </div>
               </div>
             </div>
 
             <!-- Civilian Team -->
-            <div class="glass-card rounded-2xl p-6 md:p-8">
-              <h3 class="text-xl font-semibold text-red-400 mb-4">Команда мирных жителей (7 игроков)</h3>
+            <div class="team-card team-civilian">
+              <h3 class="text-xl font-display text-white mb-4">Команда мирных жителей <span class="text-gray-500 font-normal text-base">(7 игроков)</span></h3>
               <div class="space-y-4 text-gray-300">
                 <div>
                   <p class="text-white font-medium">Мирные жители (6 игроков)</p>
@@ -92,7 +91,7 @@ const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
               </div>
             </div>
 
-            <p class="text-gray-400 text-sm">
+            <p class="text-gray-500 text-sm">
               В спортивной мафии используются только эти роли. Дополнительных ролей (доктор, маньяк и др.) нет.
             </p>
           </div>
@@ -100,63 +99,63 @@ const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
 
         <!-- 3. Night Phase -->
         <article id="night" class="scroll-mt-24">
-          <h2 class="text-2xl md:text-3xl font-display text-white mb-6 flex items-center gap-3">
-            <span class="flex-shrink-0 w-10 h-10 border border-red-500/60 text-red-100 rounded-full flex items-center justify-center text-sm font-bold">03</span>
-            Ночная фаза
-          </h2>
-          <div class="glass-card rounded-2xl p-6 md:p-8 space-y-4 text-gray-300">
+          <div class="rule-header">
+            <span class="rule-index">03</span>
+            <h2 class="text-2xl md:text-3xl font-display text-white">Ночная фаза</h2>
+          </div>
+          <div class="rule-content">
             <p>
               Ночью все игроки закрывают глаза. Ведущий поочерёдно вызывает роли.
             </p>
 
-            <div class="space-y-3">
-              <div class="border-l-2 border-blue-500/50 pl-4">
+            <div class="space-y-4 mt-6">
+              <div class="phase-item phase-mafia">
                 <p class="text-white font-medium">Мафия просыпается</p>
-                <p>Все три мафиози открывают глаза, видят друг друга и молча указывают на игрока, которого хотят убить. Можно намеренно не убивать никого («пустой выстрел»).</p>
+                <p>Все три мафиози открывают глаза, видят друг друга и молча указывают на игрока, которого хотят убить.</p>
               </div>
 
-              <div class="border-l-2 border-blue-500/50 pl-4">
+              <div class="phase-item phase-mafia">
                 <p class="text-white font-medium">Дон просыпается</p>
-                <p>Дон (если жив) указывает на игрока для проверки на Шерифа. Ведущий показывает «да» (это Шериф) или «нет».</p>
+                <p>Дон (если жив) указывает на игрока для проверки на Шерифа. Ведущий показывает «да» или «нет».</p>
               </div>
 
-              <div class="border-l-2 border-red-500/50 pl-4">
+              <div class="phase-item phase-civilian">
                 <p class="text-white font-medium">Шериф просыпается</p>
-                <p>Шериф (если жив) указывает на игрока для проверки. Ведущий показывает принадлежность: мафия (чёрная карта) или мирный (красная карта).</p>
+                <p>Шериф (если жив) указывает на игрока для проверки. Ведущий показывает принадлежность: мафия или мирный.</p>
               </div>
             </div>
 
-            <p class="text-gray-400 text-sm mt-4">
-              Ведущий всегда объявляет пробуждение Дона и Шерифа, даже если эти роли уже выбыли из игры. Это сохраняет информационную симметрию.
+            <p class="text-gray-500 text-sm mt-6">
+              Ведущий всегда объявляет пробуждение Дона и Шерифа, даже если эти роли уже выбыли из игры.
             </p>
           </div>
         </article>
 
         <!-- 4. Day Discussion -->
         <article id="day" class="scroll-mt-24">
-          <h2 class="text-2xl md:text-3xl font-display text-white mb-6 flex items-center gap-3">
-            <span class="flex-shrink-0 w-10 h-10 border border-red-500/60 text-red-100 rounded-full flex items-center justify-center text-sm font-bold">04</span>
-            Дневное обсуждение
-          </h2>
-          <div class="glass-card rounded-2xl p-6 md:p-8 space-y-4 text-gray-300">
+          <div class="rule-header">
+            <span class="rule-index">04</span>
+            <h2 class="text-2xl md:text-3xl font-display text-white">Дневное обсуждение</h2>
+          </div>
+          <div class="rule-content">
             <p>
-              Утром ведущий объявляет, кто был убит ночью (если был выстрел). Убитый игрок покидает игру без права голоса и комментариев.
+              Утром ведущий объявляет, кто был убит ночью. Убитый игрок покидает игру без права голоса и комментариев.
             </p>
 
-            <div class="space-y-3">
+            <div class="space-y-4 mt-6">
               <div>
                 <p class="text-white font-medium">Порядок выступлений</p>
-                <p>Игроки выступают строго по очереди, начиная с определённого номера. Каждому отводится ровно 1 минута.</p>
+                <p>Игроки выступают строго по очереди. Каждому отводится ровно 1 минута.</p>
               </div>
 
               <div>
                 <p class="text-white font-medium">Выдвижение кандидатур</p>
-                <p>Во время своей речи игрок может выдвинуть <strong class="text-white">только одного</strong> кандидата на голосование или воздержаться от выдвижения. Выдвинуть самого себя нельзя.</p>
+                <p>Во время своей речи игрок может выдвинуть <strong class="text-white">только одного</strong> кандидата на голосование. Выдвинуть самого себя нельзя.</p>
               </div>
 
               <div>
                 <p class="text-white font-medium">День 0</p>
-                <p>Первый день игры (до первой ночи). Игроки знакомятся и формируют первые версии. Если выдвинут только один кандидат — голосование не проводится, игра переходит в ночь.</p>
+                <p>Первый день игры (до первой ночи). Игроки знакомятся и формируют первые версии.</p>
               </div>
             </div>
           </div>
@@ -164,16 +163,16 @@ const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
 
         <!-- 5. Voting -->
         <article id="voting" class="scroll-mt-24">
-          <h2 class="text-2xl md:text-3xl font-display text-white mb-6 flex items-center gap-3">
-            <span class="flex-shrink-0 w-10 h-10 border border-red-500/60 text-red-100 rounded-full flex items-center justify-center text-sm font-bold">05</span>
-            Голосование
-          </h2>
-          <div class="glass-card rounded-2xl p-6 md:p-8 space-y-4 text-gray-300">
+          <div class="rule-header">
+            <span class="rule-index">05</span>
+            <h2 class="text-2xl md:text-3xl font-display text-white">Голосование</h2>
+          </div>
+          <div class="rule-content">
             <p>
               После завершения всех выступлений проводится голосование по выдвинутым кандидатам.
             </p>
 
-            <div class="space-y-3">
+            <div class="space-y-4 mt-6">
               <div>
                 <p class="text-white font-medium">Процедура голосования</p>
                 <p>Голосование открытое. Кандидаты голосуются в порядке выдвижения. Каждый игрок обязан проголосовать ровно один раз.</p>
@@ -181,17 +180,12 @@ const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
 
               <div>
                 <p class="text-white font-medium">Обязательное голосование</p>
-                <p>Если игрок не проголосовал ни за одного кандидата, его голос автоматически засчитывается за последнего в списке.</p>
-              </div>
-
-              <div>
-                <p class="text-white font-medium">Единственный кандидат (с Дня 1)</p>
-                <p>Если выдвинут только один кандидат — он выбывает автоматически без голосования.</p>
+                <p>Если игрок не проголосовал — его голос засчитывается за последнего в списке.</p>
               </div>
 
               <div>
                 <p class="text-white font-medium">Результат</p>
-                <p>Выбывает игрок, набравший наибольшее число голосов. При равенстве голосов назначается перестрелка.</p>
+                <p>Выбывает игрок, набравший наибольшее число голосов. При равенстве голосов — перестрелка.</p>
               </div>
             </div>
           </div>
@@ -199,32 +193,27 @@ const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
 
         <!-- 6. Tiebreaker -->
         <article id="tiebreaker" class="scroll-mt-24">
-          <h2 class="text-2xl md:text-3xl font-display text-white mb-6 flex items-center gap-3">
-            <span class="flex-shrink-0 w-10 h-10 border border-red-500/60 text-red-100 rounded-full flex items-center justify-center text-sm font-bold">06</span>
-            Перестрелка
-          </h2>
-          <div class="glass-card rounded-2xl p-6 md:p-8 space-y-4 text-gray-300">
+          <div class="rule-header">
+            <span class="rule-index">06</span>
+            <h2 class="text-2xl md:text-3xl font-display text-white">Перестрелка</h2>
+          </div>
+          <div class="rule-content">
             <p>
               Перестрелка проводится при равенстве голосов между двумя или более кандидатами.
             </p>
 
-            <div class="space-y-3">
+            <div class="space-y-4 mt-6">
               <div>
                 <p class="text-white font-medium">Оправдательная речь</p>
                 <p>Каждый участник перестрелки получает 30 секунд для оправдательной речи.</p>
               </div>
 
               <div>
-                <p class="text-white font-medium">Повторное голосование</p>
-                <p>После речей проводится повторное голосование только между участниками перестрелки.</p>
-              </div>
-
-              <div>
                 <p class="text-white font-medium">Повторное равенство</p>
-                <p>Если голоса снова разделились поровну, возможны два исхода:</p>
-                <ul class="list-disc list-inside ml-4 mt-2 space-y-1">
-                  <li><strong class="text-white">Стол 9–10 игроков:</strong> выбывают все участники перестрелки</li>
-                  <li><strong class="text-white">Стол 8 и менее игроков:</strong> никто не выбывает, игра переходит в ночь</li>
+                <p>Если голоса снова поровну:</p>
+                <ul class="list-none mt-2 space-y-1 text-gray-400">
+                  <li>• <span class="text-gray-300">9–10 игроков:</span> выбывают все участники перестрелки</li>
+                  <li>• <span class="text-gray-300">8 и менее:</span> никто не выбывает, игра переходит в ночь</li>
                 </ul>
               </div>
             </div>
@@ -233,45 +222,117 @@ const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
 
         <!-- 7. Endgame -->
         <article id="endgame" class="scroll-mt-24">
-          <h2 class="text-2xl md:text-3xl font-display text-white mb-6 flex items-center gap-3">
-            <span class="flex-shrink-0 w-10 h-10 border border-red-500/60 text-red-100 rounded-full flex items-center justify-center text-sm font-bold">07</span>
-            Условия победы
-          </h2>
-          <div class="glass-card rounded-2xl p-6 md:p-8 space-y-4 text-gray-300">
-            <div class="grid md:grid-cols-2 gap-4">
-              <div class="border border-blue-500/30 rounded-xl p-4">
-                <p class="text-blue-400 font-semibold mb-2">Победа мафии</p>
-                <p>Мафия побеждает, когда количество мафии сравнялось с количеством мирных жителей:</p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm">
-                  <li>3 мафии — 3 мирных</li>
-                  <li>2 мафии — 2 мирных</li>
-                  <li>1 мафия — 1 мирный</li>
-                </ul>
+          <div class="rule-header">
+            <span class="rule-index">07</span>
+            <h2 class="text-2xl md:text-3xl font-display text-white">Условия победы</h2>
+          </div>
+          <div class="rule-content">
+            <div class="grid md:grid-cols-2 gap-6 mt-6">
+              <div class="win-card win-mafia">
+                <p class="text-blue-400 font-display text-xl mb-3">Победа мафии</p>
+                <p class="text-gray-300">Количество мафии сравнялось с мирными:</p>
+                <p class="text-gray-500 text-sm mt-2">3:3 • 2:2 • 1:1</p>
               </div>
 
-              <div class="border border-red-500/30 rounded-xl p-4">
-                <p class="text-red-400 font-semibold mb-2">Победа мирных</p>
-                <p>Мирные жители побеждают, когда все три мафиози выбыли из игры.</p>
+              <div class="win-card win-civilian">
+                <p class="text-red-400 font-display text-xl mb-3">Победа мирных</p>
+                <p class="text-gray-300">Все три мафиози выбыли из игры.</p>
               </div>
             </div>
 
-            <div>
-              <p class="text-white font-medium">Критические ситуации</p>
-              <ul class="list-disc list-inside mt-2 space-y-1">
-                <li><strong class="text-white">3 мафии, 4 мирных (7 игроков):</strong> если днём выбывает мирный — победа мафии</li>
-                <li><strong class="text-white">2 мафии, 3 мирных (5 игроков):</strong> если днём выбывает мирный — победа мафии</li>
-                <li><strong class="text-white">1 мафия, 2 мирных (3 игрока):</strong> если днём выбывает мирный — победа мафии</li>
-              </ul>
-            </div>
-
-            <p class="text-gray-400 text-sm">
-              Победа фиксируется немедленно при достижении условия, независимо от фазы игры (день или ночь).
+            <p class="text-gray-500 text-sm mt-6">
+              Победа фиксируется немедленно при достижении условия, независимо от фазы игры.
             </p>
           </div>
         </article>
 
       </div>
-
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .rules-header {
+    background: linear-gradient(180deg, rgba(12, 12, 12, 0.6), rgba(0, 0, 0, 0));
+  }
+
+  .rules-header.section-edge::after {
+    opacity: 0.3;
+  }
+
+  .rule-header {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .rule-index {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 9999px;
+    background: rgba(227, 67, 67, 0.12);
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .rule-content {
+    color: #c7c7c7;
+    line-height: 1.75;
+  }
+
+  .rule-content p {
+    margin-bottom: 1rem;
+  }
+
+  .rule-content p:last-child {
+    margin-bottom: 0;
+  }
+
+  .team-card {
+    padding: 1.5rem;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .team-mafia {
+    border-left: 3px solid rgba(96, 165, 250, 0.4);
+  }
+
+  .team-civilian {
+    border-left: 3px solid rgba(248, 113, 113, 0.4);
+  }
+
+  .phase-item {
+    padding-left: 1rem;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+    color: #c7c7c7;
+  }
+
+  .phase-mafia {
+    border-left-color: rgba(96, 165, 250, 0.35);
+  }
+
+  .phase-civilian {
+    border-left-color: rgba(248, 113, 113, 0.35);
+  }
+
+  .win-card {
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .win-mafia {
+    border-left: 3px solid rgba(96, 165, 250, 0.4);
+  }
+
+  .win-civilian {
+    border-left: 3px solid rgba(248, 113, 113, 0.4);
+  }
+</style>
