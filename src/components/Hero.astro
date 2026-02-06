@@ -139,7 +139,7 @@ const icons = {
     background-image:
       repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0px, rgba(255, 255, 255, 0.035) 1px, transparent 1px, transparent 12px),
       repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 1px, transparent 1px, transparent 16px);
-    opacity: 0.35;
+    opacity: 0.5;
     transform: rotate(-8deg);
     z-index: 0;
     pointer-events: none;
@@ -168,6 +168,11 @@ const icons = {
 
   .hero-divider.section-edge::after {
     opacity: 0.45;
+  }
+
+  :root.day-mode .hero-section .pattern-layer {
+    opacity: 0.44;
+    filter: invert(1);
   }
 </style>
 
@@ -211,8 +216,8 @@ const icons = {
 
   // Generate the full pattern SVG
   function generatePattern(): string {
-    const iconSize = 18;  // Actual icon size
-    const gap = 8;        // Gap between icons
+    const iconSize = 22;  // Actual icon size
+    const gap = 7;        // Gap between icons
     const cellSize = iconSize + gap;
     const cols = 10;
     const rows = 6;
@@ -231,7 +236,7 @@ const icons = {
     }
 
     return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
-      <g fill="white" fill-opacity="0.025">${content}</g>
+      <g fill="white" fill-opacity="0.055">${content}</g>
     </svg>`;
   }
 

@@ -377,4 +377,35 @@ const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
   .win-civilian {
     border-left: 3px solid rgba(248, 113, 113, 0.4);
   }
+
+  :root.day-mode .rules-header {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  }
+
+  :root.day-mode .rules-header.section-edge::after {
+    opacity: 0.55;
+  }
+
+  :root.day-mode .rule-content {
+    color: #374151;
+  }
+
+  :root.day-mode .team-card,
+  :root.day-mode .win-card {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+
+  :root.day-mode .phase-item {
+    color: #4b5563;
+    border-left-color: rgba(0, 0, 0, 0.15);
+  }
+
+  :root.day-mode .phase-mafia {
+    border-left-color: rgba(37, 99, 235, 0.35);
+  }
+
+  :root.day-mode .phase-civilian {
+    border-left-color: rgba(220, 38, 38, 0.35);
+  }
 </style>

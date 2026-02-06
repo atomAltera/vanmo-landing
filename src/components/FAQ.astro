@@ -15,7 +15,7 @@ const faqData = [
   },
   {
     question: "Сколько стоит участие?",
-    answer: 'Информацию о стоимости и расписании вы найдёте в наших социальных сетях или на странице <a href="/contacts" class="text-red-500 underline hover:no-underline">контактов</a>.'
+    answer: 'Игра стоит 20 GEL за вечер. Посмотреть игру можно бесплатно.'
   }
 ];
 ---
@@ -92,5 +92,30 @@ const faqData = [
     margin-top: 0.75rem;
     color: #c7c7c7;
     line-height: 1.7;
+  }
+
+  :root.day-mode .faq-section {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  }
+
+  :root.day-mode .faq-section.section-edge::after {
+    opacity: 0.4;
+  }
+
+  :root.day-mode .faq-row {
+    border-bottom-color: rgba(0, 0, 0, 0.1);
+  }
+
+  :root.day-mode .faq-title {
+    color: #1f2937;
+  }
+
+  :root.day-mode .faq-index {
+    color: rgba(127, 29, 29, 0.9);
+    background: rgba(227, 67, 67, 0.14);
+  }
+
+  :root.day-mode .faq-body {
+    color: #4b5563;
   }
 </style>

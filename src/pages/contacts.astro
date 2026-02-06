@@ -207,6 +207,42 @@ const telegram2HrefEncoded = encode('https://t.me/' + org2.telegram);
     background: none;
     padding: 0;
   }
+
+  :root.day-mode .contact-card,
+  :root.day-mode .organizer-block {
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+  }
+
+  :root.day-mode .contact-card:hover {
+    background: #f9fafb;
+  }
+
+  :root.day-mode .contact-row {
+    color: #4b5563;
+  }
+
+  :root.day-mode .contact-row:hover {
+    color: #111827;
+  }
+
+  :root.day-mode .contacts-header {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  }
+
+  :root.day-mode .contacts-header.section-edge::after {
+    opacity: 0.55;
+  }
+
+  :root.day-mode .contact-icon {
+    color: #b91c1c;
+    background: rgba(227, 67, 67, 0.14);
+  }
+
+  :root.day-mode .contact-row .text-gray-500 {
+    color: #6b7280 !important;
+  }
 </style>
 
 <script>

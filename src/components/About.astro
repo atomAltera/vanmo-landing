@@ -2,7 +2,6 @@
 ---
 
 <section class="section-edge section-padding relative overflow-hidden about-section">
-  <div class="absolute inset-0 bg-[radial-gradient(ellipse_70%_40%_at_60%_0%,rgba(227,67,67,0.05),transparent)] pointer-events-none"></div>
 
   <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid gap-12 lg:grid-cols-[1fr,1fr] items-start">
@@ -93,5 +92,40 @@
 
   .about-section.section-edge::after {
     opacity: 0.25;
+  }
+  .about-section {
+    background:
+      radial-gradient(600px 320px at 75% -10%, rgba(227, 67, 67, 0.18), transparent 60%),
+      radial-gradient(520px 260px at 12% 15%, rgba(200, 169, 106, 0.14), transparent 60%),
+      linear-gradient(180deg, rgba(8, 8, 8, 0.95) 0%, rgba(14, 14, 14, 0.98) 55%, rgba(8, 8, 8, 0.95) 100%);
+  }
+
+  .about-section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+    background-size: 5px 5px;
+    opacity: 0.25;
+    pointer-events: none;
+    mix-blend-mode: soft-light;
+  }
+
+  :root.day-mode .about-section {
+    background:
+      radial-gradient(700px 360px at 75% -10%, rgba(227, 67, 67, 0.16), transparent 65%),
+      radial-gradient(560px 300px at 12% 15%, rgba(200, 169, 106, 0.13), transparent 65%),
+      linear-gradient(180deg, #ffffff 0%, #ffffff 55%, #f7f7f8 100%);
+  }
+
+  :root.day-mode .about-section::before {
+    background-image: radial-gradient(circle, rgba(17, 24, 39, 0.06) 1px, transparent 1px);
+    opacity: 0.18;
+    mix-blend-mode: multiply;
+  }
+
+  :root.day-mode .about-icon {
+    color: #b91c1c;
+    background: rgba(227, 67, 67, 0.14);
   }
 </style>
