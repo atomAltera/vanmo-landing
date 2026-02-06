@@ -24,12 +24,51 @@
   --section-padding-y-md: 7rem;
 }
 
+/* Theme Variables - Night Mode (default) */
+:root {
+  --theme-bg: #0a0a0a;
+  --theme-bg-secondary: #121212;
+  --theme-text: #ffffff;
+  --theme-text-muted: #9ca3af;
+  --theme-text-subtle: rgba(255, 255, 255, 0.6);
+  --theme-border: rgba(255, 255, 255, 0.1);
+  --theme-card-bg: rgba(255, 255, 255, 0.02);
+  --theme-card-hover: rgba(255, 255, 255, 0.04);
+  --theme-toast-bg: #fff;
+  --theme-toast-text: #111;
+  --theme-header-bg: rgba(10, 10, 10, 0.7);
+}
+
+/* Day Mode */
+:root.day-mode {
+  --theme-bg: #f5f5f5;
+  --theme-bg-secondary: #ffffff;
+  --theme-text: #1a1a1a;
+  --theme-text-muted: #6b7280;
+  --theme-text-subtle: rgba(0, 0, 0, 0.5);
+  --theme-border: rgba(0, 0, 0, 0.1);
+  --theme-card-bg: rgba(0, 0, 0, 0.03);
+  --theme-card-hover: rgba(0, 0, 0, 0.06);
+  --theme-toast-bg: #1a1a1a;
+  --theme-toast-text: #fff;
+  --theme-header-bg: rgba(255, 255, 255, 0.85);
+}
+
 body.site-shell {
   background: radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.06), transparent 45%),
     radial-gradient(circle at 80% 0%, rgba(200, 169, 106, 0.12), transparent 50%),
     linear-gradient(135deg, #0a0a0a 0%, #121212 55%, #0f0f0f 100%);
   position: relative;
   isolation: isolate;
+  color: var(--theme-text);
+  transition: background 0.4s ease, color 0.3s ease;
+}
+
+/* Day mode body styles */
+:root.day-mode body.site-shell {
+  background: radial-gradient(circle at 15% 20%, rgba(227, 67, 67, 0.05), transparent 45%),
+    radial-gradient(circle at 80% 0%, rgba(200, 169, 106, 0.08), transparent 50%),
+    linear-gradient(135deg, #f5f5f5 0%, #ffffff 55%, #fafafa 100%);
 }
 
 body.site-shell::before {
@@ -42,6 +81,38 @@ body.site-shell::before {
   opacity: 0.35;
   mix-blend-mode: soft-light;
   z-index: -1;
+  transition: opacity 0.4s ease;
+}
+
+:root.day-mode body.site-shell::before {
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+}
+
+/* Global Toast */
+.global-toast {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  background: var(--theme-toast-bg);
+  color: var(--theme-toast-text);
+  padding: 0.875rem 1.5rem;
+  border-radius: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease, background 0.3s ease, color 0.3s ease;
+  z-index: 1000;
+}
+
+.global-toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+  visibility: visible;
 }
 
 .font-display {

@@ -66,5 +66,82 @@ const { title, description } = Astro.props;
       <slot />
     </main>
     <Footer />
+
+    <!-- Global Toast -->
+    <div id="global-toast" class="global-toast" aria-live="polite"></div>
+
+    <!-- Theme Management Script -->
+    <script>
+      // Global toast function
+      interface Window {
+        showToast: (message: string) => void;
+        toggleTheme: () => void;
+      }
+
+      let toastTimeout: ReturnType<typeof setTimeout>;
+      const toast = document.getElementById('global-toast');
+
+      window.showToast = function(message: string) {
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add('show');
+        clearTimeout(toastTimeout);
+        toastTimeout = setTimeout(() => {
+          toast.classList.remove('show');
+        }, 2500);
+      };
+
+      // Theme management
+      function getSystemTheme(): 'day' | 'night' {
+        // Check system preference first
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+          return 'day';
+        }
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'night';
+        }
+        // Fallback to time-based (6 AM - 6 PM is day)
+        const hour = new Date().getHours();
+        return (hour >= 6 && hour < 18) ? 'day' : 'night';
+      }
+
+      function applyTheme(theme: 'day' | 'night', showMessage = false) {
+        const root = document.documentElement;
+        if (theme === 'day') {
+          root.classList.add('day-mode');
+        } else {
+          root.classList.remove('day-mode');
+        }
+        localStorage.setItem('vanmo-theme', theme);
+
+        if (showMessage) {
+          const message = theme === 'night' ? 'В городе ночь' : 'В городе утро';
+          window.showToast(message);
+        }
+      }
+
+      window.toggleTheme = function() {
+        const root = document.documentElement;
+        const currentTheme = root.classList.contains('day-mode') ? 'day' : 'night';
+        const newTheme = currentTheme === 'day' ? 'night' : 'day';
+        applyTheme(newTheme, true);
+      };
+
+      // Initialize theme
+      (function() {
+        const savedTheme = localStorage.getItem('vanmo-theme') as 'day' | 'night' | null;
+        const theme = savedTheme || getSystemTheme();
+        applyTheme(theme, false);
+
+        // Listen for system preference changes
+        if (window.matchMedia) {
+          window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('vanmo-theme')) {
+              applyTheme(e.matches ? 'day' : 'night', true);
+            }
+          });
+        }
+      })();
+    </script>
   </body>
 </html>

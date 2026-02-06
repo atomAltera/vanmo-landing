@@ -136,9 +136,6 @@ const telegram2HrefEncoded = encode('https://t.me/' + org2.telegram);
   </section>
 
   <Map />
-
-  <!-- Toast notification -->
-  <div id="toast" class="toast" aria-live="polite"></div>
 </BaseLayout>
 
 <style>
@@ -210,31 +207,6 @@ const telegram2HrefEncoded = encode('https://t.me/' + org2.telegram);
     background: none;
     padding: 0;
   }
-
-  /* Toast notification */
-  .toast {
-    position: fixed;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%) translateY(100%);
-    background: #fff;
-    color: #111;
-    padding: 0.875rem 1.5rem;
-    border-radius: 0.75rem;
-    font-size: 0.9rem;
-    font-weight: 500;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    visibility: hidden;
-    transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
-    z-index: 1000;
-  }
-
-  .toast.show {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-    visibility: visible;
-  }
 </style>
 
 <script>
@@ -252,21 +224,6 @@ const telegram2HrefEncoded = encode('https://t.me/' + org2.telegram);
     const h = el.getAttribute('data-h');
     if (h) el.setAttribute('href', d(h));
   });
-
-  // Toast notification
-  const toast = document.getElementById('toast');
-  let toastTimeout: ReturnType<typeof setTimeout>;
-
-  function showToast(message: string) {
-    if (!toast) return;
-    toast.textContent = message;
-    toast.classList.add('show');
-
-    clearTimeout(toastTimeout);
-    toastTimeout = setTimeout(() => {
-      toast.classList.remove('show');
-    }, 2000);
-  }
 
   // Copy to clipboard with cross-browser support
   async function copyToClipboard(text: string): Promise<boolean> {
@@ -290,7 +247,6 @@ const telegram2HrefEncoded = encode('https://t.me/' + org2.telegram);
     document.body.appendChild(textarea);
 
     // iOS Safari requires special handling
-    const range = document.createRange();
     const selection = window.getSelection();
 
     if (selection) {
@@ -323,9 +279,9 @@ const telegram2HrefEncoded = encode('https://t.me/' + org2.telegram);
       const success = await copyToClipboard(text);
 
       if (success) {
-        showToast('Скопировано в буфер обмена');
+        (window as any).showToast('Скопировано в буфер обмена');
       } else {
-        showToast('Не удалось скопировать');
+        (window as any).showToast('Не удалось скопировать');
       }
     });
   });
