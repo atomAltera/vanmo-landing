@@ -54,6 +54,93 @@
   --theme-header-bg: rgba(255, 255, 255, 0.85);
 }
 
+/* Day mode text color overrides */
+:root.day-mode .text-white {
+  color: #1a1a1a !important;
+}
+
+:root.day-mode .text-gray-300 {
+  color: #4b5563 !important;
+}
+
+:root.day-mode .text-gray-400 {
+  color: #6b7280 !important;
+}
+
+:root.day-mode .text-gray-500 {
+  color: #9ca3af !important;
+}
+
+:root.day-mode .kicker {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+/* Day mode card backgrounds */
+:root.day-mode .hero-panel {
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.95), rgba(245, 245, 245, 0.9));
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.1);
+}
+
+:root.day-mode .glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(250, 250, 250, 0.85));
+  border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* Day mode section edge dividers */
+:root.day-mode .section-edge::after {
+  background: linear-gradient(90deg, transparent 0%, rgba(227, 67, 67, 0.2) 20%, rgba(227, 67, 67, 0.15) 50%, rgba(227, 67, 67, 0.2) 80%, transparent 100%);
+}
+
+/* Day mode icons */
+:root.day-mode .step-icon,
+:root.day-mode .contact-icon,
+:root.day-mode .faq-index,
+:root.day-mode .rule-index {
+  background: rgba(227, 67, 67, 0.1);
+  color: #b91c1c;
+}
+
+/* Day mode links */
+:root.day-mode a.text-red-500 {
+  color: #dc2626 !important;
+}
+
+/* Keep CTA button red */
+:root.day-mode .cta-button {
+  color: #fff !important;
+}
+
+/* Day mode footer */
+:root.day-mode footer {
+  background: rgba(0, 0, 0, 0.03);
+}
+
+/* Day mode hero section - keep dark for contrast */
+:root.day-mode .hero-section {
+  background-color: #1a1a1a;
+  background-image:
+    radial-gradient(900px 520px at 18% -10%, rgba(227, 67, 67, 0.12), transparent 60%),
+    radial-gradient(700px 480px at 80% 10%, rgba(255, 255, 255, 0.05), transparent 65%),
+    linear-gradient(180deg, #1a1a1a 0%, #242424 55%, #1a1a1a 100%);
+}
+
+:root.day-mode .hero-section .text-white,
+:root.day-mode .hero-section h1 {
+  color: #fff !important;
+}
+
+:root.day-mode .hero-section .text-gray-300 {
+  color: #d1d5db !important;
+}
+
+:root.day-mode .hero-section .kicker {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+:root.day-mode .hero-section .pattern-layer {
+  opacity: 0.25;
+}
+
 body.site-shell {
   background: radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.06), transparent 45%),
     radial-gradient(circle at 80% 0%, rgba(200, 169, 106, 0.12), transparent 50%),
