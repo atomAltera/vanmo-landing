@@ -217,18 +217,17 @@ const telegram2HrefEncoded = encode('https://t.me/' + org2.telegram);
     bottom: 2rem;
     left: 50%;
     transform: translateX(-50%) translateY(100%);
-    background: rgba(30, 30, 30, 0.95);
-    color: #fff;
+    background: #fff;
+    color: #111;
     padding: 0.875rem 1.5rem;
     border-radius: 0.75rem;
     font-size: 0.9rem;
     font-weight: 500;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
     opacity: 0;
     visibility: hidden;
     transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
     z-index: 1000;
-    backdrop-filter: blur(8px);
   }
 
   .toast.show {
