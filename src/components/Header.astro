@@ -20,25 +20,23 @@ const navItems = [
           <img src={headerLogoDark.src} alt="VANMO" class="header-logo-dark h-8 w-auto" />
         </a>
 
-        <!-- Theme Toggle (center) -->
+        <!-- Theme Toggle (center) - Eclipse Design -->
         <button
           id="theme-toggle-desktop"
           onclick="window.toggleTheme()"
-          class="theme-toggle theme-toggle-centered"
+          class="eclipse-toggle"
           aria-label="Переключить тему"
         >
-          <span class="theme-toggle-track">
-            <span class="theme-toggle-orb"></span>
-            <span class="theme-toggle-icon theme-toggle-moon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-              </svg>
-            </span>
-            <span class="theme-toggle-icon theme-toggle-sun" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
-            </span>
+          <span class="eclipse-glow"></span>
+          <span class="eclipse-body">
+            <!-- Moon (visible in night mode) -->
+            <svg class="eclipse-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+            </svg>
+            <!-- Sun (visible in day mode) -->
+            <svg class="eclipse-sun" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
+            </svg>
           </span>
         </button>
 
@@ -168,117 +166,105 @@ const navItems = [
     border-color: var(--theme-border);
   }
 
-  /* Theme Toggle - Capsule Switch */
-  .theme-toggle {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .theme-toggle-centered {
+  /* Eclipse Theme Toggle */
+  .eclipse-toggle {
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
-  }
-
-  .theme-toggle-track {
-    position: relative;
-    width: 80px;
-    height: 32px;
-    border-radius: 9999px;
-    padding: 3px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    justify-items: center;
-    background: radial-gradient(circle at 20% 20%, rgba(120, 180, 255, 0.35), transparent 55%),
-      linear-gradient(135deg, rgba(15, 15, 18, 0.98), rgba(4, 4, 8, 0.9));
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04), 0 8px 20px rgba(0, 0, 0, 0.35);
-    transition: background 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-    --orb-x: 0px;
-  }
-
-  .theme-toggle:hover .theme-toggle-track {
-    border-color: rgba(255, 255, 255, 0.35);
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08), 0 10px 24px rgba(0, 0, 0, 0.45);
-  }
-
-  .theme-toggle-orb {
-    position: absolute;
-    width: 34px;
-    height: 24px;
-    border-radius: 9999px;
-    left: 3px;
-    top: 4px;
-    transform: translateX(var(--orb-x));
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05));
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35), inset 0 0 0 1px rgba(255, 255, 255, 0.14);
-    transition: transform 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
-    z-index: 1;
-  }
-
-  .theme-toggle-icon {
-    position: relative;
-    z-index: 2;
-    width: 14px;
-    height: 14px;
-    display: inline-flex;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255, 255, 255, 0.6);
-    transition: color 0.35s ease, transform 0.35s ease;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+  }
+
+  .eclipse-toggle:hover {
+    transform: translate(-50%, -50%) scale(1.08);
+  }
+
+  .eclipse-toggle:active {
+    transform: translate(-50%, -50%) scale(0.95);
+  }
+
+  .eclipse-glow {
+    position: absolute;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(200, 169, 106, 0.4) 0%, transparent 70%);
+    filter: blur(8px);
+    opacity: 0.8;
+    transition: background 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
     pointer-events: none;
   }
 
-  .theme-toggle-icon svg {
-    width: 14px;
-    height: 14px;
+  .eclipse-toggle:hover .eclipse-glow {
+    opacity: 1;
+    transform: scale(1.2);
   }
 
-  .theme-toggle-moon {
-    justify-self: center;
+  .eclipse-body {
+    position: relative;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .theme-toggle-sun {
-    justify-self: center;
+  .eclipse-moon,
+  .eclipse-sun {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s ease;
   }
 
-  :root:not(.day-mode) .theme-toggle-moon {
-    color: #f3c176;
-    transform: translateX(1px) scale(1.03);
+  /* Night mode (default) - Moon visible */
+  .eclipse-moon {
+    color: #f5d88a;
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+    filter: drop-shadow(0 0 6px rgba(245, 216, 138, 0.5));
   }
 
-  :root:not(.day-mode) .theme-toggle-sun {
-    color: rgba(255, 255, 255, 0.4);
+  .eclipse-sun {
+    color: rgba(255, 255, 255, 0.3);
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
   }
 
-  /* Day mode: move orb right to sun */
-  :root.day-mode .theme-toggle-track {
-    --orb-x: 40px;
-    background: radial-gradient(circle at 80% 20%, rgba(255, 223, 128, 0.45), transparent 55%),
-      linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(230, 234, 240, 0.92));
-    border-color: rgba(17, 24, 39, 0.2);
-    box-shadow: inset 0 0 0 1px rgba(17, 24, 39, 0.06), 0 10px 20px rgba(15, 23, 42, 0.18);
+  /* Day mode - Sun visible */
+  :root.day-mode .eclipse-moon {
+    color: rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+    filter: none;
   }
 
-  :root.day-mode .theme-toggle-orb {
-    background: linear-gradient(145deg, rgba(17, 24, 39, 0.14), rgba(17, 24, 39, 0.04));
-    box-shadow: 0 6px 12px rgba(15, 23, 42, 0.16), inset 0 0 0 1px rgba(17, 24, 39, 0.08);
+  :root.day-mode .eclipse-sun {
+    color: #d97706;
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+    filter: drop-shadow(0 0 8px rgba(217, 119, 6, 0.4));
   }
 
-  :root.day-mode .theme-toggle-moon {
-    color: rgba(17, 24, 39, 0.45);
+  :root.day-mode .eclipse-glow {
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.5) 0%, transparent 70%);
   }
 
-  :root.day-mode .theme-toggle-sun {
-    color: rgba(17, 24, 39, 0.95);
-    transform: translateX(-1px) scale(1.03);
+  /* Hover states */
+  .eclipse-toggle:hover .eclipse-moon {
+    filter: drop-shadow(0 0 10px rgba(245, 216, 138, 0.7));
+  }
+
+  :root.day-mode .eclipse-toggle:hover .eclipse-sun {
+    filter: drop-shadow(0 0 12px rgba(217, 119, 6, 0.6));
   }
 </style>
