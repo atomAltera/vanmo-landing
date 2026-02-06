@@ -28,6 +28,24 @@ const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="space-y-16">
 
+        <!-- 0. Quick Start -->
+        <article id="quick-start" class="scroll-mt-24">
+          <div class="rule-header">
+            <span class="rule-index">00</span>
+            <h2 class="text-2xl md:text-3xl font-display text-white">Быстрый старт</h2>
+          </div>
+          <div class="rule-content">
+            <p>Как проходит игра за 60 секунд:</p>
+            <ol class="list-decimal pl-5 space-y-2">
+              <li>Все получают роли и начинается ночь: “чёрные” знакомятся, Дон и Шериф получают свои проверки.</li>
+              <li>Утром объявляют выбывшего. Он говорит последнее слово 1 минуту.</li>
+              <li>Днём все по очереди говорят по 1 минуте и называют одного кандидата на голосование.</li>
+              <li>Проходит открытое голосование. Выбывает игрок с большинством.</li>
+              <li>Снова ночь — мафия “стреляет”, Дон и Шериф проверяют. Цикл повторяется до победы одной команды.</li>
+            </ol>
+          </div>
+        </article>
+
         <!-- 1. Overview -->
         <article id="overview" class="scroll-mt-24">
           <div class="rule-header">
@@ -166,6 +184,23 @@ const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
                 <p>Говорит только тот, кому дали слово. Остальные слушают и не перебивают.</p>
               </div>
             </div>
+          </div>
+        </article>
+
+        <!-- 4.1 Tips -->
+        <article id="tips" class="scroll-mt-24">
+          <div class="rule-header">
+            <span class="rule-index">04</span>
+            <h2 class="text-2xl md:text-3xl font-display text-white">Как говорить в свою минуту</h2>
+          </div>
+          <div class="rule-content">
+            <p>Короткий план, чтобы звучать уверенно:</p>
+            <ol class="list-decimal pl-5 space-y-2">
+              <li>Скажи, кого считаешь “красным”, а кого — “чёрным”, и почему.</li>
+              <li>Отметь 1–2 наблюдения: голосования, реакции, логические несостыковки.</li>
+              <li>Назови одного кандидата на голосование и кратко обоснуй выбор.</li>
+              <li>Заканчивай фразой “ПАС” или “СПАСИБО”.</li>
+            </ol>
           </div>
         </article>
 
