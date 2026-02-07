@@ -107,9 +107,19 @@
 :root.day-mode .step-icon,
 :root.day-mode .contact-icon,
 :root.day-mode .faq-index,
-:root.day-mode .rule-index {
-  background: rgba(227, 67, 67, 0.1);
+:root.day-mode .rule-index,
+:root.day-mode .feature-icon {
+  background: rgba(227, 67, 67, 0.15);
   color: #b91c1c;
+}
+
+/* Day mode mafia section background */
+:root.day-mode .mafia-section {
+  background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+}
+
+:root.day-mode .mafia-section > .absolute {
+  background: none;
 }
 
 /* Day mode links */
