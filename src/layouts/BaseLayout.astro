@@ -16,6 +16,27 @@ const { title, description } = Astro.props;
 <html lang="ru">
   <head>
     <meta charset="UTF-8" />
+    <!-- Theme initialization - MUST run before any content renders to prevent flash -->
+    <script is:inline>
+      (function() {
+        var theme = localStorage.getItem('vanmo-theme');
+        if (!theme) {
+          // Check system preference
+          if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+            theme = 'day';
+          } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            theme = 'night';
+          } else {
+            // Fallback to time-based
+            var hour = new Date().getHours();
+            theme = (hour >= 6 && hour < 18) ? 'day' : 'night';
+          }
+        }
+        if (theme === 'day') {
+          document.documentElement.classList.add('day-mode');
+        }
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
@@ -70,7 +91,7 @@ const { title, description } = Astro.props;
     <!-- Global Toast -->
     <div id="global-toast" class="global-toast" aria-live="polite"></div>
 
-    <!-- Theme Management Script -->
+    <!-- Theme toggle and toast functions -->
     <script>
       // Global toast function
       interface Window {
@@ -91,57 +112,37 @@ const { title, description } = Astro.props;
         }, 2500);
       };
 
-      // Theme management
-      function getSystemTheme(): 'day' | 'night' {
-        // Check system preference first
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
-          return 'day';
-        }
-        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          return 'night';
-        }
-        // Fallback to time-based (6 AM - 6 PM is day)
-        const hour = new Date().getHours();
-        return (hour >= 6 && hour < 18) ? 'day' : 'night';
-      }
-
-      function applyTheme(theme: 'day' | 'night', showMessage = false) {
-        const root = document.documentElement;
-        if (theme === 'day') {
-          root.classList.add('day-mode');
-        } else {
-          root.classList.remove('day-mode');
-        }
-        localStorage.setItem('vanmo-theme', theme);
-
-        if (showMessage) {
-          const message = theme === 'night' ? 'В городе ночь' : 'В городе утро';
-          window.showToast(message);
-        }
-      }
-
+      // Theme toggle function
       window.toggleTheme = function() {
         const root = document.documentElement;
         const currentTheme = root.classList.contains('day-mode') ? 'day' : 'night';
         const newTheme = currentTheme === 'day' ? 'night' : 'day';
-        applyTheme(newTheme, true);
+
+        if (newTheme === 'day') {
+          root.classList.add('day-mode');
+        } else {
+          root.classList.remove('day-mode');
+        }
+        localStorage.setItem('vanmo-theme', newTheme);
+
+        const message = newTheme === 'night' ? 'В городе ночь' : 'В городе утро';
+        window.showToast(message);
       };
 
-      // Initialize theme
-      (function() {
-        const savedTheme = localStorage.getItem('vanmo-theme') as 'day' | 'night' | null;
-        const theme = savedTheme || getSystemTheme();
-        applyTheme(theme, false);
-
-        // Listen for system preference changes
-        if (window.matchMedia) {
-          window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
-            if (!localStorage.getItem('vanmo-theme')) {
-              applyTheme(e.matches ? 'day' : 'night', true);
+      // Listen for system preference changes (only if user hasn't set preference)
+      if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+          if (!localStorage.getItem('vanmo-theme')) {
+            const root = document.documentElement;
+            if (e.matches) {
+              root.classList.add('day-mode');
+            } else {
+              root.classList.remove('day-mode');
             }
-          });
-        }
-      })();
+            window.showToast(e.matches ? 'В городе утро' : 'В городе ночь');
+          }
+        });
+      }
     </script>
   </body>
 </html>
