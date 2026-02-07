@@ -22,6 +22,7 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
   };
   contact: {
     phone: string;
+    name: string;
     email: string;
     telegram: string;
   };
@@ -38,7 +39,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "SportsClub",
   "name": siteData.name,
-  "description": "Клуб спортивной мафии",
+  "description": "Клуб спортивной мафии в Тбилиси. Регулярные игры на русском языке, турниры ФИИМ, обучение для новичков.",
   "url": siteUrl,
   "logo": `${siteUrl}/logo.png`,
   "image": ogImageUrl,
@@ -55,7 +56,14 @@ const jsonLd = {
     "latitude": siteData.address.coordinates.lat,
     "longitude": siteData.address.coordinates.lng
   },
-  "sameAs": Object.values(siteData.social)
+  "sameAs": Object.values(siteData.social),
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "telephone": siteData.contact.phone,
+    "name": siteData.contact.name,
+    "availableLanguage": ["Russian", "English"]
+  }
 };
 ---
 
@@ -78,8 +86,10 @@ const jsonLd = {
 <meta name="geo.position" content={`${siteData.address.coordinates.lat};${siteData.address.coordinates.lng}`} />
 <meta name="ICBM" content={`${siteData.address.coordinates.lat}, ${siteData.address.coordinates.lng}`} />
 
-<!-- Canonical -->
+<!-- Canonical & Hreflang -->
 <link rel="canonical" href={canonicalUrl} />
+<link rel="alternate" hreflang="ru" href={canonicalUrl} />
+<link rel="alternate" hreflang="x-default" href={canonicalUrl} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />

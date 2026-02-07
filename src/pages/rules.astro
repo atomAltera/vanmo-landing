@@ -9,9 +9,30 @@ const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
     description: string;
   };
 };
+
+const siteUrl = 'https://vanmo.ge';
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Главная",
+      "item": siteUrl
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Правила",
+      "item": `${siteUrl}/rules`
+    }
+  ]
+};
 ---
 
 <BaseLayout title={pagesData.rules.title} description={pagesData.rules.description}>
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <section class="section-edge section-padding rules-header">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <p class="kicker mb-3">Регламент</p>
@@ -194,7 +215,7 @@ const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
         <!-- 4.1 Tips -->
         <article id="tips" class="scroll-mt-24">
           <div class="rule-header">
-            <span class="rule-index">04</span>
+            <span class="rule-index rule-index-tip">💡</span>
             <h2 class="text-2xl md:text-3xl font-display text-white">Как говорить в свою минуту</h2>
           </div>
           <div class="rule-content">
@@ -321,6 +342,11 @@ const pagesData = yaml.load(readFileSync('src/data/pages.yaml', 'utf8')) as {
     color: rgba(255, 255, 255, 0.85);
     font-size: 0.85rem;
     font-weight: 600;
+  }
+
+  .rule-index-tip {
+    background: rgba(250, 204, 21, 0.15);
+    font-size: 1.1rem;
   }
 
   .rule-content {

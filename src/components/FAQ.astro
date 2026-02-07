@@ -18,6 +18,20 @@ const faqData = [
     answer: 'Игра стоит 20 GEL за вечер. Посмотреть игру можно бесплатно.'
   }
 ];
+
+// FAQPage schema for SEO
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqData.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer.replace(/<[^>]*>/g, '') // Strip HTML for schema
+    }
+  }))
+};
 ---
 
 <section class="section-edge py-16 md:py-20 faq-section">
@@ -44,6 +58,9 @@ const faqData = [
     </dl>
   </div>
 </section>
+
+<!-- FAQPage Schema -->
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 <style>
   .faq-section {
