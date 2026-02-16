@@ -33,20 +33,13 @@ const icons = {
   <div class="pattern-layer"></div>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 lg:grid-cols-[1.2fr,0.8fr] items-center">
     <div>
-      <p class="kicker mb-6">Клуб VANMO • Тбилиси</p>
       <h1 class="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-6 leading-tight">
-        Спортивная мафия в Тбилиси для новичков и опытных игроков
+        Клуб спортивной мафии в Тбилиси
       </h1>
       <p class="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed">
-        Играем по понедельникам и субботам в центре города. Помогаем новичкам уверенно зайти в первую игру и кайфовать с первого вечера.
+        Регулярные игры по понедельникам и субботам. Приходите знакомиться и играть вместе.
       </p>
-      <ul class="hero-facts mt-8">
-        <li>Пн и Сб</li>
-        <li>Join Bar</li>
-        <li>20 GEL</li>
-        <li>Объясняем правила перед стартом</li>
-      </ul>
-      <div class="mt-8 flex flex-col sm:flex-row gap-4">
+      <div class="mt-10 flex flex-col sm:flex-row gap-4">
         <a
           href={siteData.social.telegram}
           target="_blank"
@@ -167,7 +160,7 @@ const icons = {
     background-image:
       repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0px, rgba(255, 255, 255, 0.035) 1px, transparent 1px, transparent 12px),
       repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 1px, transparent 1px, transparent 16px);
-    opacity: 0.5;
+    opacity: 0.36;
     transform: rotate(-8deg);
     z-index: 0;
     pointer-events: none;
@@ -192,22 +185,6 @@ const icons = {
     border-radius: 9999px;
     background: rgba(227, 67, 67, 0.14);
     color: #f3b6b6;
-  }
-
-  .hero-facts {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-  }
-
-  .hero-facts li {
-    border: 1px solid rgba(255, 255, 255, 0.14);
-    border-radius: 9999px;
-    padding: 0.35rem 0.8rem;
-    font-size: 0.78rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.84);
   }
 
   .hero-divider.section-edge::after {
@@ -280,7 +257,7 @@ const icons = {
     }
 
     return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
-      <g fill="white" fill-opacity="0.042">${content}</g>
+      <g fill="white" fill-opacity="0.032">${content}</g>
     </svg>`;
   }
 
