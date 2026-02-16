@@ -21,19 +21,24 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
           <span class="text-[#E34343]">на грани правды и лжи</span>
         </h2>
         <p class="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl">
-          Командная психологическая игра, где участники делятся на мирных жителей и мафию.
-          Днём город голосует, чтобы вычислить преступников. Ночью мафия тайно устраняет жителей.
+          Это интеллектуальный командный формат: вы тренируете логику, публичную речь и чтение людей.
+          В VANMO игра проходит по спортивному регламенту, поэтому каждая партия динамична и честна.
         </p>
 
-        <div class="mt-10">
+        <div class="mt-10 flex flex-col sm:flex-row gap-4">
+          <a
+            href={siteData.social.telegram}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="cta-button btn-primary text-base md:text-lg px-6 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
+          >
+            Записаться на игру
+          </a>
           <a
             href="/rules"
-            class="cta-button inline-flex items-center gap-3 bg-red-600 text-white px-6 py-3 rounded-lg text-base md:text-lg font-semibold transition-colors hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
+            class="btn-secondary text-base md:text-lg px-6 py-3"
           >
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-            </svg>
-            Узнать правила
+            Правила игры
           </a>
         </div>
       </div>

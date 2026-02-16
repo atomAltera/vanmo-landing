@@ -33,6 +33,7 @@ const { title, description, canonical, ogImage } = Astro.props;
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') || '';
 const canonicalUrl = canonical || Astro.url.href;
 const ogImageUrl = ogImage || `${siteUrl}/og-image.jpg`;
+const logoUrl = `${siteUrl}/favicon/android-chrome-512x512.png`;
 
 // JSON-LD structured data for local business
 const jsonLd = {
@@ -41,7 +42,7 @@ const jsonLd = {
   "name": siteData.name,
   "description": "Клуб спортивной мафии в Тбилиси. Регулярные игры на русском языке, турниры ФИИМ, обучение для новичков.",
   "url": siteUrl,
-  "logo": `${siteUrl}/logo.png`,
+  "logo": logoUrl,
   "image": ogImageUrl,
   "telephone": siteData.contact.phone,
   "email": siteData.contact.email,

@@ -319,6 +319,86 @@ body.site-shell::before {
   overflow: hidden;
 }
 
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  border-radius: 0.6rem;
+  padding: 0.85rem 1.5rem;
+  font-weight: 600;
+  background: #dc2626;
+  color: #fff;
+  transition: background 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: #b91c1c;
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.6rem;
+  padding: 0.85rem 1.5rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  background: transparent;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-link-subtle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 0.95rem;
+  border-radius: 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: #d1d5db;
+  font-size: 0.94rem;
+  font-weight: 500;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.02);
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.btn-link-subtle:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+:root.day-mode .btn-secondary {
+  border-color: rgba(17, 24, 39, 0.35);
+  color: #111827;
+  background: rgba(255, 255, 255, 0.85);
+}
+
+:root.day-mode .btn-secondary:hover {
+  border-color: rgba(17, 24, 39, 0.55);
+  background: #fff;
+}
+
+:root.day-mode .btn-link-subtle {
+  color: #374151;
+  border-color: rgba(17, 24, 39, 0.2);
+  background: rgba(255, 255, 255, 0.85);
+}
+
+:root.day-mode .btn-link-subtle:hover {
+  color: #111827;
+  border-color: rgba(17, 24, 39, 0.35);
+  background: #fff;
+}
+
 .cta-button::after {
   content: "";
   position: absolute;

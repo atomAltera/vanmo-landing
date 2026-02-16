@@ -14,11 +14,11 @@
 
         <p class="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl">
           VANMO — клуб для любителей классической спортивной мафии в&nbsp;Тбилиси.
-          Мы проводим регулярные игры для новичков и опытных игроков.
+          Мы собираем живое комьюнити, где важны уважительный формат, сильная игра и комфортный старт для новых участников.
         </p>
       </div>
 
-      <div class="flex flex-col lg:flex-row lg:gap-10 gap-6">
+      <div class="about-grid">
         <div class="about-item">
           <span class="about-icon">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24">
@@ -26,8 +26,8 @@
             </svg>
           </span>
           <div>
-            <p class="text-white font-display text-2xl mb-1">Спокойная атмосфера</p>
-            <p class="text-sm text-gray-400 uppercase tracking-[0.14em]">комфортно новичкам</p>
+            <p class="text-white font-display text-xl leading-tight mb-2">Дружелюбный вход</p>
+            <p class="text-sm text-gray-400">Понятно даже с нуля</p>
           </div>
         </div>
 
@@ -38,8 +38,8 @@
             </svg>
           </span>
           <div>
-            <p class="text-white font-display text-2xl mb-1">Уютная локация</p>
-            <p class="text-sm text-gray-400 uppercase tracking-[0.14em]">удобно добраться</p>
+            <p class="text-white font-display text-xl leading-tight mb-2">Стабильное расписание</p>
+            <p class="text-sm text-gray-400">Играем по понедельникам и субботам</p>
           </div>
         </div>
 
@@ -50,8 +50,8 @@
             </svg>
           </span>
           <div>
-            <p class="text-white font-display text-2xl mb-1">Вкусная еда</p>
-            <p class="text-sm text-gray-400 uppercase tracking-[0.14em]">перерывы с пользой</p>
+            <p class="text-white font-display text-xl leading-tight mb-2">Спортивный стандарт</p>
+            <p class="text-sm text-gray-400">Клуб FIIM и официальный регламент</p>
           </div>
         </div>
       </div>
@@ -60,10 +60,31 @@
 </section>
 
 <style>
+  .about-grid {
+    display: grid;
+    gap: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .about-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .about-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
   .about-item {
     display: flex;
     gap: 1rem;
-    align-items: center;
+    align-items: flex-start;
+    padding: 1rem;
+    border-radius: 0.9rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .about-icon {
@@ -114,5 +135,11 @@
   :root.day-mode .about-icon {
     color: #b91c1c;
     background: rgba(227, 67, 67, 0.14);
+  }
+
+  :root.day-mode .about-item {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.04);
   }
 </style>

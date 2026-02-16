@@ -17,6 +17,7 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
 
 const { lat, lng } = siteData.address.coordinates;
 const mapUrl = `https://www.google.com/maps?q=${lat},${lng}&z=17&output=embed`;
+const mapLink = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
 ---
 
 <section class="section-edge py-16 md:py-20 map-section">
@@ -42,6 +43,14 @@ const mapUrl = `https://www.google.com/maps?q=${lat},${lng}&z=17&output=embed`;
         {siteData.address.venue && <span class="font-semibold text-white">{siteData.address.venue}</span>}
         <span>{siteData.address.street}, {siteData.address.city}</span>
       </address>
+      <a
+        href={mapLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 text-sm text-gray-300 hover:text-white underline underline-offset-4 mb-4"
+      >
+        Открыть в Google Maps
+      </a>
       <div class="aspect-video rounded-xl overflow-hidden map-frame">
         <iframe
           src={mapUrl}

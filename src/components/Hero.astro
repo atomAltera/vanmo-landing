@@ -33,16 +33,52 @@ const icons = {
   <div class="pattern-layer"></div>
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 lg:grid-cols-[1.2fr,0.8fr] items-center">
     <div>
-      <p class="kicker mb-6">Клуб VANMO</p>
+      <p class="kicker mb-6">Клуб VANMO • Тбилиси</p>
       <h1 class="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-6 leading-tight">
-        Клуб спортивной мафии в Тбилиси
+        Спортивная мафия в Тбилиси для новичков и опытных игроков
       </h1>
       <p class="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed">
-        Регулярные игры по понедельникам и субботам. Приходите знакомиться и играть вместе.
+        Играем по понедельникам и субботам в центре города. Помогаем новичкам уверенно зайти в первую игру и кайфовать с первого вечера.
+      </p>
+      <ul class="hero-facts mt-8">
+        <li>Пн и Сб</li>
+        <li>Join Bar</li>
+        <li>20 GEL</li>
+        <li>Объясняем правила перед стартом</li>
+      </ul>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4">
+        <a
+          href={siteData.social.telegram}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="cta-button btn-primary text-lg px-7 py-4 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
+          </svg>
+          Записаться на ближайшую игру
+        </a>
+        <a
+          href="/rules"
+          class="btn-secondary text-base px-6 py-4"
+        >
+          Как проходит игра
+        </a>
+      </div>
+      <p class="hero-proof mt-5 text-sm text-gray-400">
+        Официальный клуб
+        <a
+          href="https://mafiaworldtour.org/clubs/349"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-gray-200 hover:text-white underline underline-offset-4"
+        >
+          FIIM (Mafia World Tour)
+        </a>
       </p>
     </div>
     <div class="hero-panel rounded-2xl p-7 md:p-8">
-      <p class="text-xs uppercase tracking-[0.28em] text-white/60 mb-5">Как поучаствовать</p>
+      <p class="text-xs uppercase tracking-[0.28em] text-white/60 mb-5">4 шага до первой игры</p>
 
       <!-- 4-step instruction -->
       <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-3 mb-8">
@@ -68,7 +104,7 @@ const icons = {
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l3 3M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
           </span>
-          <p class="text-sm text-white">2. Дождаться анонса</p>
+          <p class="text-sm text-white">2. Выбрать ближайший анонс</p>
         </div>
 
         <!-- Arrow -->
@@ -102,17 +138,9 @@ const icons = {
         </div>
       </div>
 
-      <a
-        href={siteData.social.telegram}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="cta-button inline-flex items-center gap-3 bg-red-600 text-white px-7 py-4 rounded-lg text-lg font-semibold transition-colors hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
-        </svg>
-        Группа в Телеграме
-      </a>
+      <p class="text-sm text-gray-300">
+        Если вы играете впервые, организатор коротко объяснит формат перед началом.
+      </p>
     </div>
   </div>
 </section>
@@ -164,6 +192,22 @@ const icons = {
     border-radius: 9999px;
     background: rgba(227, 67, 67, 0.14);
     color: #f3b6b6;
+  }
+
+  .hero-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .hero-facts li {
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 9999px;
+    padding: 0.35rem 0.8rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.84);
   }
 
   .hero-divider.section-edge::after {
@@ -236,7 +280,7 @@ const icons = {
     }
 
     return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
-      <g fill="white" fill-opacity="0.055">${content}</g>
+      <g fill="white" fill-opacity="0.042">${content}</g>
     </svg>`;
   }
 
