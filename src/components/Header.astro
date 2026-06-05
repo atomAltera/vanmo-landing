@@ -5,7 +5,6 @@ import yaml from 'js-yaml';
 import { readFileSync } from 'fs';
 
 const navItems = [
-  // { href: '/', label: 'Главная' },
   { href: '/rules', label: 'Правила' },
   { href: '/contacts', label: 'Контакты' },
 ];
@@ -20,15 +19,16 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
 <div class="header-wrapper">
   <input type="checkbox" id="mobile-menu-toggle" class="sr-only" aria-hidden="true" />
 
-  <header class="bg-neutral-950/70 border-b border-white/10 backdrop-blur relative">
+  <header class="header-bar">
     <nav class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Главное меню">
-      <div class="flex justify-between items-center h-16">
-        <a href="/" class="block hover:opacity-80 transition-opacity">
-          <img src={headerLogoLight.src} alt="VANMO" class="header-logo-light h-8 w-auto" />
-          <img src={headerLogoDark.src} alt="VANMO" class="header-logo-dark h-8 w-auto" />
+      <div class="flex justify-between items-center h-14">
+
+        <a href="/" class="block hover:opacity-75 transition-opacity">
+          <img src={headerLogoLight.src} alt="VANMO" class="header-logo-light h-7 w-auto" />
+          <img src={headerLogoDark.src} alt="VANMO" class="header-logo-dark h-7 w-auto" />
         </a>
 
-        <!-- Theme Toggle (center) - Eclipse Design -->
+        <!-- Theme toggle (center) -->
         <button
           id="theme-toggle-desktop"
           onclick="window.toggleTheme()"
@@ -37,11 +37,9 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
         >
           <span class="eclipse-glow"></span>
           <span class="eclipse-body">
-            <!-- Moon (visible in night mode) -->
             <svg class="eclipse-moon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
             </svg>
-            <!-- Sun (visible in day mode) -->
             <svg class="eclipse-sun" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.166a.75.75 0 00-1.06-1.06l-1.591 1.59a.75.75 0 101.06 1.061l1.591-1.59zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.834 18.894a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 10-1.061 1.06l1.59 1.591zM12 18a.75.75 0 01.75.75V21a.75.75 0 01-1.5 0v-2.25A.75.75 0 0112 18zM7.758 17.303a.75.75 0 00-1.061-1.06l-1.591 1.59a.75.75 0 001.06 1.061l1.591-1.59zM6 12a.75.75 0 01-.75.75H3a.75.75 0 010-1.5h2.25A.75.75 0 016 12zM6.697 7.757a.75.75 0 001.06-1.06l-1.59-1.591a.75.75 0 00-1.061 1.06l1.59 1.591z" />
             </svg>
@@ -49,14 +47,11 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
         </button>
 
         <!-- Desktop nav -->
-        <div class="hidden md:flex items-center gap-6">
-          <ul class="flex space-x-8 text-sm uppercase tracking-[0.18em]">
+        <div class="hidden md:flex items-center gap-7">
+          <ul class="flex space-x-8 text-xs uppercase tracking-[0.2em]">
             {navItems.map((item) => (
               <li>
-                <a
-                  href={item.href}
-                  class="nav-link hover:text-white transition-colors font-medium"
-                >
+                <a href={item.href} class="nav-link">
                   {item.label}
                 </a>
               </li>
@@ -66,66 +61,62 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
             href={siteData.social.telegram}
             target="_blank"
             rel="noopener noreferrer"
-            class="header-join-btn inline-flex items-center px-4 py-2 rounded-lg text-xs uppercase tracking-[0.12em] font-semibold"
+            class="header-join-btn"
           >
             Записаться
           </a>
         </div>
 
-        <!-- Hamburger button -->
+        <!-- Hamburger -->
         <label
           for="mobile-menu-toggle"
           class="md:hidden flex flex-col justify-center items-center w-10 h-10 cursor-pointer group"
           aria-label="Открыть меню"
         >
-          <span class="hamburger-line block w-6 h-0.5 bg-gray-400 group-hover:bg-white my-0.5 origin-center transition-all duration-300"></span>
-          <span class="hamburger-line block w-6 h-0.5 bg-gray-400 group-hover:bg-white my-0.5 transition-all duration-300"></span>
-          <span class="hamburger-line block w-6 h-0.5 bg-gray-400 group-hover:bg-white my-0.5 origin-center transition-all duration-300"></span>
+          <span class="hamburger-line block w-5 h-px my-[3px] origin-center transition-all duration-300"></span>
+          <span class="hamburger-line block w-5 h-px my-[3px] transition-all duration-300"></span>
+          <span class="hamburger-line block w-5 h-px my-[3px] origin-center transition-all duration-300"></span>
         </label>
       </div>
     </nav>
   </header>
 
-  <!-- Mobile menu overlay -->
+  <!-- Mobile overlay -->
   <label
     for="mobile-menu-toggle"
     class="mobile-overlay fixed inset-0 bg-black/60 backdrop-blur-sm z-40 opacity-0 pointer-events-none transition-opacity duration-300 md:hidden"
     aria-hidden="true"
   ></label>
 
-  <!-- Mobile nav menu -->
-  <div class="mobile-menu fixed top-0 right-0 h-screen w-64 bg-neutral-950 border-l border-white/10 z-50 translate-x-full transition-transform duration-300 ease-out md:hidden">
+  <!-- Mobile menu -->
+  <div class="mobile-menu fixed top-0 right-0 h-screen w-64 z-50 translate-x-full transition-transform duration-300 ease-out md:hidden">
     <div class="flex justify-end p-4">
       <label
         for="mobile-menu-toggle"
-        class="w-10 h-10 flex items-center justify-center text-gray-400 hover:text-white cursor-pointer transition-colors"
+        class="w-10 h-10 flex items-center justify-center cursor-pointer transition-colors"
         aria-label="Закрыть меню"
+        style="color: var(--text-muted);"
       >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </label>
     </div>
-    <ul class="flex flex-col px-6 space-y-6 text-sm uppercase tracking-[0.18em]">
+    <ul class="flex flex-col px-6 space-y-6 text-xs uppercase tracking-[0.2em]">
       {navItems.map((item) => (
         <li>
-          <a
-            href={item.href}
-            class="nav-link hover:text-white transition-colors font-medium block py-2"
-          >
+          <a href={item.href} class="nav-link block py-2">
             {item.label}
           </a>
         </li>
       ))}
     </ul>
-    <div class="px-6 mt-8 pt-6 border-t border-white/10">
-    </div>
-    <div class="px-6 mt-4">
+    <div class="px-6 mt-8 pt-6 border-t" style="border-color: var(--border);">
       <a
         href={siteData.social.telegram}
         target="_blank"
         rel="noopener noreferrer"
-        class="header-join-btn inline-flex justify-center w-full px-4 py-3 rounded-lg text-xs uppercase tracking-[0.12em] font-semibold"
+        class="header-join-btn w-full justify-center"
       >
         Записаться на игру
       </a>
@@ -134,75 +125,72 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
 </div>
 
 <style is:global>
-  /* Header theme styles */
-  .header-wrapper header {
-    background: var(--theme-header-bg);
-    border-color: var(--theme-border);
+  .header-bar {
+    background: var(--header-bg);
+    border-bottom: 1px solid var(--border);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 30;
     transition: background 0.3s ease, border-color 0.3s ease;
   }
 
-  /* Logo switching based on theme */
-  .header-logo-light {
-    display: block;
-  }
-  .header-logo-dark {
-    display: none;
-  }
-
-  :root.day-mode .header-logo-light {
-    display: none;
-  }
-  :root.day-mode .header-logo-dark {
-    display: block;
-  }
+  /* Logo switching */
+  .header-logo-light { display: block; }
+  .header-logo-dark  { display: none; }
+  :root.day-mode .header-logo-light { display: none; }
+  :root.day-mode .header-logo-dark  { display: block; }
 
   .nav-link {
-    color: var(--theme-text-muted);
+    color: var(--text-muted);
+    font-weight: 500;
+    transition: color 0.2s ease;
   }
+  .nav-link:hover { color: var(--text); }
 
   .header-join-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1.125rem;
+    border-radius: 3px;
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
     color: #fff;
-    background: #b91c1c;
-    border: 1px solid rgba(255, 255, 255, 0.14);
+    background: var(--accent);
     transition: background 0.2s ease;
   }
-
-  .header-join-btn:hover {
-    background: #991b1b;
-  }
+  .header-join-btn:hover { background: var(--accent-hover); }
 
   .hamburger-line {
-    background-color: var(--theme-text-muted) !important;
+    background-color: var(--text-muted);
   }
 
-  /* Mobile menu */
-  #mobile-menu-toggle:checked ~ header nav .hamburger-line:nth-child(1) {
-    transform: rotate(45deg) translateY(6px);
+  #mobile-menu-toggle:checked ~ header .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translateY(7px);
   }
-
-  #mobile-menu-toggle:checked ~ header nav .hamburger-line:nth-child(2) {
+  #mobile-menu-toggle:checked ~ header .hamburger-line:nth-child(2) {
     opacity: 0;
   }
-
-  #mobile-menu-toggle:checked ~ header nav .hamburger-line:nth-child(3) {
-    transform: rotate(-45deg) translateY(-6px);
+  #mobile-menu-toggle:checked ~ header .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translateY(-7px);
   }
-
   #mobile-menu-toggle:checked ~ .mobile-overlay {
     opacity: 1;
     pointer-events: auto;
   }
-
   #mobile-menu-toggle:checked ~ .mobile-menu {
     --tw-translate-x: 0 !important;
   }
 
   .mobile-menu {
-    background: var(--theme-bg-secondary);
-    border-color: var(--theme-border);
+    background: var(--bg-raised);
+    border-left: 1px solid var(--border);
   }
 
-  /* Eclipse Theme Toggle */
+  /* Eclipse toggle */
   .eclipse-toggle {
     position: absolute;
     left: 50%;
@@ -219,36 +207,26 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
     border-radius: 50%;
     transition: transform 0.2s ease;
   }
-
-  .eclipse-toggle:hover {
-    transform: translate(-50%, -50%) scale(1.08);
-  }
-
-  .eclipse-toggle:active {
-    transform: translate(-50%, -50%) scale(0.95);
-  }
+  .eclipse-toggle:hover { transform: translate(-50%, -50%) scale(1.1); }
+  .eclipse-toggle:active { transform: translate(-50%, -50%) scale(0.93); }
 
   .eclipse-glow {
     position: absolute;
-    width: 48px;
-    height: 48px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
-    background: radial-gradient(circle, rgba(200, 169, 106, 0.4) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(200, 169, 106, 0.35) 0%, transparent 70%);
     filter: blur(8px);
-    opacity: 0.8;
-    transition: background 0.5s ease, opacity 0.5s ease, transform 0.5s ease;
+    opacity: 0.7;
+    transition: background 0.5s ease, opacity 0.5s ease;
     pointer-events: none;
   }
-
-  .eclipse-toggle:hover .eclipse-glow {
-    opacity: 1;
-    transform: scale(1.2);
-  }
+  .eclipse-toggle:hover .eclipse-glow { opacity: 1; }
 
   .eclipse-body {
     position: relative;
-    width: 28px;
-    height: 28px;
+    width: 26px;
+    height: 26px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -257,50 +235,36 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
   .eclipse-moon,
   .eclipse-sun {
     position: absolute;
-    width: 22px;
-    height: 22px;
+    width: 20px;
+    height: 20px;
     transition: opacity 0.4s ease, transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s ease;
   }
 
-  /* Night mode (default) - Moon visible */
   .eclipse-moon {
     color: #f5d88a;
     opacity: 1;
     transform: rotate(0deg) scale(1);
-    filter: drop-shadow(0 0 6px rgba(245, 216, 138, 0.5));
+    filter: drop-shadow(0 0 5px rgba(245, 216, 138, 0.45));
   }
-
   .eclipse-sun {
     color: rgba(255, 255, 255, 0.3);
     opacity: 0;
     transform: rotate(-90deg) scale(0.5);
   }
 
-  /* Day mode - Sun visible */
   :root.day-mode .eclipse-moon {
-    color: rgba(0, 0, 0, 0.2);
+    color: rgba(0,0,0,0.15);
     opacity: 0;
     transform: rotate(90deg) scale(0.5);
     filter: none;
   }
-
   :root.day-mode .eclipse-sun {
-    color: #d97706;
+    color: #c9820a;
     opacity: 1;
     transform: rotate(0deg) scale(1);
-    filter: drop-shadow(0 0 8px rgba(217, 119, 6, 0.4));
+    filter: drop-shadow(0 0 6px rgba(217, 119, 6, 0.35));
   }
-
   :root.day-mode .eclipse-glow {
-    background: radial-gradient(circle, rgba(251, 191, 36, 0.5) 0%, transparent 70%);
-  }
-
-  /* Hover states */
-  .eclipse-toggle:hover .eclipse-moon {
-    filter: drop-shadow(0 0 10px rgba(245, 216, 138, 0.7));
-  }
-
-  :root.day-mode .eclipse-toggle:hover .eclipse-sun {
-    filter: drop-shadow(0 0 12px rgba(217, 119, 6, 0.6));
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.4) 0%, transparent 70%);
   }
 </style>

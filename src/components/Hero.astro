@@ -7,272 +7,239 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
     telegram: string;
   };
 };
-
-// Load icons from files at build time
-function parseIcon(filePath: string) {
-  const svg = readFileSync(filePath, 'utf8');
-  const viewBoxMatch = svg.match(/viewBox="([^"]+)"/);
-  const viewBox = viewBoxMatch ? viewBoxMatch[1] : '0 0 24 24';
-
-  // Extract inner content (everything between <svg> and </svg>)
-  const innerMatch = svg.match(/<svg[^>]*>([\s\S]*)<\/svg>/);
-  const content = innerMatch ? innerMatch[1].trim() : '';
-
-  return { viewBox, content };
-}
-
-const icons = {
-  pistol: parseIcon('src/assets/icons/pistol.svg'),
-  star: parseIcon('src/assets/icons/star.svg'),
-  tie: parseIcon('src/assets/icons/tie.svg'),
-  ring: parseIcon('src/assets/icons/ring.svg'),
-};
 ---
 
-<section class="hero-section section-edge hero-divider py-20 md:py-32 relative overflow-hidden">
-  <div class="pattern-layer"></div>
-  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid gap-10 lg:grid-cols-[1.2fr,0.8fr] items-center">
-    <div>
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-6 leading-tight">
-        Клуб спортивной мафии в Тбилиси
+<section class="hero-section section-edge">
+  <div class="hero-inner max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+    <!-- Left: Main content -->
+    <div class="hero-content">
+      <p class="kicker hero-kicker">Тбилиси · FIIM</p>
+
+      <h1 class="hero-title font-display">
+        Клуб<br/>
+        спортивной<br/>
+        <em class="hero-title-em">мафии</em>
       </h1>
-      <p class="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed">
-        Регулярные игры по понедельникам и субботам. Приходите знакомиться и играть вместе.
+
+      <p class="hero-location">в Тбилиси</p>
+
+      <p class="hero-subtitle">
+        Регулярные игры по понедельникам и субботам.<br class="hidden sm:block"/>
+        Приходите знакомиться и играть вместе.
       </p>
-      <div class="mt-10 flex flex-col sm:flex-row gap-4">
+
+      <div class="hero-ctas">
         <a
           href={siteData.social.telegram}
           target="_blank"
           rel="noopener noreferrer"
-          class="cta-button btn-primary text-lg px-7 py-4 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
+          class="cta-button btn-primary focus:outline-none focus:ring-2 focus:ring-red-700 focus:ring-offset-2 focus:ring-offset-black"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
             <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/>
           </svg>
           Записаться на ближайшую игру
         </a>
-        <a
-          href="/rules"
-          class="btn-secondary text-base px-6 py-4"
-        >
-          Как проходит игра
-        </a>
+        <a href="/rules" class="btn-secondary">Как проходит игра</a>
       </div>
-      <p class="hero-proof mt-5 text-sm text-gray-400">
+
+      <p class="hero-proof">
         Официальный клуб
         <a
           href="https://mafiaworldtour.org/clubs/349"
           target="_blank"
           rel="noopener noreferrer"
-          class="text-gray-200 hover:text-white underline underline-offset-4"
-        >
-          FIIM (Mafia World Tour)
-        </a>
+          class="hero-proof-link"
+        >FIIM · Mafia World Tour</a>
       </p>
     </div>
-    <div class="hero-panel rounded-2xl p-7 md:p-8">
-      <p class="text-xs uppercase tracking-[0.28em] text-white/60 mb-5">4 шага до первой игры</p>
 
-      <!-- 4-step instruction -->
-      <div class="flex flex-col md:flex-row md:items-center gap-4 md:gap-3 mb-8">
-        <!-- Step 1 -->
-        <div class="flex items-center gap-3">
-          <span class="step-icon">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8 10h8M8 14h4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-            </svg>
-          </span>
-          <p class="text-sm text-white">1. Вступить в группу</p>
-        </div>
-
-        <!-- Arrow -->
-        <svg class="hidden md:block w-4 h-4 text-white/30 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-        </svg>
-
-        <!-- Step 2 -->
-        <div class="flex items-center gap-3">
-          <span class="step-icon">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l3 3M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </span>
-          <p class="text-sm text-white">2. Выбрать ближайший анонс</p>
-        </div>
-
-        <!-- Arrow -->
-        <svg class="hidden md:block w-4 h-4 text-white/30 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-        </svg>
-
-        <!-- Step 3 -->
-        <div class="flex items-center gap-3">
-          <span class="step-icon">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-            </svg>
-          </span>
-          <p class="text-sm text-white">3. Отметиться в опросе</p>
-        </div>
-
-        <!-- Arrow -->
-        <svg class="hidden md:block w-4 h-4 text-white/30 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-        </svg>
-
-        <!-- Step 4 -->
-        <div class="flex items-center gap-3">
-          <span class="step-icon">
-            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M15 8l4 4-4 4"/>
-            </svg>
-          </span>
-          <p class="text-sm text-white">4. Прийти и играть</p>
-        </div>
-      </div>
-
-      <p class="text-sm text-gray-300">
-        Если вы играете впервые, организатор коротко объяснит формат перед началом.
+    <!-- Right: Steps panel -->
+    <div class="hero-steps">
+      <p class="steps-label">4 шага до первой игры</p>
+      <ol class="steps-list">
+        <li class="step-item">
+          <span class="step-num font-display">01</span>
+          <span class="step-text">Вступить в Telegram-группу</span>
+        </li>
+        <li class="step-item">
+          <span class="step-num font-display">02</span>
+          <span class="step-text">Выбрать ближайший анонс</span>
+        </li>
+        <li class="step-item">
+          <span class="step-num font-display">03</span>
+          <span class="step-text">Отметиться в опросе</span>
+        </li>
+        <li class="step-item">
+          <span class="step-num font-display">04</span>
+          <span class="step-text">Прийти и играть</span>
+        </li>
+      </ol>
+      <p class="steps-note">
+        Если вы играете впервые — организатор коротко объяснит формат перед началом.
       </p>
     </div>
+
   </div>
 </section>
 
-<!-- Pass icon data to client script -->
-<script is:inline define:vars={{ icons }}>
-  window.__PATTERN_ICONS__ = icons;
-</script>
-
 <style>
   .hero-section {
-    background-color: #0b0b0b;
-    background-image:
-      radial-gradient(900px 520px at 18% -10%, rgba(227, 67, 67, 0.12), transparent 60%),
-      radial-gradient(700px 480px at 80% 10%, rgba(255, 255, 255, 0.05), transparent 65%),
-      linear-gradient(180deg, #0b0b0b 0%, #0e0e0e 55%, #0b0b0b 100%);
-  }
-
-  .pattern-layer {
-    position: absolute;
-    inset: -40%;
-    width: 180%;
-    height: 180%;
-    background-image:
-      repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.035) 0px, rgba(255, 255, 255, 0.035) 1px, transparent 1px, transparent 12px),
-      repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.02) 0px, rgba(255, 255, 255, 0.02) 1px, transparent 1px, transparent 16px);
-    opacity: 0.36;
-    transform: rotate(-8deg);
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .hero-section > div:not(.pattern-layer) {
-    position: relative;
-    z-index: 1;
-  }
-
-  .hero-panel {
-    background: linear-gradient(140deg, rgba(24, 24, 24, 0.9), rgba(14, 14, 14, 0.85));
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
-  }
-
-  .step-icon {
-    display: inline-flex;
+    background-color: var(--bg);
+    min-height: 92vh;
+    display: flex;
     align-items: center;
-    justify-content: center;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 9999px;
-    background: rgba(227, 67, 67, 0.14);
-    color: #f3b6b6;
+    padding: 7rem 0 5rem;
   }
 
-  .hero-divider.section-edge::after {
-    opacity: 0.45;
+  .hero-inner {
+    width: 100%;
+    display: grid;
+    gap: 4rem;
+    align-items: center;
   }
 
-  :root.day-mode .hero-section .pattern-layer {
-    opacity: 0.44;
-    filter: invert(1);
+  @media (min-width: 1024px) {
+    .hero-inner {
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 5rem;
+    }
+  }
+
+  /* Kicker */
+  .hero-kicker {
+    margin-bottom: 2rem;
+  }
+
+  /* Headline */
+  .hero-title {
+    font-size: clamp(3.75rem, 9vw, 8rem);
+    font-weight: 700;
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title-em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-location {
+    font-family: var(--font-display);
+    font-size: clamp(1.125rem, 2.5vw, 1.625rem);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 2.25rem;
+    letter-spacing: 0.01em;
+  }
+
+  .hero-subtitle {
+    font-size: 1.0625rem;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 32rem;
+    margin-bottom: 2.75rem;
+  }
+
+  .hero-ctas {
+    display: flex;
+    flex-direction: column;
+    gap: 0.875rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (min-width: 480px) {
+    .hero-ctas {
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+
+  .hero-proof {
+    font-size: 0.8125rem;
+    color: var(--text-dim);
+    letter-spacing: 0.01em;
+  }
+
+  .hero-proof-link {
+    color: var(--text-muted);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color 0.2s ease;
+  }
+
+  .hero-proof-link:hover {
+    color: var(--text);
+  }
+
+  /* Steps panel */
+  .hero-steps {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 2rem 2rem 1.75rem;
+  }
+
+  .steps-label {
+    font-size: 0.625rem;
+    font-weight: 500;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 1.75rem;
+  }
+
+  .steps-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.125rem;
+    margin-bottom: 1.75rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.75rem;
+  }
+
+  .step-item {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .step-num {
+    font-size: 1.625rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--accent);
+    min-width: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .step-text {
+    font-size: 0.9375rem;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1.4;
+  }
+
+  .steps-note {
+    font-size: 0.8125rem;
+    font-weight: 300;
+    line-height: 1.55;
+    color: var(--text-muted);
+  }
+
+  /* Day mode */
+  :root.day-mode .hero-title { color: var(--text); }
+  :root.day-mode .hero-steps {
+    background: #fff;
+    box-shadow: 0 4px 24px rgba(22, 19, 16, 0.06);
   }
 </style>
-
-<script>
-  // Get icons loaded from files at build time
-  const icons = (window as any).__PATTERN_ICONS__ as Record<string, { viewBox: string; content: string }>;
-
-  // Shuffle array using Fisher-Yates
-  function shuffle<T>(array: T[]): T[] {
-    const arr = [...array];
-    for (let i = arr.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [arr[i], arr[j]] = [arr[j], arr[i]];
-    }
-    return arr;
-  }
-
-  // Create a row of 10 icons: 2 pistols, 6 ties, 1 ring, 1 star
-  function createIconRow(): string[] {
-    const row = [
-      'pistol', 'pistol',
-      'tie', 'tie', 'tie', 'tie', 'tie', 'tie',
-      'ring',
-      'star'
-    ];
-    return shuffle(row);
-  }
-
-  // Generate SVG content for an icon
-  function renderIcon(iconName: string, x: number, y: number, size: number): string {
-    const icon = icons[iconName];
-    const [, , vbW, vbH] = icon.viewBox.split(' ').map(Number);
-
-    // Scale to fit in size while maintaining aspect ratio
-    const scale = size / Math.max(vbW, vbH);
-    const offsetX = (size - vbW * scale) / 2;
-    const offsetY = (size - vbH * scale) / 2;
-
-    return `<g transform="translate(${x + offsetX}, ${y + offsetY}) scale(${scale})">${icon.content}</g>`;
-  }
-
-  // Generate the full pattern SVG
-  function generatePattern(): string {
-    const iconSize = 22;  // Actual icon size
-    const gap = 7;        // Gap between icons
-    const cellSize = iconSize + gap;
-    const cols = 10;
-    const rows = 6;
-    const width = cols * cellSize;
-    const height = rows * cellSize;
-
-    let content = '';
-
-    for (let row = 0; row < rows; row++) {
-      const iconRow = createIconRow();
-      for (let col = 0; col < cols; col++) {
-        const x = col * cellSize + gap / 2;
-        const y = row * cellSize + gap / 2;
-        content += renderIcon(iconRow[col], x, y, iconSize);
-      }
-    }
-
-    return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
-      <g fill="white" fill-opacity="0.032">${content}</g>
-    </svg>`;
-  }
-
-  // Apply pattern to background
-  function applyPattern() {
-    const svg = generatePattern();
-    const encoded = encodeURIComponent(svg);
-    const dataUrl = `url("data:image/svg+xml,${encoded}")`;
-
-    const patternLayer = document.querySelector('.pattern-layer') as HTMLElement;
-    if (patternLayer) {
-      patternLayer.style.backgroundImage = dataUrl;
-    }
-  }
-
-  // Run on page load
-  applyPattern();
-</script>

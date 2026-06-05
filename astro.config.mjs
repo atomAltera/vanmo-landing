@@ -15,6 +15,9 @@ export default defineConfig({
     plugins: [tailwindcss()],
     server: {
       allowedHosts: ['host.docker.internal']
+    },
+    preview: {
+      allowedHosts: ['host.docker.internal']
     }
   },
 

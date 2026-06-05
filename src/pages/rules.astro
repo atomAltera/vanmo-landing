@@ -35,11 +35,11 @@ const breadcrumbSchema = {
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <section class="section-edge section-padding rules-header">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="kicker mb-3">Регламент</p>
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-6">
+      <p class="kicker mb-6">Регламент</p>
+      <h1 class="font-display rules-page-title mb-6">
         Правила спортивной мафии
       </h1>
-      <p class="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed">
+      <p class="rules-page-sub max-w-2xl">
         Краткое руководство по официальным правилам. Только то, что нужно новичкам, чтобы уверенно сыграть первую игру.
       </p>
     </div>
@@ -315,123 +315,92 @@ const breadcrumbSchema = {
 </BaseLayout>
 
 <style>
-  .rules-header {
-    background: linear-gradient(180deg, rgba(12, 12, 12, 0.6), rgba(0, 0, 0, 0));
+  .rules-header { background: var(--bg); }
+
+  .rules-page-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text);
   }
 
-  .rules-header.section-edge::after {
-    opacity: 0.3;
+  .rules-page-sub {
+    font-size: 1.0625rem;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--text-muted);
   }
 
   .rule-header {
     display: grid;
     grid-template-columns: auto 1fr;
-    gap: 1rem;
-    align-items: center;
+    gap: 1.25rem;
+    align-items: baseline;
     margin-bottom: 1.5rem;
   }
 
   .rule-index {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 9999px;
-    background: rgba(227, 67, 67, 0.12);
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 0.85rem;
+    font-family: var(--font-display);
+    font-size: 2rem;
     font-weight: 600;
+    line-height: 1;
+    color: var(--accent);
+    opacity: 0.55;
+    min-width: 3rem;
   }
 
   .rule-index-tip {
-    background: rgba(250, 204, 21, 0.15);
-    font-size: 1.1rem;
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    opacity: 1;
   }
 
   .rule-content {
-    color: #c7c7c7;
+    color: var(--text-muted);
+    font-weight: 300;
     line-height: 1.75;
   }
 
-  .rule-content p {
-    margin-bottom: 1rem;
-  }
-
-  .rule-content p:last-child {
-    margin-bottom: 0;
-  }
+  .rule-content p { margin-bottom: 1rem; }
+  .rule-content p:last-child { margin-bottom: 0; }
 
   .team-card {
     padding: 1.5rem;
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.02);
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
   }
 
-  .team-mafia {
-    border-left: 3px solid rgba(96, 165, 250, 0.4);
-  }
-
-  .team-civilian {
-    border-left: 3px solid rgba(248, 113, 113, 0.4);
-  }
+  .team-mafia  { border-left: 2px solid rgba(96, 165, 250, 0.45); }
+  .team-civilian { border-left: 2px solid var(--accent); }
 
   .phase-item {
     padding-left: 1rem;
-    border-left: 2px solid rgba(255, 255, 255, 0.1);
-    color: #c7c7c7;
+    border-left: 2px solid var(--border);
+    color: var(--text-muted);
   }
 
-  .phase-mafia {
-    border-left-color: rgba(96, 165, 250, 0.35);
-  }
-
-  .phase-civilian {
-    border-left-color: rgba(248, 113, 113, 0.35);
-  }
+  .phase-mafia    { border-left-color: rgba(96, 165, 250, 0.4); }
+  .phase-civilian { border-left-color: rgba(196, 30, 30, 0.4); }
 
   .win-card {
     padding: 1.25rem;
-    border-radius: 0.75rem;
-    background: rgba(255, 255, 255, 0.02);
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
   }
 
-  .win-mafia {
-    border-left: 3px solid rgba(96, 165, 250, 0.4);
-  }
+  .win-mafia    { border-top: 2px solid rgba(96, 165, 250, 0.45); }
+  .win-civilian { border-top: 2px solid var(--accent); }
 
-  .win-civilian {
-    border-left: 3px solid rgba(248, 113, 113, 0.4);
-  }
-
-  :root.day-mode .rules-header {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
-  }
-
-  :root.day-mode .rules-header.section-edge::after {
-    opacity: 0.55;
-  }
-
-  :root.day-mode .rule-content {
-    color: #374151;
-  }
+  :root.day-mode .rule-content { color: var(--text-muted); }
 
   :root.day-mode .team-card,
   :root.day-mode .win-card {
-    background: rgba(0, 0, 0, 0.03);
-    border-color: rgba(0, 0, 0, 0.08);
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(22,19,16,0.05);
   }
 
-  :root.day-mode .phase-item {
-    color: #4b5563;
-    border-left-color: rgba(0, 0, 0, 0.15);
-  }
-
-  :root.day-mode .phase-mafia {
-    border-left-color: rgba(37, 99, 235, 0.35);
-  }
-
-  :root.day-mode .phase-civilian {
-    border-left-color: rgba(220, 38, 38, 0.35);
-  }
+  :root.day-mode .phase-item  { color: var(--text-muted); }
 </style>

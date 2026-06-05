@@ -8,10 +8,7 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
     venue?: string;
     city: string;
     postalCode: string;
-    coordinates: {
-      lat: number;
-      lng: number;
-    };
+    coordinates: { lat: number; lng: number };
   };
 };
 
@@ -20,59 +17,110 @@ const mapUrl = `https://www.google.com/maps?q=${lat},${lng}&z=17&output=embed`;
 const mapLink = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
 ---
 
-<section class="section-edge py-16 md:py-20 map-section">
+<section class="section-edge section-padding map-section">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="mb-8">
-      <p class="kicker mb-2">Локация</p>
-      <h2 class="text-3xl md:text-4xl font-display text-white">
-        Как нас найти
-      </h2>
-      <p class="text-gray-400 mt-4 max-w-2xl">
-        Уютное место для встречи перед игрой и спокойного старта вечера.
-      </p>
-    </div>
-    <div class="rounded-2xl p-0">
-      <address class="flex flex-wrap items-center gap-x-2 gap-y-1 text-gray-200 mb-4 not-italic">
-        <span class="inline-flex items-center gap-2 text-sm uppercase tracking-[0.2em] text-gray-500">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s6-5.686 6-10a6 6 0 10-12 0c0 4.314 6 10 6 10z"/>
-            <circle cx="12" cy="11" r="2.5" />
-          </svg>
-          адрес
-        </span>
-        {siteData.address.venue && <span class="font-semibold text-white">{siteData.address.venue}</span>}
-        <span>{siteData.address.street}, {siteData.address.city}</span>
-      </address>
+
+    <div class="map-header">
+      <div>
+        <p class="kicker mb-5">Локация</p>
+        <h2 class="font-display map-heading">Как нас найти</h2>
+        <address class="map-address not-italic">
+          {siteData.address.venue && (
+            <span class="map-venue">{siteData.address.venue}</span>
+          )}
+          <span class="map-street">{siteData.address.street}, {siteData.address.city}</span>
+        </address>
+      </div>
       <a
         href={mapLink}
         target="_blank"
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 text-sm text-gray-300 hover:text-white underline underline-offset-4 mb-4"
+        class="btn-link-subtle map-open-btn"
       >
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+        </svg>
         Открыть в Google Maps
       </a>
-      <div class="aspect-video rounded-xl overflow-hidden map-frame">
-        <iframe
-          src={mapUrl}
-          width="100%"
-          height="100%"
-          style="border:0;"
-          allowfullscreen=""
-          loading="eager"
-          referrerpolicy="no-referrer-when-downgrade"
-          title="Карта с местоположением"
-        ></iframe>
-      </div>
     </div>
+
+    <div class="map-frame">
+      <iframe
+        src={mapUrl}
+        width="100%"
+        height="100%"
+        style="border:0;"
+        allowfullscreen=""
+        loading="eager"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Карта с местоположением"
+      ></iframe>
+    </div>
+
   </div>
 </section>
 
 <style>
-  .map-frame {
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  .map-section { background: var(--bg); }
+
+  .map-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
   }
 
-  .map-section.section-edge::after {
-    opacity: 0.25;
+  @media (min-width: 768px) {
+    .map-header {
+      flex-direction: row;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
   }
+
+  .map-heading {
+    font-size: clamp(2rem, 4.5vw, 3.25rem);
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.1;
+    margin-bottom: 0.875rem;
+  }
+
+  .map-address {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .map-venue {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .map-street {
+    font-size: 0.9375rem;
+    font-weight: 300;
+    color: var(--text-muted);
+  }
+
+  .map-open-btn {
+    flex-shrink: 0;
+  }
+
+  .map-frame {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+
+  @media (max-width: 640px) {
+    .map-frame { aspect-ratio: 4 / 3; }
+  }
+
+  :root.day-mode .map-section { background: var(--bg); }
+  :root.day-mode .map-heading { color: var(--text); }
 </style>
