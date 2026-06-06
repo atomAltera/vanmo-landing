@@ -3,104 +3,140 @@ import yaml from 'js-yaml';
 import { readFileSync } from 'fs';
 
 const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
-  social: {
-    telegram: string;
-  };
+  social: { telegram: string };
 };
 ---
 
-<section class="section-edge section-padding relative overflow-hidden mafia-section">
-  <div class="absolute inset-0 bg-gradient-to-br from-black/40 via-transparent to-black/30 pointer-events-none"></div>
+<section class="section-edge section-padding mafia-section">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid gap-16 lg:grid-cols-[1.1fr,0.9fr] items-start">
 
-  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid gap-12 lg:grid-cols-[1.1fr,0.9fr] items-start">
+      <!-- Left -->
       <div>
-        <p class="kicker mb-6">Об игре</p>
-        <h2 class="font-display text-3xl md:text-4xl lg:text-5xl text-white leading-tight mb-6">
-          Мафия — это игра<br class="hidden sm:block" />
-          <span class="text-[#E34343]">на грани правды и лжи</span>
+        <p class="kicker mb-7">Об игре</p>
+        <h2 class="font-display mafia-heading text-white mb-7">
+          Мафия — это игра<br/>
+          <em class="mafia-heading-em">на грани правды и лжи</em>
         </h2>
-        <p class="text-lg md:text-xl text-gray-300 leading-relaxed max-w-2xl">
-          Это интеллектуальный командный формат: вы тренируете логику, публичную речь и чтение людей.
-          В VANMO игра проходит по спортивному регламенту, поэтому каждая партия динамична и честна.
+        <p class="mafia-body">
+          Интеллектуальный командный формат: вы тренируете логику, публичную речь и чтение людей.
+          В VANMO игра проходит по спортивному регламенту — каждая партия динамична и честна.
         </p>
 
-        <div class="mt-10 flex flex-col sm:flex-row gap-4">
+        <div class="mt-10 flex flex-col sm:flex-row gap-3">
           <a
             href={siteData.social.telegram}
             target="_blank"
             rel="noopener noreferrer"
-            class="cta-button btn-primary text-base md:text-lg px-6 py-3 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-neutral-950"
+            class="cta-button btn-primary"
           >
             Записаться на игру
           </a>
-          <a
-            href="/rules"
-            class="btn-secondary text-base md:text-lg px-6 py-3"
-          >
-            Правила игры
-          </a>
+          <a href="/rules" class="btn-secondary">Правила игры</a>
         </div>
       </div>
 
-      <div class="flex flex-col lg:flex-row lg:gap-10 gap-6">
-        <div class="feature-row">
-          <span class="feature-icon">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-            </svg>
-          </span>
+      <!-- Right: three skills -->
+      <div class="mafia-skills">
+        <div class="skill-item">
+          <span class="skill-num font-display">01</span>
           <div>
-            <p class="text-white font-display text-2xl mb-1">Логика</p>
-            <p class="text-sm text-gray-400 uppercase tracking-[0.14em]">анализ и дедукция</p>
+            <p class="skill-title font-display">Логика</p>
+            <p class="skill-desc">Анализ и дедукция</p>
           </div>
         </div>
-        <div class="feature-row">
-          <span class="feature-icon">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-          </span>
+        <div class="skill-sep"></div>
+        <div class="skill-item">
+          <span class="skill-num font-display">02</span>
           <div>
-            <p class="text-white font-display text-2xl mb-1">Психология</p>
-            <p class="text-sm text-gray-400 uppercase tracking-[0.14em]">чтение людей</p>
+            <p class="skill-title font-display">Психология</p>
+            <p class="skill-desc">Чтение людей</p>
           </div>
         </div>
-        <div class="feature-row">
-          <span class="feature-icon">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          </span>
+        <div class="skill-sep"></div>
+        <div class="skill-item">
+          <span class="skill-num font-display">03</span>
           <div>
-            <p class="text-white font-display text-2xl mb-1">Интуиция</p>
-            <p class="text-sm text-gray-400 uppercase tracking-[0.14em]">решения под давлением</p>
+            <p class="skill-title font-display">Интуиция</p>
+            <p class="skill-desc">Решения под давлением</p>
           </div>
         </div>
       </div>
+
     </div>
   </div>
 </section>
 
 <style>
-  .feature-row {
+  .mafia-section { background: var(--bg); }
+
+  .mafia-heading {
+    font-size: clamp(2.25rem, 5vw, 3.75rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--text);
+  }
+  .mafia-heading-em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .mafia-body {
+    font-size: 1.0625rem;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--text-muted);
+    max-width: 34rem;
+  }
+
+  .mafia-skills {
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .skill-item {
     display: flex;
-    gap: 1rem;
     align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem 1.75rem;
   }
 
-  .feature-icon {
-    width: 2.5rem;
-    height: 2.5rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    background: rgba(227, 67, 67, 0.12);
-    color: #f1b2b2;
+  .skill-sep {
+    height: 1px;
+    background: var(--border);
+    margin: 0 1.75rem;
   }
 
-  .mafia-section.section-edge::after {
-    opacity: 0.3;
+  .skill-num {
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--accent);
+    min-width: 3rem;
+    opacity: 0.6;
   }
+
+  .skill-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+  }
+
+  .skill-desc {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  :root.day-mode .mafia-skills {
+    background: #fff;
+    box-shadow: 0 4px 24px rgba(22, 19, 16, 0.06);
+  }
+  :root.day-mode .mafia-heading { color: var(--text); }
 </style>

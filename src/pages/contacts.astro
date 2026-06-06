@@ -66,11 +66,11 @@ const telegram2HrefEncoded = encode('https://t.me/' + org2.telegram);
   <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
   <section class="section-edge section-padding contacts-header">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <p class="kicker mb-3">Контакты</p>
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-display text-white mb-6">
-        Как с нами связаться
+      <p class="kicker mb-6">Контакты</p>
+      <h1 class="font-display contacts-page-title mb-6">
+        Как с нами<br/><em>связаться</em>
       </h1>
-      <p class="text-lg md:text-xl text-gray-300 max-w-2xl leading-relaxed">
+      <p class="contacts-page-sub max-w-2xl">
         Пишите в Telegram или приходите в клуб — будем рады познакомиться.
       </p>
     </div>
@@ -160,12 +160,25 @@ const telegram2HrefEncoded = encode('https://t.me/' + org2.telegram);
 </BaseLayout>
 
 <style>
-  .contacts-header {
-    background: linear-gradient(180deg, rgba(12, 12, 12, 0.6), rgba(0, 0, 0, 0));
+  .contacts-header { background: var(--bg); }
+
+  .contacts-page-title {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+  .contacts-page-title em {
+    font-style: italic;
+    color: var(--gold);
   }
 
-  .contacts-header.section-edge::after {
-    opacity: 0.3;
+  .contacts-page-sub {
+    font-size: 1.0625rem;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--text-muted);
   }
 
   .contact-card {
@@ -173,15 +186,18 @@ const telegram2HrefEncoded = encode('https://t.me/' + org2.telegram);
     grid-template-columns: auto 1fr;
     gap: 1rem;
     align-items: center;
-    padding: 1.25rem;
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.02);
+    padding: 1.25rem 1.5rem;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
     cursor: pointer;
-    transition: background 0.2s ease;
+    width: 100%;
+    transition: border-color 0.2s ease, background 0.2s ease;
   }
 
   .contact-card:hover {
-    background: rgba(255, 255, 255, 0.04);
+    border-color: var(--border-md);
+    background: rgba(237, 232, 223, 0.05);
   }
 
   .contact-icon {
@@ -190,79 +206,45 @@ const telegram2HrefEncoded = encode('https://t.me/' + org2.telegram);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 9999px;
-    background: rgba(227, 67, 67, 0.12);
-    color: #f1b2b2;
+    border-radius: 3px;
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
   }
 
   .organizer-block {
-    padding: 1.25rem;
-    border-radius: 1rem;
-    background: rgba(255, 255, 255, 0.02);
+    padding: 1.25rem 1.5rem;
+    border-radius: 3px;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
   }
 
   .contact-row {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    color: #c7c7c7;
+    color: var(--text-muted);
     transition: color 0.2s ease;
   }
 
-  .contact-row:hover {
-    color: #fff;
-  }
+  .contact-row:hover { color: var(--text); }
 
-  /* Copyable elements */
   .copyable {
     border: none;
     font: inherit;
     text-align: left;
   }
 
-  .contact-card.copyable {
-    width: 100%;
-  }
-
-  .contact-row.copyable {
-    background: none;
-    padding: 0;
-  }
+  .contact-card.copyable { width: 100%; }
+  .contact-row.copyable  { background: none; padding: 0; }
 
   :root.day-mode .contact-card,
   :root.day-mode .organizer-block {
-    background: #ffffff;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+    background: #fff;
+    box-shadow: 0 2px 16px rgba(22,19,16,0.06);
   }
 
   :root.day-mode .contact-card:hover {
-    background: #f9fafb;
-  }
-
-  :root.day-mode .contact-row {
-    color: #4b5563;
-  }
-
-  :root.day-mode .contact-row:hover {
-    color: #111827;
-  }
-
-  :root.day-mode .contacts-header {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
-  }
-
-  :root.day-mode .contacts-header.section-edge::after {
-    opacity: 0.55;
-  }
-
-  :root.day-mode .contact-icon {
-    color: #b91c1c;
-    background: rgba(227, 67, 67, 0.14);
-  }
-
-  :root.day-mode .contact-row .text-gray-500 {
-    color: #6b7280 !important;
+    background: #f9f6f1;
   }
 </style>
 

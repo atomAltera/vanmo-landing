@@ -1,5 +1,4 @@
 ---
-// FAQ content hardcoded directly in component
 const faqData = [
   {
     question: "Что такое спортивная мафия?",
@@ -11,7 +10,7 @@ const faqData = [
   },
   {
     question: "Как часто проходят игры?",
-    answer: 'Каждую субботу и понедельник, следите за анонсами в нашем <a href="https://t.me/vanmo_mafia" class="text-red-500 underline hover:no-underline">Telegram-канале</a>.'
+    answer: 'Каждую субботу и понедельник, следите за анонсами в нашем <a href="https://t.me/vanmo_mafia" class="faq-link">Telegram-канале</a>.'
   },
   {
     question: "Сколько стоит участие?",
@@ -39,7 +38,6 @@ const faqData = [
   }
 ];
 
-// FAQPage schema for SEO
 const faqSchema = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -48,111 +46,134 @@ const faqSchema = {
     "name": item.question,
     "acceptedAnswer": {
       "@type": "Answer",
-      "text": item.answer.replace(/<[^>]*>/g, '') // Strip HTML for schema
+      "text": item.answer.replace(/<[^>]*>/g, '')
     }
   }))
 };
 ---
 
-<section class="section-edge py-16 md:py-20 faq-section">
+<section class="section-edge section-padding faq-section">
   <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="mb-12">
-      <p class="kicker mb-3">FAQ</p>
-      <h2 class="text-3xl md:text-4xl font-display text-white">
-        Частые вопросы о клубе
-      </h2>
-      <p class="text-gray-400 mt-4 max-w-2xl">
-        Короткие ответы для тех, кто планирует первую игру или хочет узнать детали.
-      </p>
+
+    <div class="faq-layout">
+
+      <!-- Header -->
+      <div class="faq-header">
+        <p class="kicker mb-7">FAQ</p>
+        <h2 class="font-display faq-heading">
+          Частые<br/><em>вопросы</em>
+        </h2>
+        <p class="faq-subheading">
+          Короткие ответы для тех, кто планирует первую игру.
+        </p>
+      </div>
+
+      <!-- List -->
+      <dl class="faq-list">
+        {faqData.map((item, index) => (
+          <div class="faq-row">
+            <div class="faq-row-inner">
+              <span class="faq-num font-display">{(index + 1).toString().padStart(2, '0')}</span>
+              <div class="faq-text">
+                <dt class="faq-q">{item.question}</dt>
+                <dd class="faq-a" set:html={item.answer} />
+              </div>
+            </div>
+          </div>
+        ))}
+      </dl>
+
     </div>
-    <dl class="space-y-8">
-      {faqData.map((item, index) => (
-        <div class="faq-row">
-          <dt class="faq-title">
-            <span class="faq-index">{(index + 1).toString().padStart(2, '0')}</span>
-            <span>{item.question}</span>
-          </dt>
-          <dd class="faq-body" set:html={item.answer} />
-        </div>
-      ))}
-    </dl>
   </div>
 </section>
 
-<!-- FAQPage Schema -->
 <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 <style>
-  .faq-section {
-    background: linear-gradient(180deg, rgba(12, 12, 12, 0.5), rgba(0, 0, 0, 0));
+  .faq-section { background: var(--bg); }
+
+  .faq-layout {
+    display: grid;
+    gap: 4rem;
   }
 
-  .faq-section.section-edge::after {
-    opacity: 0.2;
+  @media (min-width: 1024px) {
+    .faq-layout {
+      grid-template-columns: 0.4fr 0.6fr;
+      gap: 5rem;
+      align-items: start;
+    }
+  }
+
+  .faq-heading {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+  .faq-heading em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .faq-subheading {
+    font-size: 0.9375rem;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--text-muted);
+  }
+
+  .faq-list {
+    display: flex;
+    flex-direction: column;
   }
 
   .faq-row {
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-top: 1px solid var(--border);
+    padding: 1.5rem 0;
   }
+  .faq-row:last-child { border-bottom: 1px solid var(--border); }
 
-  .faq-row:last-child {
-    border-bottom: 0;
-    padding-bottom: 0;
-  }
-
-  .faq-title {
+  .faq-row-inner {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: 3rem 1fr;
     gap: 1rem;
-    align-items: center;
-    font-size: 1.1rem;
+    align-items: start;
+  }
+
+  .faq-num {
+    font-size: 1.75rem;
     font-weight: 600;
-    color: #fff;
+    line-height: 1;
+    color: var(--border-md);
+    padding-top: 0.1rem;
   }
 
-  .faq-index {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.25rem;
-    height: 2.25rem;
-    border-radius: 9999px;
-    background: rgba(227, 67, 67, 0.12);
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 0.8rem;
-    font-weight: 600;
+  .faq-q {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.45;
+    margin-bottom: 0.6rem;
   }
 
-  .faq-body {
-    margin-left: 3.25rem;
-    margin-top: 0.75rem;
-    color: #c7c7c7;
-    line-height: 1.7;
+  .faq-a {
+    font-size: 0.9375rem;
+    font-weight: 300;
+    line-height: 1.65;
+    color: var(--text-muted);
   }
 
-  :root.day-mode .faq-section {
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0));
+  :global(.faq-link) {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
+  :global(.faq-link:hover) { opacity: 0.8; }
 
-  :root.day-mode .faq-section.section-edge::after {
-    opacity: 0.4;
-  }
-
-  :root.day-mode .faq-row {
-    border-bottom-color: rgba(0, 0, 0, 0.1);
-  }
-
-  :root.day-mode .faq-title {
-    color: #1f2937;
-  }
-
-  :root.day-mode .faq-index {
-    color: rgba(127, 29, 29, 0.9);
-    background: rgba(227, 67, 67, 0.14);
-  }
-
-  :root.day-mode .faq-body {
-    color: #4b5563;
-  }
+  :root.day-mode .faq-section { background: var(--bg); }
+  :root.day-mode .faq-heading { color: var(--text); }
+  :root.day-mode .faq-num { color: var(--border-md); }
 </style>
