@@ -2,6 +2,7 @@
 import yaml from 'js-yaml';
 import { readFileSync } from 'fs';
 import fiimLogo from '../assets/images/fiim-logo.png';
+import imafiaLogo from '../assets/images/imafia-logo.png';
 
 const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
   name: string;
@@ -23,16 +24,28 @@ const socialIcons: Record<string, string> = {
     <div class="footer-inner">
 
       <div class="footer-brand">
-        <a
-          href="https://mafiaworldtour.org/clubs/349"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="footer-fiim"
-          aria-label="FIIM — Mafia World Tour"
-        >
-          <img src={fiimLogo.src} alt="FIIM" class="h-6" loading="lazy" />
-        </a>
-        <p class="footer-fiim-label">Официальный клуб FIIM</p>
+        <div class="footer-badges">
+          <a
+            href="https://mafiaworldtour.org/clubs/349"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-badge-link"
+            aria-label="FIIM — Mafia World Tour"
+          >
+            <img src={fiimLogo.src} alt="FIIM" class="h-6" loading="lazy" />
+          </a>
+          <span class="footer-badge-sep">·</span>
+          <a
+            href="https://imafia.org/club/101"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-badge-link"
+            aria-label="iMafia — club 101"
+          >
+            <img src={imafiaLogo.src} alt="iMafia" class="h-6 footer-imafia-logo" loading="lazy" />
+          </a>
+        </div>
+        <p class="footer-fiim-label">Официальный клуб FIIM и iMafia</p>
       </div>
 
       <div class="footer-right">
@@ -90,11 +103,28 @@ const socialIcons: Record<string, string> = {
     gap: 0.5rem;
   }
 
-  .footer-fiim {
-    opacity: 0.7;
+  .footer-badges {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-badge-link {
+    opacity: 0.65;
     transition: opacity 0.2s ease;
   }
-  .footer-fiim:hover { opacity: 1; }
+  .footer-badge-link:hover { opacity: 1; }
+
+  .footer-badge-sep {
+    color: var(--text-dim);
+    font-size: 0.875rem;
+  }
+
+  .footer-imafia-logo {
+    opacity: 0.65;
+  }
+  .footer-badge-link:hover .footer-imafia-logo { opacity: 1; }
 
   .footer-fiim-label {
     font-size: 0.6875rem;

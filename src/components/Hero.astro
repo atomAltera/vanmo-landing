@@ -14,8 +14,6 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
 
     <!-- Left: Main content -->
     <div class="hero-content">
-      <p class="kicker hero-kicker">Тбилиси · FIIM</p>
-
       <h1 class="hero-title font-display">
         Клуб<br/>
         спортивной<br/>
@@ -51,7 +49,14 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
           target="_blank"
           rel="noopener noreferrer"
           class="hero-proof-link"
-        >FIIM · Mafia World Tour</a>
+        >FIIM</a>
+        {' и '}
+        <a
+          href="https://imafia.org/club/101"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hero-proof-link"
+        >iMafia</a>
       </p>
     </div>
 
@@ -87,10 +92,10 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
 <style>
   .hero-section {
     background-color: var(--bg);
-    min-height: 92vh;
+    min-height: unset;
     display: flex;
     align-items: center;
-    padding: 7rem 0 5rem;
+    padding: 6rem 0 4rem;
   }
 
   .hero-inner {
@@ -114,7 +119,7 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
 
   /* Headline */
   .hero-title {
-    font-size: clamp(3.75rem, 9vw, 8rem);
+    font-size: clamp(3rem, 7vw, 6rem);
     font-weight: 700;
     line-height: 0.88;
     letter-spacing: -0.02em;
