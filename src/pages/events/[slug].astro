@@ -1,0 +1,485 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import eventsData from '../../data/events.json';
+
+export function getStaticPaths() {
+  return eventsData.map((event) => ({
+    params: { slug: event.slug },
+    props: { event },
+  }));
+}
+
+interface Event {
+  slug: string;
+  type: string;
+  title: string;
+  subtitle: string;
+  tagline: string;
+  status: string;
+  seriesStart: string;
+  seriesEnd: string;
+  seriesStartLabel: string;
+  seriesEndLabel: string;
+  finalDates: string;
+  image: string;
+  registrationUrl: string;
+  registrationLabel: string;
+  entryFee: string;
+  finalFee: string;
+  prizePool: string;
+  level: string;
+  prizes: { place: number; amount: string; label: string }[];
+  seriesCount: number;
+  seriesPlayers: number;
+  seriesGames: number;
+  seriesAdvance: number;
+  finalPlayers: number;
+  finalGames: number;
+  description: string;
+  youtubeChannel: string;
+  languages: string;
+}
+
+const { event } = Astro.props as { event: Event };
+---
+
+<BaseLayout title={`${event.title} — VANMO`} description={event.description}>
+  <!-- HERO -->
+  <section class="event-hero">
+    <div class="event-hero__noise" aria-hidden="true"></div>
+    <div class="event-hero__content container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <p class="event-kicker">Тбилиси · 2026 · Агата Кристи</p>
+      <h1 class="event-hero__title font-display">{event.title}</h1>
+      <p class="event-hero__tagline font-display">{event.tagline}</p>
+      <div class="event-hero__stats">
+        <div class="event-stat">
+          <span class="event-stat__value">{event.prizePool}</span>
+          <span class="event-stat__label">призовой фонд</span>
+        </div>
+        <div class="event-stat-divider" aria-hidden="true">◆</div>
+        <div class="event-stat">
+          <span class="event-stat__value">{event.entryFee}</span>
+          <span class="event-stat__label">вход в серию</span>
+        </div>
+        <div class="event-stat-divider" aria-hidden="true">◆</div>
+        <div class="event-stat">
+          <span class="event-stat__value">{event.finalFee}</span>
+          <span class="event-stat__label">вход в финал</span>
+        </div>
+      </div>
+      <a href={event.registrationUrl} class="btn-primary event-cta-btn" target="_blank" rel="noopener noreferrer">
+        {event.registrationLabel}
+      </a>
+    </div>
+  </section>
+
+  <!-- STRUCTURE -->
+  <section class="section-padding section-edge event-section">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <div class="event-deco-divider" aria-hidden="true"><span>◆</span></div>
+      <p class="event-kicker">Формат турнира</p>
+      <h2 class="event-section__heading font-display">Путь к финалу</h2>
+      <div class="event-structure">
+        <div class="event-structure__box">
+          <div class="event-structure__number font-display">5</div>
+          <div class="event-structure__label">отборочных серий</div>
+          <div class="event-structure__sub">
+            {event.seriesPlayers} игроков · {event.seriesGames} партий · топ‑{event.seriesAdvance} в финал
+          </div>
+        </div>
+        <div class="event-structure__arrow" aria-hidden="true">→</div>
+        <div class="event-structure__box event-structure__box--final">
+          <div class="event-structure__number font-display">{event.finalPlayers}</div>
+          <div class="event-structure__label">финалистов</div>
+          <div class="event-structure__sub">
+            {event.finalGames} партий · 2 дня · {event.finalDates}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA 1 -->
+  <section class="event-cta-block section-edge">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <a href={event.registrationUrl} class="btn-primary event-cta-btn" target="_blank" rel="noopener noreferrer">
+        {event.registrationLabel}
+      </a>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section class="section-padding section-edge event-section">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <div class="event-deco-divider" aria-hidden="true"><span>◆</span></div>
+      <div class="event-details-grid">
+
+        <!-- About -->
+        <div class="event-details-col">
+          <p class="event-kicker">О турнире</p>
+          <p class="event-details__text">{event.description}</p>
+          <p class="event-details__meta">
+            Трансляции: YouTube · {event.youtubeChannel}<br />
+            Уровень: iMafia {event.level}<br />
+            Язык: {event.languages}
+          </p>
+        </div>
+
+        <!-- Prizes -->
+        <div class="event-details-col">
+          <p class="event-kicker">Призовой фонд</p>
+          <div class="event-prizes">
+            {event.prizes.map((prize) => (
+              <div class="event-prize">
+                <span class="event-prize__place font-display">{prize.label}</span>
+                <span class="event-prize__amount">{prize.amount}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Schedule -->
+      <div class="event-schedule">
+        <p class="event-kicker">Расписание</p>
+        <div class="event-schedule__grid">
+          <div class="event-schedule__item">
+            <span class="event-schedule__period">Отборочные серии</span>
+            <span class="event-schedule__dates">{event.seriesStartLabel} — {event.seriesEndLabel}</span>
+          </div>
+          <div class="event-schedule__item">
+            <span class="event-schedule__period">Финал</span>
+            <span class="event-schedule__dates">{event.finalDates}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA 2 -->
+  <section class="event-cta-block event-cta-block--last">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl event-cta-block__inner">
+      <p class="event-cta-block__tagline font-display">Займи своё место за столом</p>
+      <a href={event.registrationUrl} class="btn-primary event-cta-btn" target="_blank" rel="noopener noreferrer">
+        {event.registrationLabel}
+      </a>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ── Christie fusion: gold-dominant, grain texture, art deco elements ── */
+
+  /* HERO */
+  .event-hero {
+    position: relative;
+    padding: 8rem 0 6rem;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .event-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(200, 169, 106, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .event-hero__noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+  }
+
+  .event-hero__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  /* KICKER — gold variant */
+  .event-kicker {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .event-kicker::after {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--gold-dim);
+  }
+
+  .event-hero__title {
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--text);
+    max-width: 18ch;
+  }
+
+  .event-hero__tagline {
+    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--gold);
+    max-width: 40ch;
+  }
+
+  .event-hero__stats {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    width: 100%;
+  }
+
+  .event-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .event-stat__value {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .event-stat__label {
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .event-stat-divider {
+    color: var(--gold-dim);
+    font-size: 0.5rem;
+  }
+
+  .event-cta-btn {
+    margin-top: 0.5rem;
+    font-size: 0.9375rem;
+  }
+
+  /* SECTIONS */
+  .event-section {
+    background: var(--bg);
+  }
+
+  /* Art Deco divider */
+  .event-deco-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    color: var(--gold-dim);
+    font-size: 0.5rem;
+    letter-spacing: 0.5em;
+  }
+
+  .event-deco-divider::before,
+  .event-deco-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .event-section__heading {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 300;
+    color: var(--text);
+    margin: 0.5rem 0 2.5rem;
+  }
+
+  /* STRUCTURE */
+  .event-structure {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .event-structure__box {
+    flex: 1;
+    min-width: 200px;
+    padding: 2rem;
+    border: 1px solid var(--border);
+    border-top-color: var(--gold-dim);
+    background: var(--bg-raised);
+  }
+
+  .event-structure__number {
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .event-structure__label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    margin: 0.25rem 0;
+  }
+
+  .event-structure__sub {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .event-structure__arrow {
+    font-size: 1.5rem;
+    color: var(--gold-dim);
+    flex-shrink: 0;
+  }
+
+  /* CTA BLOCKS */
+  .event-cta-block {
+    padding: 3rem 0;
+  }
+
+  .event-cta-block--last {
+    padding: 4rem 0 6rem;
+  }
+
+  .event-cta-block__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .event-cta-block__tagline {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-muted);
+  }
+
+  /* DETAILS */
+  .event-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-bottom: 3rem;
+  }
+
+  .event-details__text {
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-size: 1rem;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .event-details__meta {
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+
+  .event-prizes {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.75rem;
+  }
+
+  .event-prize {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .event-prize:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .event-prize__place {
+    font-size: 1.125rem;
+    color: var(--text);
+  }
+
+  .event-prize__amount {
+    font-size: 1rem;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .event-schedule {
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .event-schedule__grid {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.75rem;
+  }
+
+  .event-schedule__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.875rem 0;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .event-schedule__item:first-child {
+    border-top: 1px solid var(--border);
+  }
+
+  .event-schedule__period {
+    font-size: 0.9375rem;
+    color: var(--text);
+  }
+
+  .event-schedule__dates {
+    font-size: 0.875rem;
+    color: var(--gold);
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .event-details-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .event-structure {
+      flex-direction: column;
+    }
+
+    .event-structure__box {
+      width: 100%;
+    }
+
+    .event-structure__arrow {
+      transform: rotate(90deg);
+    }
+  }
+</style>
