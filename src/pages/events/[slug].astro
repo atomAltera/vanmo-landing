@@ -44,7 +44,7 @@ const { event } = Astro.props as { event: Event };
 const ogImage = new URL(event.image, Astro.site).toString();
 ---
 
-<BaseLayout title={`${event.title} — VANMO`} description={event.description} ogImage={ogImage} ogImageWidth={1535} ogImageHeight={1024}>
+<BaseLayout title={`${event.title} — VANMO`} description={event.description} ogImage={ogImage} ogImageWidth={500} ogImageHeight={334}>
   <!-- HERO -->
   <section class="event-hero">
     <div class="event-hero__noise" aria-hidden="true"></div>
