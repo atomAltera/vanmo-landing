@@ -1,0 +1,36 @@
+[
+  {
+    "slug": "one_more_league_2026",
+    "type": "tournament",
+    "title": "One More League 2026",
+    "subtitle": "Тематический турнир по произведениям Агаты Кристи",
+    "tagline": "Пять серий. Один детектив. Вся правда — в финале.",
+    "status": "active",
+    "seriesStart": "2026-06-15",
+    "seriesEnd": "2026-10-12",
+    "seriesStartLabel": "15 июня 2026",
+    "seriesEndLabel": "12 октября 2026",
+    "finalDates": "24–25 октября 2026",
+    "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='330'%3E%3Crect width='500' height='330' fill='%23111111'/%3E%3Ctext x='250' y='175' font-family='serif' font-size='14' fill='%23444' text-anchor='middle'%3E500 %C3%97 330%3C/text%3E%3C/svg%3E",
+    "registrationUrl": "https://imafia.org/tournament/1755",
+    "registrationLabel": "Зарегистрироваться на Серию 1",
+    "entryFee": "110 GEL",
+    "finalFee": "Бесплатно",
+    "prizePool": "450 EUR",
+    "level": "BRONZE",
+    "prizes": [
+      { "place": 1, "amount": "200 EUR", "label": "1 место" },
+      { "place": 2, "amount": "150 EUR", "label": "2 место" },
+      { "place": 3, "amount": "100 EUR", "label": "3 место" }
+    ],
+    "seriesCount": 5,
+    "seriesPlayers": 10,
+    "seriesGames": 8,
+    "seriesAdvance": 2,
+    "finalPlayers": 10,
+    "finalGames": 14,
+    "description": "One More League — турнир с погружением в атмосферу детективных историй Агаты Кристи. Пять отборочных серий определят десятерых финалистов, которые сразятся за призовой фонд в двухдневном финале. Все партии транслируются на YouTube.",
+    "youtubeChannel": "iMafia",
+    "languages": "Русский, украинский"
+  }
+]
