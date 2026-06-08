@@ -7,9 +7,12 @@ import Footer from '../components/Footer.astro';
 interface Props {
   title: string;
   description: string;
+  ogImage?: string;
+  ogImageWidth?: number;
+  ogImageHeight?: number;
 }
 
-const { title, description } = Astro.props;
+const { title, description, ogImage, ogImageWidth, ogImageHeight } = Astro.props;
 ---
 
 <!doctype html>
@@ -51,7 +54,7 @@ const { title, description } = Astro.props;
     />
     <link rel="preconnect" href="https://maps.googleapis.com" />
     <link rel="preconnect" href="https://maps.gstatic.com" crossorigin />
-    <SEO title={title} description={description} />
+    <SEO title={title} description={description} ogImage={ogImage} ogImageWidth={ogImageWidth} ogImageHeight={ogImageHeight} />
     {import.meta.env.PROD && (
       <>
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-CL9PMY2N5Y"></script>

@@ -11,7 +11,7 @@
     "seriesStartLabel": "15 июня 2026",
     "seriesEndLabel": "12 октября 2026",
     "finalDates": "24–25 октября 2026",
-    "image": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='330'%3E%3Crect width='500' height='330' fill='%23111111'/%3E%3Ctext x='250' y='175' font-family='serif' font-size='14' fill='%23444' text-anchor='middle'%3E500 %C3%97 330%3C/text%3E%3C/svg%3E",
+    "image": "/images/events/oml2026-cover.png",
     "registrationUrl": "https://imafia.org/tournament/1755",
     "registrationLabel": "Зарегистрироваться на Серию 1",
     "entryFee": "110 GEL",
