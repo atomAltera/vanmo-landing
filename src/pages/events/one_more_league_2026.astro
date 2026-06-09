@@ -182,7 +182,7 @@ const ogImage = Astro.site
               Язык: Русский, Украинский
             </p>
           </div>
-          <div class="event-hero__info-col">
+          <div class="event-hero__info-col event-hero__prizes-col">
             <p class="event-kicker">Призовой фонд</p>
             <div class="event-prizes">
               {prizes.map((prize) => (
@@ -306,6 +306,8 @@ const ogImage = Astro.site
     background-image: url('/images/events/oml2026-bg-light.jpg');
     --text-muted: rgba(18, 13, 8, 0.8);
     --text-dim: rgba(18, 13, 8, 0.62);
+    --gold: #4a2e06;
+    --gold-dim: rgba(74, 46, 6, 0.45);
   }
 
   :global(:root.day-mode) .event-hero::before {
@@ -492,6 +494,19 @@ const ogImage = Astro.site
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
+  }
+
+  .event-hero__prizes-col {
+    background: rgba(8, 6, 4, 0.28);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem 1rem 1.5rem 1.75rem;
+    margin: -1.5rem 0 -1.5rem -1.75rem;
+    backdrop-filter: blur(4px);
+  }
+
+  :global(:root.day-mode) .event-hero__prizes-col {
+    background: rgba(240, 232, 210, 0.45);
   }
 
   .event-hero__description {
@@ -720,6 +735,13 @@ const ogImage = Astro.site
     .event-hero__info-grid {
       grid-template-columns: 1fr;
       gap: 2.5rem;
+    }
+
+    .event-hero__prizes-col {
+      margin: 0;
+      padding: 1.5rem;
+      border-left: none;
+      border-top: 1px solid var(--border);
     }
   }
 </style>

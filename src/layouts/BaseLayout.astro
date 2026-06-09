@@ -132,6 +132,16 @@ const { title, description, ogImage, ogImageWidth, ogImageHeight } = Astro.props
         window.showToast(message);
       };
 
+      // Shift+T keyboard shortcut for theme toggle
+      document.addEventListener('keydown', (e) => {
+        if (e.shiftKey && e.code === 'KeyT' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+          const tag = (e.target as HTMLElement).tagName;
+          if (tag !== 'INPUT' && tag !== 'TEXTAREA') {
+            window.toggleTheme();
+          }
+        }
+      });
+
       // Listen for system preference changes (only if user hasn't set preference)
       if (window.matchMedia) {
         window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {

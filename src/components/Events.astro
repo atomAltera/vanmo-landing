@@ -324,9 +324,16 @@
   /* ── PRIZES (right column) ── */
   .oml-spotlight__right {
     min-width: 220px;
-    padding-top: 0.25rem;
+    padding: 1.5rem;
+    margin: -1.25rem 0 -1.5rem 0;
     border-left: 1px solid var(--border);
-    padding-left: 3rem;
+    border-radius: 4px;
+    background: rgba(8, 6, 4, 0.28);
+    backdrop-filter: blur(4px);
+  }
+
+  :global(:root.day-mode) .oml-spotlight__right {
+    background: rgba(240, 232, 210, 0.45);
   }
 
   .oml-prizes__kicker {
