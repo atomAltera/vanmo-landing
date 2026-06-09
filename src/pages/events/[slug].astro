@@ -112,6 +112,35 @@ function regLabel(round: Round): string {
           {regLabel(activeRound)}
         </a>
       )}
+
+      <div class="event-hero__info">
+        <div class="event-hero__info-grid">
+          <div class="event-hero__info-col">
+            <p class="event-kicker">О турнире</p>
+            <p class="event-hero__description">
+              One More League — серийный турнир по мафии с детективной тематикой.
+              Пять отборочных серий определят десятерых финалистов, которые сразятся
+              за призовой фонд в двухдневном финале. Все партии транслируются на YouTube.
+            </p>
+            <p class="event-hero__meta">
+              Трансляции: YouTube · {event.youtubeChannel}<br />
+              Уровень: iMafia {event.level}<br />
+              Язык: {event.languages}
+            </p>
+          </div>
+          <div class="event-hero__info-col">
+            <p class="event-kicker">Призовой фонд</p>
+            <div class="event-prizes">
+              {event.prizes.map((prize) => (
+                <div class="event-prize">
+                  <span class="event-prize__place font-display">{prize.label}</span>
+                  <span class="event-prize__amount">{prize.amount}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -196,65 +225,6 @@ function regLabel(round: Round): string {
     </div>
   </section>
 
-  <!-- DETAILS -->
-  <section class="section-padding section-edge event-section">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-      <div class="event-deco-divider" aria-hidden="true"><span>◆</span></div>
-      <div class="event-details-grid">
-
-        <!-- About -->
-        <div class="event-details-col">
-          <p class="event-kicker">О турнире</p>
-          <p class="event-details__text">
-            One More League — серийный турнир по мафии с детективной тематикой.
-            Пять отборочных серий определят десятерых финалистов, которые сразятся
-            за призовой фонд в двухдневном финале. Все партии транслируются на YouTube.
-          </p>
-          <p class="event-details__meta">
-            Трансляции: YouTube · {event.youtubeChannel}<br />
-            Уровень: iMafia {event.level}<br />
-            Язык: {event.languages}
-          </p>
-        </div>
-
-        <!-- Prizes -->
-        <div class="event-details-col">
-          <p class="event-kicker">Призовой фонд</p>
-          <div class="event-prizes">
-            {event.prizes.map((prize) => (
-              <div class="event-prize">
-                <span class="event-prize__place font-display">{prize.label}</span>
-                <span class="event-prize__amount">{prize.amount}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA 2 -->
-  <section class="event-cta-block event-cta-block--last">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl event-cta-block__inner">
-      <p class="event-cta-block__tagline font-display">Займи своё место за столом</p>
-      {activeRound
-        ? (
-          <a
-            href={activeRound.registrationUrl}
-            class="btn-primary event-cta-btn"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {regLabel(activeRound)}
-          </a>
-        )
-        : (
-          <p class="event-details__meta">Регистрация на следующую серию откроется после завершения текущей.</p>
-        )
-      }
-    </div>
-  </section>
 </BaseLayout>
 
 <style>
@@ -370,6 +340,33 @@ function regLabel(round: Round): string {
   .event-cta-btn {
     margin-top: 0.5rem;
     font-size: 0.9375rem;
+  }
+
+  /* ── HERO INFO (о турнире + призы, встроены в герой) ── */
+  .event-hero__info {
+    width: 100%;
+    padding-top: 2.5rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .event-hero__info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .event-hero__description {
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-size: 1rem;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .event-hero__meta {
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    line-height: 1.8;
   }
 
   /* ── SECTIONS ── */
@@ -632,6 +629,11 @@ function regLabel(round: Round): string {
 
     .rounds-grid {
       grid-template-columns: 1fr;
+    }
+
+    .event-hero__info-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
     }
   }
 </style>
