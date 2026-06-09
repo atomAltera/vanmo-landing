@@ -9,49 +9,79 @@ export function getStaticPaths() {
   }));
 }
 
+interface Round {
+  id: string;
+  type: 'qualifier' | 'final';
+  number: number | null;
+  title: string;
+  theme: string | null;
+  themeKnown: boolean;
+  dateLabel: string | null;
+  players: number;
+  games: number;
+  days: number;
+  advance: number | null;
+  registration: 'available' | 'past' | 'not-available';
+  registrationUrl: string | null;
+}
+
 interface Event {
   slug: string;
   type: string;
   title: string;
   subtitle: string;
-  tagline: string;
+  cardDateRange: string;
   status: string;
   seriesStart: string;
   seriesEnd: string;
-  seriesStartLabel: string;
-  seriesEndLabel: string;
   finalDates: string;
   image: string;
-  registrationUrl: string;
-  registrationLabel: string;
   entryFee: string;
-  finalFee: string;
   prizePool: string;
   level: string;
   prizes: { place: number; amount: string; label: string }[];
-  seriesCount: number;
-  seriesPlayers: number;
-  seriesGames: number;
-  seriesAdvance: number;
-  finalPlayers: number;
-  finalGames: number;
-  description: string;
   youtubeChannel: string;
   languages: string;
+  rounds: Round[];
 }
 
 const { event } = Astro.props as { event: Event };
+
+const activeRound = event.rounds.find(r => r.registration === 'available') ?? null;
+const qualifierCount = event.rounds.filter(r => r.type === 'qualifier').length;
+const finalRound = event.rounds.find(r => r.type === 'final')!;
+const firstQualifier = event.rounds.find(r => r.type === 'qualifier')!;
+
 const ogImage = new URL(event.image, Astro.site).toString();
+
+function roundAccent(round: Round): string {
+  if (round.type === 'final') return 'var(--accent)';
+  if (round.themeKnown) return 'var(--gold)';
+  return 'var(--text-dim)';
+}
+
+function regLabel(round: Round): string {
+  if (round.type === 'qualifier' && round.number !== null) {
+    return `Зарегистрироваться на Серию ${round.number}`;
+  }
+  return 'Зарегистрироваться';
+}
 ---
 
-<BaseLayout title={`${event.title} — VANMO`} description={event.description} ogImage={ogImage} ogImageWidth={500} ogImageHeight={334}>
+<BaseLayout
+  title={`${event.title} — VANMO`}
+  description="Серийный турнир по мафии с детективной тематикой. 5 отборочных серий, 10 финалистов, призовой фонд 450 EUR. Финал 24–25 октября 2026 в Тбилиси."
+  ogImage={ogImage}
+  ogImageWidth={500}
+  ogImageHeight={334}
+>
   <!-- HERO -->
   <section class="event-hero">
     <div class="event-hero__noise" aria-hidden="true"></div>
     <div class="event-hero__content container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-      <p class="event-kicker">Тбилиси · 2026 · Агата Кристи</p>
+      <p class="event-kicker">Тбилиси · 2026</p>
       <h1 class="event-hero__title font-display">{event.title}</h1>
-      <p class="event-hero__tagline font-display">{event.tagline}</p>
+      <p class="event-hero__subtitle">{event.subtitle}</p>
       <div class="event-hero__stats">
         <div class="event-stat">
           <span class="event-stat__value">{event.prizePool}</span>
@@ -62,15 +92,26 @@ const ogImage = new URL(event.image, Astro.site).toString();
           <span class="event-stat__value">{event.entryFee}</span>
           <span class="event-stat__label">вход в серию</span>
         </div>
-        <div class="event-stat-divider" aria-hidden="true">◆</div>
-        <div class="event-stat">
-          <span class="event-stat__value">{event.finalFee}</span>
-          <span class="event-stat__label">вход в финал</span>
-        </div>
+        {activeRound && (
+          <>
+            <div class="event-stat-divider" aria-hidden="true">◆</div>
+            <div class="event-stat">
+              <span class="event-stat__value event-stat__value--active">{activeRound.title}</span>
+              <span class="event-stat__label">открыта регистрация</span>
+            </div>
+          </>
+        )}
       </div>
-      <a href={event.registrationUrl} class="btn-primary event-cta-btn" target="_blank" rel="noopener noreferrer">
-        {event.registrationLabel}
-      </a>
+      {activeRound && (
+        <a
+          href={activeRound.registrationUrl}
+          class="btn-primary event-cta-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {regLabel(activeRound)}
+        </a>
+      )}
     </div>
   </section>
 
@@ -82,32 +123,94 @@ const ogImage = new URL(event.image, Astro.site).toString();
       <h2 class="event-section__heading font-display">Путь к финалу</h2>
       <div class="event-structure">
         <div class="event-structure__box">
-          <div class="event-structure__number font-display">5</div>
+          <div class="event-structure__number font-display">{qualifierCount}</div>
           <div class="event-structure__label">отборочных серий</div>
           <div class="event-structure__sub">
-            {event.seriesPlayers} игроков · {event.seriesGames} партий · топ‑{event.seriesAdvance} в финал
+            {firstQualifier.players} игроков · {firstQualifier.games} партий · топ‑{firstQualifier.advance} в финал
           </div>
         </div>
         <div class="event-structure__arrow" aria-hidden="true">→</div>
         <div class="event-structure__box event-structure__box--final">
-          <div class="event-structure__number font-display">{event.finalPlayers}</div>
+          <div class="event-structure__number font-display">{finalRound.players}</div>
           <div class="event-structure__label">финалистов</div>
           <div class="event-structure__sub">
-            {event.finalGames} партий · 2 дня · {event.finalDates}
+            {finalRound.games} партий · {finalRound.days} дня · {event.finalDates}
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA 1 -->
-  <section class="event-cta-block section-edge">
+  <!-- ROUNDS -->
+  <section class="section-padding section-edge event-section">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-      <a href={event.registrationUrl} class="btn-primary event-cta-btn" target="_blank" rel="noopener noreferrer">
-        {event.registrationLabel}
-      </a>
+      <div class="event-deco-divider" aria-hidden="true"><span>◆</span></div>
+      <p class="event-kicker">Расписание</p>
+      <h2 class="event-section__heading font-display">Серии и финал</h2>
+      <div class="rounds-grid">
+        {event.rounds.map((round) => (
+          <div class="round-card" style={`--round-accent: ${roundAccent(round)}`}>
+            <div class="round-card__header">
+              <span class="round-card__number font-display">
+                {round.type === 'final' ? '◆' : round.number}
+              </span>
+              <span class="round-card__title">{round.title}</span>
+            </div>
+            <div class="round-card__theme">
+              {round.themeKnown
+                ? <em class="round-card__theme-name font-display">{round.theme}</em>
+                : <span class="round-card__theme-unknown">Тематика будет объявлена</span>
+              }
+            </div>
+            <div class={`round-card__date${round.dateLabel ? '' : ' round-card__date--unknown'}`}>
+              {round.dateLabel ?? 'Дата будет объявлена'}
+            </div>
+            <div class="round-card__info">
+              {round.players} игроков · {round.games} партий
+              {round.advance != null && <> · топ‑{round.advance} в финал</>}
+            </div>
+            <div class="round-card__cta">
+              {round.registration === 'available' && (
+                <a
+                  href={round.registrationUrl}
+                  class="btn-primary round-cta-btn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Зарегистрироваться
+                </a>
+              )}
+              {round.registration === 'past' && (
+                <span class="round-badge round-badge--closed">Завершена</span>
+              )}
+              {round.registration === 'not-available' && round.type === 'qualifier' && (
+                <span class="round-badge round-badge--pending">Регистрация откроется позже</span>
+              )}
+              {round.registration === 'not-available' && round.type === 'final' && (
+                <span class="round-badge round-badge--invite">По итогам серий</span>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
+
+  <!-- CTA 1 -->
+  {activeRound && (
+    <section class="event-cta-block section-edge">
+      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+        <a
+          href={activeRound.registrationUrl}
+          class="btn-primary event-cta-btn"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {regLabel(activeRound)}
+        </a>
+      </div>
+    </section>
+  )}
 
   <!-- DETAILS -->
   <section class="section-padding section-edge event-section">
@@ -118,7 +221,11 @@ const ogImage = new URL(event.image, Astro.site).toString();
         <!-- About -->
         <div class="event-details-col">
           <p class="event-kicker">О турнире</p>
-          <p class="event-details__text">{event.description}</p>
+          <p class="event-details__text">
+            One More League — серийный турнир по мафии с детективной тематикой.
+            Пять отборочных серий определят десятерых финалистов, которые сразятся
+            за призовой фонд в двухдневном финале. Все партии транслируются на YouTube.
+          </p>
           <p class="event-details__meta">
             Трансляции: YouTube · {event.youtubeChannel}<br />
             Уровень: iMafia {event.level}<br />
@@ -140,21 +247,6 @@ const ogImage = new URL(event.image, Astro.site).toString();
         </div>
 
       </div>
-
-      <!-- Schedule -->
-      <div class="event-schedule">
-        <p class="event-kicker">Расписание</p>
-        <div class="event-schedule__grid">
-          <div class="event-schedule__item">
-            <span class="event-schedule__period">Отборочные серии</span>
-            <span class="event-schedule__dates">{event.seriesStartLabel} — {event.seriesEndLabel}</span>
-          </div>
-          <div class="event-schedule__item">
-            <span class="event-schedule__period">Финал</span>
-            <span class="event-schedule__dates">{event.finalDates}</span>
-          </div>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -162,17 +254,27 @@ const ogImage = new URL(event.image, Astro.site).toString();
   <section class="event-cta-block event-cta-block--last">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl event-cta-block__inner">
       <p class="event-cta-block__tagline font-display">Займи своё место за столом</p>
-      <a href={event.registrationUrl} class="btn-primary event-cta-btn" target="_blank" rel="noopener noreferrer">
-        {event.registrationLabel}
-      </a>
+      {activeRound
+        ? (
+          <a
+            href={activeRound.registrationUrl}
+            class="btn-primary event-cta-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {regLabel(activeRound)}
+          </a>
+        )
+        : (
+          <p class="event-details__meta">Регистрация на следующую серию откроется после завершения текущей.</p>
+        )
+      }
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  /* ── Christie fusion: gold-dominant, grain texture, art deco elements ── */
-
-  /* HERO */
+  /* ── HERO ── */
   .event-hero {
     position: relative;
     padding: 8rem 0 6rem;
@@ -206,7 +308,7 @@ const ogImage = new URL(event.image, Astro.site).toString();
     gap: 1.25rem;
   }
 
-  /* KICKER — gold variant */
+  /* ── KICKER ── */
   .event-kicker {
     font-size: 0.6875rem;
     font-weight: 500;
@@ -234,12 +336,12 @@ const ogImage = new URL(event.image, Astro.site).toString();
     max-width: 18ch;
   }
 
-  .event-hero__tagline {
-    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
-    font-style: italic;
+  .event-hero__subtitle {
+    font-size: clamp(0.9375rem, 2vw, 1.125rem);
+    color: var(--text-muted);
     font-weight: 300;
-    color: var(--gold);
     max-width: 40ch;
+    margin-top: -0.5rem;
   }
 
   .event-hero__stats {
@@ -265,6 +367,10 @@ const ogImage = new URL(event.image, Astro.site).toString();
     color: var(--text);
   }
 
+  .event-stat__value--active {
+    color: var(--gold);
+  }
+
   .event-stat__label {
     font-size: 0.6875rem;
     letter-spacing: 0.12em;
@@ -282,12 +388,11 @@ const ogImage = new URL(event.image, Astro.site).toString();
     font-size: 0.9375rem;
   }
 
-  /* SECTIONS */
+  /* ── SECTIONS ── */
   .event-section {
     background: var(--bg);
   }
 
-  /* Art Deco divider */
   .event-deco-divider {
     display: flex;
     align-items: center;
@@ -313,7 +418,7 @@ const ogImage = new URL(event.image, Astro.site).toString();
     margin: 0.5rem 0 2.5rem;
   }
 
-  /* STRUCTURE */
+  /* ── STRUCTURE ── */
   .event-structure {
     display: flex;
     align-items: center;
@@ -356,7 +461,100 @@ const ogImage = new URL(event.image, Astro.site).toString();
     flex-shrink: 0;
   }
 
-  /* CTA BLOCKS */
+  /* ── ROUNDS GRID ── */
+  .rounds-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  .round-card {
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--round-accent);
+    background: var(--bg-raised);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .round-card__header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .round-card__number {
+    font-size: 1.75rem;
+    font-weight: 300;
+    color: var(--round-accent);
+    line-height: 1;
+  }
+
+  .round-card__title {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .round-card__theme-name {
+    font-style: italic;
+    color: var(--round-accent);
+    font-size: 1rem;
+  }
+
+  .round-card__theme-unknown {
+    color: var(--text-dim);
+    font-size: 0.875rem;
+    font-style: italic;
+  }
+
+  .round-card__date {
+    font-size: 0.875rem;
+    color: var(--round-accent);
+    font-weight: 500;
+  }
+
+  .round-card__date--unknown {
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+
+  .round-card__info {
+    font-size: 0.8125rem;
+    color: var(--text-dim);
+    line-height: 1.5;
+  }
+
+  .round-card__cta {
+    margin-top: auto;
+    padding-top: 0.25rem;
+  }
+
+  .round-cta-btn {
+    font-size: 0.875rem;
+  }
+
+  .round-badge {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .round-badge--pending,
+  .round-badge--invite {
+    color: var(--text-dim);
+  }
+
+  .round-badge--closed {
+    color: var(--text-muted);
+    text-decoration: line-through;
+  }
+
+  /* ── CTA BLOCKS ── */
   .event-cta-block {
     padding: 3rem 0;
   }
@@ -379,7 +577,7 @@ const ogImage = new URL(event.image, Astro.site).toString();
     color: var(--text-muted);
   }
 
-  /* DETAILS */
+  /* ── DETAILS ── */
   .event-details-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -429,42 +627,7 @@ const ogImage = new URL(event.image, Astro.site).toString();
     font-weight: 500;
   }
 
-  .event-schedule {
-    padding-top: 2rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .event-schedule__grid {
-    display: flex;
-    flex-direction: column;
-    margin-top: 0.75rem;
-  }
-
-  .event-schedule__item {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 0.875rem 0;
-    border-bottom: 1px solid var(--border);
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .event-schedule__item:first-child {
-    border-top: 1px solid var(--border);
-  }
-
-  .event-schedule__period {
-    font-size: 0.9375rem;
-    color: var(--text);
-  }
-
-  .event-schedule__dates {
-    font-size: 0.875rem;
-    color: var(--gold);
-  }
-
-  /* Responsive */
+  /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     .event-details-grid {
       grid-template-columns: 1fr;
@@ -481,6 +644,10 @@ const ogImage = new URL(event.image, Astro.site).toString();
 
     .event-structure__arrow {
       transform: rotate(90deg);
+    }
+
+    .rounds-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>
