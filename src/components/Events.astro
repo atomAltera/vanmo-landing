@@ -57,8 +57,8 @@
             >
               Зарегистрироваться на Серию 1
             </a>
-            <a href="/events/one_more_league_2026" class="oml-link-more">
-              Подробнее →
+            <a href="/events/one_more_league_2026" class="btn-secondary">
+              Подробнее
             </a>
           </div>
         </div>
@@ -101,6 +101,47 @@
     border: 1px solid var(--border);
     border-top: 2px solid var(--gold-dim);
     background: var(--bg-raised);
+    background-image: url('/images/events/oml2026-bg-dark.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .oml-spotlight::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      rgba(10, 8, 6, 0.82) 0%,
+      rgba(10, 8, 6, 0.72) 45%,
+      rgba(10, 8, 6, 0.55) 100%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* ── LIGHT / DAY MODE ── */
+  :global(:root.day-mode) .oml-spotlight {
+    background-image: url('/images/events/oml2026-bg-light.jpg');
+  }
+
+  :global(:root.day-mode) .oml-spotlight::after {
+    background: linear-gradient(
+      105deg,
+      rgba(240, 232, 210, 0.82) 0%,
+      rgba(240, 232, 210, 0.68) 45%,
+      rgba(240, 232, 210, 0.45) 100%
+    );
+  }
+
+  :global(:root.day-mode) .oml-spotlight__inner {
+    --text: #1c1510;
+    --text-muted: rgba(28, 21, 16, 0.72);
+    --text-dim: rgba(28, 21, 16, 0.5);
+    --border: rgba(28, 21, 16, 0.18);
+    --gold: #7a5c0f;
+    --gold-dim: rgba(122, 92, 15, 0.45);
+    color: #1c1510;
   }
 
   .oml-spotlight__glow {
@@ -109,8 +150,9 @@
     left: -60px;
     width: 420px;
     height: 420px;
-    background: radial-gradient(circle, rgba(200, 169, 106, 0.1) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(200, 169, 106, 0.12) 0%, transparent 70%);
     pointer-events: none;
+    z-index: 1;
   }
 
   .oml-spotlight__noise {
@@ -118,12 +160,14 @@
     inset: 0;
     opacity: 0.03;
     pointer-events: none;
+    z-index: 1;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 256px 256px;
   }
 
   .oml-spotlight__watermark {
     position: absolute;
+    z-index: 1;
     right: -0.05em;
     bottom: -0.25em;
     font-size: clamp(7rem, 18vw, 14rem);
@@ -144,6 +188,14 @@
     gap: 3rem;
     padding: 2.75rem 3rem;
     align-items: start;
+    /* force light text regardless of theme */
+    --text: #f0ece4;
+    --text-muted: rgba(240, 236, 228, 0.7);
+    --text-dim: rgba(240, 236, 228, 0.45);
+    --border: rgba(240, 236, 228, 0.15);
+    --gold: #c8a96a;
+    --gold-dim: rgba(200, 169, 106, 0.4);
+    color: #f0ece4;
   }
 
   /* ── TAGS ── */
@@ -268,14 +320,6 @@
     flex-wrap: wrap;
   }
 
-  .oml-link-more {
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    text-decoration: none;
-    transition: color 0.2s;
-    letter-spacing: 0.04em;
-  }
-  .oml-link-more:hover { color: var(--text); }
 
   /* ── PRIZES (right column) ── */
   .oml-spotlight__right {
