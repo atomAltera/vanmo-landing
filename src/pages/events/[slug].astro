@@ -79,39 +79,40 @@ function regLabel(round: Round): string {
   <section class="event-hero">
     <div class="event-hero__noise" aria-hidden="true"></div>
     <div class="event-hero__content container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-      <p class="event-kicker">Тбилиси · 2026</p>
       <h1 class="event-hero__title font-display">{event.title}</h1>
       <p class="event-hero__subtitle">{event.subtitle}</p>
       <div class="event-hero__stats">
-        <div class="event-stat">
-          <span class="event-stat__value">{event.prizePool}</span>
-          <span class="event-stat__label">призовой фонд</span>
-        </div>
-        <div class="event-stat-divider" aria-hidden="true">◆</div>
-        <div class="event-stat">
-          <span class="event-stat__value">{event.entryFee}</span>
-          <span class="event-stat__label">вход в серию</span>
+        <div class="event-hero__stats-left">
+          <div class="event-stat">
+            <span class="event-stat__value">{event.prizePool}</span>
+            <span class="event-stat__label">призовой фонд</span>
+          </div>
+          <div class="event-stat-divider" aria-hidden="true">◆</div>
+          <div class="event-stat">
+            <span class="event-stat__value">{event.entryFee}</span>
+            <span class="event-stat__label">вход в серию</span>
+          </div>
+          {activeRound && (
+            <>
+              <div class="event-stat-divider" aria-hidden="true">◆</div>
+              <div class="event-stat">
+                <span class="event-stat__value event-stat__value--active">{activeRound.title}</span>
+                <span class="event-stat__label">открыта регистрация</span>
+              </div>
+            </>
+          )}
         </div>
         {activeRound && (
-          <>
-            <div class="event-stat-divider" aria-hidden="true">◆</div>
-            <div class="event-stat">
-              <span class="event-stat__value event-stat__value--active">{activeRound.title}</span>
-              <span class="event-stat__label">открыта регистрация</span>
-            </div>
-          </>
+          <a
+            href={activeRound.registrationUrl}
+            class="btn-primary event-cta-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {regLabel(activeRound)}
+          </a>
         )}
       </div>
-      {activeRound && (
-        <a
-          href={activeRound.registrationUrl}
-          class="btn-primary event-cta-btn"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {regLabel(activeRound)}
-        </a>
-      )}
 
       <div class="event-hero__info">
         <div class="event-hero__info-grid">
@@ -120,7 +121,7 @@ function regLabel(round: Round): string {
             <p class="event-hero__description">
               One More League — серийный турнир по мафии с детективной тематикой.
               Пять отборочных серий определят десятерых финалистов, которые сразятся
-              за призовой фонд в двухдневном финале. Все партии транслируются на YouTube.
+              за призовой фонд в двухдневном финале. Все игры транслируются на YouTube.
             </p>
             <p class="event-hero__meta">
               Трансляции: YouTube · {event.youtubeChannel}<br />
@@ -147,15 +148,14 @@ function regLabel(round: Round): string {
   <!-- STRUCTURE -->
   <section class="section-padding section-edge event-section">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-      <div class="event-deco-divider" aria-hidden="true"><span>◆</span></div>
-      <p class="event-kicker">Формат турнира</p>
+<p class="event-kicker">Формат турнира</p>
       <h2 class="event-section__heading font-display">Путь к финалу</h2>
       <div class="event-structure">
         <div class="event-structure__box">
           <div class="event-structure__number font-display">{qualifierCount}</div>
           <div class="event-structure__label">отборочных серий</div>
           <div class="event-structure__sub">
-            {firstQualifier.players} игроков · {firstQualifier.games} партий · топ‑{firstQualifier.advance} в финал
+            {firstQualifier.players} игроков · {firstQualifier.games} игр · топ‑{firstQualifier.advance} в финал
           </div>
         </div>
         <div class="event-structure__arrow" aria-hidden="true">→</div>
@@ -163,7 +163,7 @@ function regLabel(round: Round): string {
           <div class="event-structure__number font-display">{finalRound.players}</div>
           <div class="event-structure__label">финалистов</div>
           <div class="event-structure__sub">
-            {finalRound.games} партий · {finalRound.days} дня · {event.finalDates}
+            {finalRound.games} игр · {finalRound.days} дня · {event.finalDates}
           </div>
         </div>
       </div>
@@ -173,8 +173,7 @@ function regLabel(round: Round): string {
   <!-- ROUNDS -->
   <section class="section-padding section-edge event-section">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-      <div class="event-deco-divider" aria-hidden="true"><span>◆</span></div>
-      <p class="event-kicker">Расписание</p>
+<p class="event-kicker">Расписание</p>
       <h2 class="event-section__heading font-display">Серии и финал</h2>
       <div class="rounds-grid">
         {event.rounds.map((round) => (
@@ -195,7 +194,7 @@ function regLabel(round: Round): string {
               {round.dateLabel ?? 'Дата будет объявлена'}
             </div>
             <div class="round-card__info">
-              {round.players} игроков · {round.games} партий
+              {round.players} игроков · {round.games} игр
               {round.advance != null && <> · топ‑{round.advance} в финал</>}
             </div>
             <div class="round-card__cta">
@@ -301,12 +300,20 @@ function regLabel(round: Round): string {
   .event-hero__stats {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 1.5rem;
     flex-wrap: wrap;
     padding: 1.25rem 0;
     border-top: 1px solid var(--border);
     border-bottom: 1px solid var(--border);
     width: 100%;
+  }
+
+  .event-hero__stats-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
   }
 
   .event-stat {
@@ -338,16 +345,15 @@ function regLabel(round: Round): string {
   }
 
   .event-cta-btn {
-    margin-top: 0.5rem;
     font-size: 0.9375rem;
+    white-space: nowrap;
   }
 
   /* ── HERO INFO (о турнире + призы, встроены в герой) ── */
   .event-hero__info {
     width: 100%;
     padding-top: 2.5rem;
-    margin-top: 1rem;
-    border-top: 1px solid var(--border);
+    margin-top: 0.5rem;
   }
 
   .event-hero__info-grid {
@@ -593,11 +599,7 @@ function regLabel(round: Round): string {
     border-bottom: 1px solid var(--border);
   }
 
-  .event-prize:first-child {
-    border-top: 1px solid var(--border);
-  }
-
-  .event-prize__place {
+.event-prize__place {
     font-size: 1.125rem;
     color: var(--text);
   }
