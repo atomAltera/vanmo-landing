@@ -1,11 +1,4 @@
 ---
-import eventsData from '../data/events.json';
-
-const events = eventsData;
-
-function typeLabel(type: string) {
-  return type === 'tournament' ? 'Турнир' : 'Событие';
-}
 ---
 
 <section id="events" class="section-padding section-edge">
@@ -18,19 +11,17 @@ function typeLabel(type: string) {
     </div>
 
     <div class="events-grid">
-      {events.map((event) => (
-        <a href={`/events/${event.slug}`} class="event-card glass-card" aria-label={event.title}>
-          <img
-            src={event.image}
-            alt={event.title}
-            width="500"
-            height="334"
-            class="event-card__image"
-            loading="lazy"
-          />
-          <span class="event-card__badge">{typeLabel(event.type)}</span>
-        </a>
-      ))}
+      <a href="/events/one_more_league_2026" class="event-card glass-card" aria-label="One More League 2026">
+        <img
+          src="/images/events/oml2026-cover.jpg"
+          alt="One More League 2026"
+          width="500"
+          height="334"
+          class="event-card__image"
+          loading="lazy"
+        />
+        <span class="event-card__badge">Турнир</span>
+      </a>
     </div>
   </div>
 </section>

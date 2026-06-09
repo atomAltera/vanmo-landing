@@ -1,75 +1,116 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import eventsData from '../../data/events.json';
 
-export function getStaticPaths() {
-  return eventsData.map((event) => ({
-    params: { slug: event.slug },
-    props: { event },
-  }));
-}
+const title = 'One More League 2026';
+const subtitle = 'Первый тематический серийный турнир';
+const prizePool = '450 EUR';
+const entryFee = '110 GEL';
+const finalDates = '24–25 октября 2026';
 
-interface Round {
-  id: string;
-  type: 'qualifier' | 'final';
-  number: number | null;
-  title: string;
-  theme: string | null;
-  themeKnown: boolean;
-  dateLabel: string | null;
-  players: number;
-  games: number;
-  days: number;
-  advance: number | null;
-  registration: 'available' | 'past' | 'not-available';
-  registrationUrl: string | null;
-}
+const prizes = [
+  { label: '1 место', amount: '200 EUR' },
+  { label: '2 место', amount: '150 EUR' },
+  { label: '3 место', amount: '100 EUR' },
+];
 
-interface Event {
-  slug: string;
-  type: string;
-  title: string;
-  subtitle: string;
-  cardDateRange: string;
-  status: string;
-  seriesStart: string;
-  seriesEnd: string;
-  finalDates: string;
-  image: string;
-  entryFee: string;
-  prizePool: string;
-  level: string;
-  prizes: { place: number; amount: string; label: string }[];
-  youtubeChannel: string;
-  languages: string;
-  rounds: Round[];
-}
+const rounds = [
+  {
+    type: 'qualifier' as const,
+    number: 1,
+    title: 'Серия 1',
+    theme: 'Убийство в Восточном Экспрессе',
+    themeKnown: true,
+    dateLabel: '4 июля 2026',
+    players: 10,
+    games: 8,
+    advance: 2,
+    registration: 'available' as const,
+    registrationUrl: 'https://imafia.org/tournament/1755',
+  },
+  {
+    type: 'qualifier' as const,
+    number: 2,
+    title: 'Серия 2',
+    theme: null,
+    themeKnown: false,
+    dateLabel: null,
+    players: 10,
+    games: 8,
+    advance: 2,
+    registration: 'not-available' as const,
+    registrationUrl: null,
+  },
+  {
+    type: 'qualifier' as const,
+    number: 3,
+    title: 'Серия 3',
+    theme: null,
+    themeKnown: false,
+    dateLabel: null,
+    players: 10,
+    games: 8,
+    advance: 2,
+    registration: 'not-available' as const,
+    registrationUrl: null,
+  },
+  {
+    type: 'qualifier' as const,
+    number: 4,
+    title: 'Серия 4',
+    theme: null,
+    themeKnown: false,
+    dateLabel: null,
+    players: 10,
+    games: 8,
+    advance: 2,
+    registration: 'not-available' as const,
+    registrationUrl: null,
+  },
+  {
+    type: 'qualifier' as const,
+    number: 5,
+    title: 'Серия 5',
+    theme: null,
+    themeKnown: false,
+    dateLabel: null,
+    players: 10,
+    games: 8,
+    advance: 2,
+    registration: 'not-available' as const,
+    registrationUrl: null,
+  },
+  {
+    type: 'final' as const,
+    number: null,
+    title: 'Финал',
+    theme: null,
+    themeKnown: false,
+    dateLabel: finalDates,
+    players: 10,
+    games: 14,
+    advance: null,
+    registration: 'not-available' as const,
+    registrationUrl: null,
+  },
+];
 
-const { event } = Astro.props as { event: Event };
+const activeRound = rounds.find(r => r.registration === 'available') ?? null;
+const qualifiers = rounds.filter(r => r.type === 'qualifier');
+const finalRound = rounds.find(r => r.type === 'final')!;
 
-const activeRound = event.rounds.find(r => r.registration === 'available') ?? null;
-const qualifierCount = event.rounds.filter(r => r.type === 'qualifier').length;
-const finalRound = event.rounds.find(r => r.type === 'final')!;
-const firstQualifier = event.rounds.find(r => r.type === 'qualifier')!;
-
-const ogImage = new URL(event.image, Astro.site).toString();
-
-function roundAccent(round: Round): string {
+function roundAccent(round: typeof rounds[number]): string {
   if (round.type === 'final') return 'var(--accent)';
   if (round.themeKnown) return 'var(--gold)';
   return 'var(--text-dim)';
 }
 
-function regLabel(round: Round): string {
-  if (round.type === 'qualifier' && round.number !== null) {
-    return `Зарегистрироваться на Серию ${round.number}`;
-  }
-  return 'Зарегистрироваться';
-}
+const ogImage = Astro.site
+  ? new URL('/images/events/oml2026-cover.jpg', Astro.site).toString()
+  : undefined;
 ---
 
 <BaseLayout
-  title={`${event.title} — VANMO`}
+  title={`${title} — VANMO`}
   description="Серийный турнир по мафии с детективной тематикой. 5 отборочных серий, 10 финалистов, призовой фонд 450 EUR. Финал 24–25 октября 2026 в Тбилиси."
   ogImage={ogImage}
   ogImageWidth={500}
@@ -79,17 +120,18 @@ function regLabel(round: Round): string {
   <section class="event-hero">
     <div class="event-hero__noise" aria-hidden="true"></div>
     <div class="event-hero__content container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-      <h1 class="event-hero__title font-display">{event.title}</h1>
-      <p class="event-hero__subtitle">{event.subtitle}</p>
+      <h1 class="event-hero__title font-display">{title}</h1>
+      <p class="event-hero__subtitle">{subtitle}</p>
+
       <div class="event-hero__stats">
         <div class="event-hero__stats-left">
           <div class="event-stat">
-            <span class="event-stat__value">{event.prizePool}</span>
+            <span class="event-stat__value">{prizePool}</span>
             <span class="event-stat__label">призовой фонд</span>
           </div>
           <div class="event-stat-divider" aria-hidden="true">◆</div>
           <div class="event-stat">
-            <span class="event-stat__value">{event.entryFee}</span>
+            <span class="event-stat__value">{entryFee}</span>
             <span class="event-stat__label">вход в серию</span>
           </div>
           {activeRound && (
@@ -104,12 +146,12 @@ function regLabel(round: Round): string {
         </div>
         {activeRound && (
           <a
-            href={activeRound.registrationUrl}
+            href={activeRound.registrationUrl!}
             class="btn-primary event-cta-btn"
             target="_blank"
             rel="noopener noreferrer"
           >
-            {regLabel(activeRound)}
+            Зарегистрироваться на Серию {activeRound.number}
           </a>
         )}
       </div>
@@ -124,15 +166,15 @@ function regLabel(round: Round): string {
               за призовой фонд в двухдневном финале. Все игры транслируются на YouTube.
             </p>
             <p class="event-hero__meta">
-              Трансляции: YouTube · {event.youtubeChannel}<br />
-              Уровень: iMafia {event.level}<br />
-              Язык: {event.languages}
+              Трансляции: <a href="https://www.youtube.com/@iMafia" target="_blank" rel="noopener noreferrer" class="event-hero__link">YouTube · iMafia</a><br />
+              Уровень: iMafia BRONZE<br />
+              Язык: Русский, Украинский
             </p>
           </div>
           <div class="event-hero__info-col">
             <p class="event-kicker">Призовой фонд</p>
             <div class="event-prizes">
-              {event.prizes.map((prize) => (
+              {prizes.map((prize) => (
                 <div class="event-prize">
                   <span class="event-prize__place font-display">{prize.label}</span>
                   <span class="event-prize__amount">{prize.amount}</span>
@@ -148,22 +190,22 @@ function regLabel(round: Round): string {
   <!-- STRUCTURE -->
   <section class="section-padding section-edge event-section">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-<p class="event-kicker">Формат турнира</p>
+      <p class="event-kicker">Формат турнира</p>
       <h2 class="event-section__heading font-display">Путь к финалу</h2>
       <div class="event-structure">
         <div class="event-structure__box">
-          <div class="event-structure__number font-display">{qualifierCount}</div>
+          <div class="event-structure__number font-display">{qualifiers.length}</div>
           <div class="event-structure__label">отборочных серий</div>
           <div class="event-structure__sub">
-            {firstQualifier.players} игроков · {firstQualifier.games} игр · топ‑{firstQualifier.advance} в финал
+            10 игроков · 8 игр · топ‑2 в финал
           </div>
         </div>
         <div class="event-structure__arrow" aria-hidden="true">→</div>
-        <div class="event-structure__box event-structure__box--final">
+        <div class="event-structure__box">
           <div class="event-structure__number font-display">{finalRound.players}</div>
           <div class="event-structure__label">финалистов</div>
           <div class="event-structure__sub">
-            {finalRound.games} игр · {finalRound.days} дня · {event.finalDates}
+            {finalRound.games} игр · 2 дня · {finalDates}
           </div>
         </div>
       </div>
@@ -173,10 +215,10 @@ function regLabel(round: Round): string {
   <!-- ROUNDS -->
   <section class="section-padding section-edge event-section">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-<p class="event-kicker">Расписание</p>
+      <p class="event-kicker">Расписание</p>
       <h2 class="event-section__heading font-display">Серии и финал</h2>
       <div class="rounds-list">
-        {event.rounds.map((round) => (
+        {rounds.map((round) => (
           <div class="round-row" style={`--round-accent: ${roundAccent(round)}`}>
             <span class="round-row__num font-display">
               {round.type === 'final' ? '◆' : round.number}
@@ -198,7 +240,7 @@ function regLabel(round: Round): string {
             <div class="round-row__cta">
               {round.registration === 'available' && (
                 <a
-                  href={round.registrationUrl}
+                  href={round.registrationUrl!}
                   class="btn-primary round-cta-btn"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -221,7 +263,6 @@ function regLabel(round: Round): string {
       </div>
     </div>
   </section>
-
 </BaseLayout>
 
 <style>
@@ -259,7 +300,6 @@ function regLabel(round: Round): string {
     gap: 1.25rem;
   }
 
-  /* ── KICKER ── */
   .event-kicker {
     font-size: 0.6875rem;
     font-weight: 500;
@@ -347,7 +387,6 @@ function regLabel(round: Round): string {
     white-space: nowrap;
   }
 
-  /* ── HERO INFO (о турнире + призы, встроены в герой) ── */
   .event-hero__info {
     width: 100%;
     padding-top: 2.5rem;
@@ -373,27 +412,17 @@ function regLabel(round: Round): string {
     line-height: 1.8;
   }
 
+  .event-hero__link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 3px;
+  }
+  .event-hero__link:hover { color: var(--text-muted); }
+
   /* ── SECTIONS ── */
   .event-section {
     background: var(--bg);
-  }
-
-  .event-deco-divider {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 2rem;
-    color: var(--gold-dim);
-    font-size: 0.5rem;
-    letter-spacing: 0.5em;
-  }
-
-  .event-deco-divider::before,
-  .event-deco-divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
   }
 
   .event-section__heading {
@@ -444,13 +473,6 @@ function regLabel(round: Round): string {
     font-size: 1.5rem;
     color: var(--gold-dim);
     flex-shrink: 0;
-  }
-
-  /* ── ROUNDS GRID ── */
-  .rounds-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1rem;
   }
 
   /* ── ROUNDS LIST ── */
@@ -545,50 +567,7 @@ function regLabel(round: Round): string {
     text-decoration: line-through;
   }
 
-  /* ── CTA BLOCKS ── */
-  .event-cta-block {
-    padding: 3rem 0;
-  }
-
-  .event-cta-block--last {
-    padding: 4rem 0 6rem;
-  }
-
-  .event-cta-block__inner {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1.25rem;
-  }
-
-  .event-cta-block__tagline {
-    font-size: clamp(1.5rem, 3vw, 2.25rem);
-    font-style: italic;
-    font-weight: 300;
-    color: var(--text-muted);
-  }
-
-  /* ── DETAILS ── */
-  .event-details-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    margin-bottom: 3rem;
-  }
-
-  .event-details__text {
-    color: var(--text-muted);
-    line-height: 1.7;
-    font-size: 1rem;
-    margin: 0.75rem 0 1rem;
-  }
-
-  .event-details__meta {
-    font-size: 0.875rem;
-    color: var(--text-dim);
-    line-height: 1.8;
-  }
-
+  /* ── PRIZES ── */
   .event-prizes {
     display: flex;
     flex-direction: column;
@@ -603,7 +582,7 @@ function regLabel(round: Round): string {
     border-bottom: 1px solid var(--border);
   }
 
-.event-prize__place {
+  .event-prize__place {
     font-size: 1.125rem;
     color: var(--text);
   }
@@ -616,11 +595,6 @@ function regLabel(round: Round): string {
 
   /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
-    .event-details-grid {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-
     .event-structure {
       flex-direction: column;
     }
