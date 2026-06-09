@@ -131,7 +131,7 @@ const ogImage = Astro.site
         )}
       </div>
 
-      <h1 class="event-hero__title font-display">{title}</h1>
+      <h1 class="event-hero__title font-display">One More League<br><em class="event-hero__title-year">2026</em></h1>
       <p class="event-hero__subtitle">{subtitle}</p>
 
       <div class="event-hero__stats">
@@ -368,9 +368,14 @@ const ogImage = Astro.site
   .event-hero__title {
     font-size: clamp(3rem, 7vw, 5.5rem);
     font-weight: 300;
-    line-height: 1.05;
+    line-height: 0.9;
     color: var(--text);
     max-width: 18ch;
+  }
+
+  .event-hero__title-year {
+    font-style: italic;
+    color: var(--accent);
   }
 
   .event-hero__subtitle {
