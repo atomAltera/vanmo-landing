@@ -13,35 +13,32 @@ function typeLabel(type: string) {
     <div class="mb-10 md:mb-14">
       <p class="kicker">События</p>
       <h2 class="font-display text-[clamp(2.25rem,5vw,3.75rem)] font-light leading-tight mt-3">
-        Ближайшие события
+        Предстоящие турниры
       </h2>
     </div>
 
     <div class="events-grid">
       {events.map((event) => (
         <article class="event-card glass-card">
-          <div class="event-card__image-wrap">
+          <a href={`/events/${event.slug}`} class="event-card__image-wrap" aria-label={`Подробнее: ${event.title}`}>
             <img
               src={event.image}
               alt={event.title}
               width="500"
-              height="330"
+              height="334"
               class="event-card__image"
               loading="lazy"
             />
             <span class="event-card__badge">{typeLabel(event.type)}</span>
-          </div>
+          </a>
           <div class="event-card__body">
-            <p class="event-card__dates">
-              {event.seriesStartLabel} — {event.finalDates}
-            </p>
+            <p class="event-card__dates">{event.cardDateRange}</p>
             <h3 class="event-card__title font-display">{event.title}</h3>
             <p class="event-card__subtitle">{event.subtitle}</p>
             <div class="event-card__footer">
               <a href={`/events/${event.slug}`} class="btn-secondary event-card__btn">
                 Подробнее →
               </a>
-              <span class="event-card__prize">{event.prizePool}</span>
             </div>
           </div>
         </article>
@@ -72,21 +69,27 @@ function typeLabel(type: string) {
   .event-card__image-wrap {
     position: relative;
     flex-shrink: 0;
+    display: block;
+  }
+
+  .event-card__image-wrap:hover .event-card__image {
+    opacity: 0.9;
   }
 
   .event-card__image {
     width: 100%;
-    aspect-ratio: 500 / 330;
+    aspect-ratio: 500 / 334;
     object-fit: cover;
     display: block;
+    transition: opacity 0.2s;
   }
 
   .event-card__badge {
     position: absolute;
     top: 0.75rem;
     left: 0.75rem;
-    background: var(--gold);
-    color: #0a0a0a;
+    background: var(--accent);
+    color: #fff;
     font-size: 0.6875rem;
     font-weight: 600;
     letter-spacing: 0.15em;
@@ -124,22 +127,11 @@ function typeLabel(type: string) {
   }
 
   .event-card__footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     margin-top: auto;
     padding-top: 1rem;
-    gap: 1rem;
   }
 
   .event-card__btn {
     font-size: 0.875rem;
-  }
-
-  .event-card__prize {
-    font-size: 0.875rem;
-    color: var(--gold);
-    font-weight: 500;
-    white-space: nowrap;
   }
 </style>
