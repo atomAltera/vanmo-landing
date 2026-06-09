@@ -196,22 +196,6 @@ function regLabel(round: Round): string {
     </div>
   </section>
 
-  <!-- CTA 1 -->
-  {activeRound && (
-    <section class="event-cta-block section-edge">
-      <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-        <a
-          href={activeRound.registrationUrl}
-          class="btn-primary event-cta-btn"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {regLabel(activeRound)}
-        </a>
-      </div>
-    </section>
-  )}
-
   <!-- DETAILS -->
   <section class="section-padding section-edge event-section">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
