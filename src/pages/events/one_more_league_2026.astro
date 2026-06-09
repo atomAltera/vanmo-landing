@@ -120,6 +120,17 @@ const ogImage = Astro.site
   <section class="event-hero">
     <div class="event-hero__noise" aria-hidden="true"></div>
     <div class="event-hero__content container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <div class="event-hero__tags">
+        <span class="hero-tag hero-tag--type">Турнир</span>
+        <span class="hero-tag hero-tag--level">iMafia Bronze</span>
+        {activeRound && (
+          <span class="hero-tag hero-tag--live">
+            <span class="hero-tag__dot"></span>
+            {activeRound.title} · регистрация открыта
+          </span>
+        )}
+      </div>
+
       <h1 class="event-hero__title font-display">{title}</h1>
       <p class="event-hero__subtitle">{subtitle}</p>
 
@@ -366,6 +377,57 @@ const ogImage = Astro.site
     font-weight: 300;
     max-width: 40ch;
     margin-top: -0.5rem;
+  }
+
+  /* ── HERO TAGS ── */
+  .event-hero__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .hero-tag {
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.65rem;
+    border-radius: 2px;
+    line-height: 1.8;
+  }
+
+  .hero-tag--type {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .hero-tag--level {
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    background: transparent;
+  }
+
+  .hero-tag--live {
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .hero-tag__dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #4ade80;
+    flex-shrink: 0;
+    animation: hero-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes hero-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
   }
 
   .event-hero__stats {
