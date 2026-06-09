@@ -31,6 +31,8 @@ Components read YAML at build time via `js-yaml` and `fs.readFileSync`.
 
 **Pages**: `/` (landing), `/rules`, `/contacts` - each imports components and page-specific SEO from `pages.yaml`.
 
+**Events**: `src/components/Events.astro` — секция событий на главной странице. Данные захардкожены прямо в компоненте (один турнир). Ссылается на страницу турнира `src/pages/events/one_more_league_2026.astro`, где также все данные захардкожены. Для каждого нового события — отдельная статическая страница со своим шаблоном.
+
 ## ⚠️ IMPORTANT: Content Language
 
 **ALL content must be in Russian.** This includes:

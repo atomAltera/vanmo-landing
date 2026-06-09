@@ -126,6 +126,11 @@ const socialIcons: Record<string, string> = {
   }
   .footer-badge-link:hover .footer-imafia-logo { opacity: 1; }
 
+  /* In day mode: white text → black, red circle stays red */
+  :global(:root.day-mode) .footer-imafia-logo {
+    filter: invert(1) hue-rotate(180deg);
+  }
+
   .footer-fiim-label {
     font-size: 0.6875rem;
     font-weight: 500;

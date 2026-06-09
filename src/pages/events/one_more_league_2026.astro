@@ -1,0 +1,747 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'One More League 2026';
+const subtitle = 'Первый тематический серийный турнир';
+const prizePool = '450 EUR';
+const entryFee = '110 GEL';
+const finalDates = '24–25 октября 2026';
+
+const prizes = [
+  { label: '1 место', amount: '200 EUR' },
+  { label: '2 место', amount: '150 EUR' },
+  { label: '3 место', amount: '100 EUR' },
+];
+
+const rounds = [
+  {
+    type: 'qualifier' as const,
+    number: 1,
+    title: 'Серия 1',
+    theme: 'Убийство в Восточном Экспрессе',
+    themeKnown: true,
+    dateLabel: '4 июля 2026',
+    players: 10,
+    games: 8,
+    advance: 2,
+    registration: 'available' as const,
+    registrationUrl: 'https://imafia.org/tournament/1755',
+  },
+  {
+    type: 'qualifier' as const,
+    number: 2,
+    title: 'Серия 2',
+    theme: null,
+    themeKnown: false,
+    dateLabel: null,
+    players: 10,
+    games: 8,
+    advance: 2,
+    registration: 'not-available' as const,
+    registrationUrl: null,
+  },
+  {
+    type: 'qualifier' as const,
+    number: 3,
+    title: 'Серия 3',
+    theme: null,
+    themeKnown: false,
+    dateLabel: null,
+    players: 10,
+    games: 8,
+    advance: 2,
+    registration: 'not-available' as const,
+    registrationUrl: null,
+  },
+  {
+    type: 'qualifier' as const,
+    number: 4,
+    title: 'Серия 4',
+    theme: null,
+    themeKnown: false,
+    dateLabel: null,
+    players: 10,
+    games: 8,
+    advance: 2,
+    registration: 'not-available' as const,
+    registrationUrl: null,
+  },
+  {
+    type: 'qualifier' as const,
+    number: 5,
+    title: 'Серия 5',
+    theme: null,
+    themeKnown: false,
+    dateLabel: null,
+    players: 10,
+    games: 8,
+    advance: 2,
+    registration: 'not-available' as const,
+    registrationUrl: null,
+  },
+  {
+    type: 'final' as const,
+    number: null,
+    title: 'Финал',
+    theme: null,
+    themeKnown: false,
+    dateLabel: finalDates,
+    players: 10,
+    games: 14,
+    advance: null,
+    registration: 'not-available' as const,
+    registrationUrl: null,
+  },
+];
+
+const activeRound = rounds.find(r => r.registration === 'available') ?? null;
+const qualifiers = rounds.filter(r => r.type === 'qualifier');
+const finalRound = rounds.find(r => r.type === 'final')!;
+
+function roundAccent(round: typeof rounds[number]): string {
+  if (round.type === 'final') return 'var(--accent)';
+  if (round.themeKnown) return 'var(--gold)';
+  return 'var(--text-dim)';
+}
+
+const ogImage = Astro.site
+  ? new URL('/images/events/oml2026-cover.jpg', Astro.site).toString()
+  : undefined;
+---
+
+<BaseLayout
+  title={`${title} — VANMO`}
+  description="Серийный турнир по мафии с детективной тематикой. 5 отборочных серий, 10 финалистов, призовой фонд 450 EUR. Финал 24–25 октября 2026 в Тбилиси."
+  ogImage={ogImage}
+  ogImageWidth={500}
+  ogImageHeight={334}
+>
+  <!-- HERO -->
+  <section class="event-hero">
+    <div class="event-hero__noise" aria-hidden="true"></div>
+    <div class="event-hero__content container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <div class="event-hero__tags">
+        <span class="hero-tag hero-tag--type">Турнир</span>
+        <span class="hero-tag hero-tag--level">iMafia Bronze</span>
+        {activeRound && (
+          <span class="hero-tag hero-tag--live">
+            <span class="hero-tag__dot"></span>
+            {activeRound.title} · регистрация открыта
+          </span>
+        )}
+      </div>
+
+      <h1 class="event-hero__title font-display">{title}</h1>
+      <p class="event-hero__subtitle">{subtitle}</p>
+
+      <div class="event-hero__stats">
+        <div class="event-hero__stats-left">
+          <div class="event-stat">
+            <span class="event-stat__value">{prizePool}</span>
+            <span class="event-stat__label">призовой фонд</span>
+          </div>
+          <div class="event-stat-divider" aria-hidden="true">◆</div>
+          <div class="event-stat">
+            <span class="event-stat__value">{entryFee}</span>
+            <span class="event-stat__label">вход в серию</span>
+          </div>
+          {activeRound && (
+            <>
+              <div class="event-stat-divider" aria-hidden="true">◆</div>
+              <div class="event-stat">
+                <span class="event-stat__value event-stat__value--active">{activeRound.title}</span>
+                <span class="event-stat__label">открыта регистрация</span>
+              </div>
+            </>
+          )}
+        </div>
+        {activeRound && (
+          <a
+            href={activeRound.registrationUrl!}
+            class="btn-primary event-cta-btn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Зарегистрироваться на Серию {activeRound.number}
+          </a>
+        )}
+      </div>
+
+      <div class="event-hero__info">
+        <div class="event-hero__info-grid">
+          <div class="event-hero__info-col">
+            <p class="event-kicker">О турнире</p>
+            <p class="event-hero__description">
+              One More League — серийный турнир по мафии с детективной тематикой.
+              Пять отборочных серий определят десятерых финалистов, которые сразятся
+              за призовой фонд в двухдневном финале. Все игры транслируются на YouTube.
+            </p>
+            <p class="event-hero__meta">
+              Трансляции: <a href="https://www.youtube.com/@iMafia" target="_blank" rel="noopener noreferrer" class="event-hero__link">YouTube · iMafia</a><br />
+              Уровень: iMafia BRONZE<br />
+              Язык: Русский, Украинский
+            </p>
+          </div>
+          <div class="event-hero__info-col event-hero__prizes-col">
+            <p class="event-kicker">Призовой фонд</p>
+            <div class="event-prizes">
+              {prizes.map((prize) => (
+                <div class="event-prize">
+                  <span class="event-prize__place font-display">{prize.label}</span>
+                  <span class="event-prize__amount">{prize.amount}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRUCTURE -->
+  <section class="section-padding section-edge event-section">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <p class="event-kicker">Формат турнира</p>
+      <h2 class="event-section__heading font-display">Путь к финалу</h2>
+      <div class="event-structure">
+        <div class="event-structure__box">
+          <div class="event-structure__number font-display">{qualifiers.length}</div>
+          <div class="event-structure__label">отборочных серий</div>
+          <div class="event-structure__sub">
+            10 игроков · 8 игр · топ‑2 в финал
+          </div>
+        </div>
+        <div class="event-structure__arrow" aria-hidden="true">→</div>
+        <div class="event-structure__box">
+          <div class="event-structure__number font-display">{finalRound.players}</div>
+          <div class="event-structure__label">финалистов</div>
+          <div class="event-structure__sub">
+            {finalRound.games} игр · 2 дня · {finalDates}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROUNDS -->
+  <section class="section-padding section-edge event-section">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
+      <p class="event-kicker">Расписание</p>
+      <h2 class="event-section__heading font-display">Серии и финал</h2>
+      <div class="rounds-list">
+        {rounds.map((round) => (
+          <div class="round-row" style={`--round-accent: ${roundAccent(round)}`}>
+            <span class="round-row__num font-display">
+              {round.type === 'final' ? '◆' : round.number}
+            </span>
+            <div class="round-row__main">
+              <span class="round-row__label">{round.title}</span>
+              {round.themeKnown
+                ? <em class="round-row__theme font-display">{round.theme}</em>
+                : <span class="round-row__theme-unknown">Тематика будет объявлена</span>
+              }
+            </div>
+            <div class={`round-row__date${round.dateLabel ? '' : ' round-row__date--unknown'}`}>
+              {round.dateLabel ?? 'Дата будет объявлена'}
+            </div>
+            <div class="round-row__info">
+              {round.players} игроков · {round.games} игр
+              {round.advance != null && <> · топ‑{round.advance} в финал</>}
+            </div>
+            <div class="round-row__cta">
+              {round.registration === 'available' && (
+                <a
+                  href={round.registrationUrl!}
+                  class="btn-primary round-cta-btn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Зарегистрироваться
+                </a>
+              )}
+              {round.registration === 'past' && (
+                <span class="round-badge round-badge--closed">Завершена</span>
+              )}
+              {round.registration === 'not-available' && round.type === 'qualifier' && (
+                <span class="round-badge round-badge--pending">Регистрация откроется позже</span>
+              )}
+              {round.registration === 'not-available' && round.type === 'final' && (
+                <span class="round-badge round-badge--invite">По итогам серий</span>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* ── HERO ── */
+  .event-hero {
+    position: relative;
+    padding: 8rem 0 6rem;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+    background-image: url('/images/events/oml2026-bg-dark.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+
+  .event-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      160deg,
+      rgba(8, 6, 4, 0.88) 0%,
+      rgba(8, 6, 4, 0.78) 50%,
+      rgba(8, 6, 4, 0.6) 100%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  :global(:root.day-mode) .event-hero {
+    background-image: url('/images/events/oml2026-bg-light.jpg');
+    --text-muted: rgba(18, 13, 8, 0.8);
+    --text-dim: rgba(18, 13, 8, 0.62);
+    --gold: #4a2e06;
+    --gold-dim: rgba(74, 46, 6, 0.45);
+  }
+
+  :global(:root.day-mode) .event-hero::before {
+    background: linear-gradient(
+      160deg,
+      rgba(240, 232, 210, 0.88) 0%,
+      rgba(240, 232, 210, 0.75) 50%,
+      rgba(240, 232, 210, 0.5) 100%
+    );
+  }
+
+  :global(:root.day-mode) .event-hero .event-hero__subtitle {
+    font-weight: 400;
+  }
+
+  :global(:root.day-mode) .event-hero .event-stat__label {
+    font-weight: 600;
+  }
+
+  .event-hero__noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.035;
+    pointer-events: none;
+    z-index: 1;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+  }
+
+  .event-hero__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .event-kicker {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .event-kicker::after {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--gold-dim);
+  }
+
+  .event-hero__title {
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--text);
+    max-width: 18ch;
+  }
+
+  .event-hero__subtitle {
+    font-size: clamp(0.9375rem, 2vw, 1.125rem);
+    color: var(--text-muted);
+    font-weight: 300;
+    max-width: 40ch;
+    margin-top: -0.5rem;
+  }
+
+  /* ── HERO TAGS ── */
+  .event-hero__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .hero-tag {
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.65rem;
+    border-radius: 2px;
+    line-height: 1.8;
+  }
+
+  .hero-tag--type {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .hero-tag--level {
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    background: transparent;
+  }
+
+  .hero-tag--live {
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .hero-tag__dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #4ade80;
+    flex-shrink: 0;
+    animation: hero-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes hero-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .event-hero__stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    width: 100%;
+  }
+
+  .event-hero__stats-left {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .event-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .event-stat__value {
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .event-stat__value--active {
+    color: var(--gold);
+  }
+
+  .event-stat__label {
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .event-stat-divider {
+    color: var(--gold-dim);
+    font-size: 0.5rem;
+  }
+
+  .event-cta-btn {
+    font-size: 0.9375rem;
+    white-space: nowrap;
+  }
+
+  .event-hero__info {
+    width: 100%;
+    padding-top: 2.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .event-hero__info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+  }
+
+  .event-hero__prizes-col {
+    background: rgba(8, 6, 4, 0.28);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem 1rem 1.5rem 1.75rem;
+    margin: -1.5rem 0 -1.5rem -1.75rem;
+    backdrop-filter: blur(4px);
+  }
+
+  :global(:root.day-mode) .event-hero__prizes-col {
+    background: rgba(240, 232, 210, 0.45);
+  }
+
+  .event-hero__description {
+    color: var(--text-muted);
+    line-height: 1.7;
+    font-size: 1rem;
+    margin: 0.75rem 0 1rem;
+  }
+
+  .event-hero__meta {
+    font-size: 0.875rem;
+    color: var(--text-dim);
+    line-height: 1.8;
+  }
+
+  .event-hero__link {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--border);
+    text-underline-offset: 3px;
+  }
+  .event-hero__link:hover { color: var(--text-muted); }
+
+  /* ── SECTIONS ── */
+  .event-section {
+    background: var(--bg);
+  }
+
+  .event-section__heading {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    font-weight: 300;
+    color: var(--text);
+    margin: 0.5rem 0 2.5rem;
+  }
+
+  /* ── STRUCTURE ── */
+  .event-structure {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .event-structure__box {
+    flex: 1;
+    min-width: 200px;
+    padding: 2rem;
+    border: 1px solid var(--border);
+    border-top-color: var(--gold-dim);
+    background: var(--bg-raised);
+  }
+
+  .event-structure__number {
+    font-size: 4rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .event-structure__label {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    margin: 0.25rem 0;
+  }
+
+  .event-structure__sub {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .event-structure__arrow {
+    font-size: 1.5rem;
+    color: var(--gold-dim);
+    flex-shrink: 0;
+  }
+
+  /* ── ROUNDS LIST ── */
+  .rounds-list {
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid var(--border);
+  }
+
+  .round-row {
+    display: grid;
+    grid-template-columns: 1.75rem 1fr auto auto auto;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.375rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .round-row__num {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--round-accent);
+    line-height: 1;
+  }
+
+  .round-row__main {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .round-row__label {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+  }
+
+  .round-row__theme {
+    font-style: italic;
+    color: var(--round-accent);
+    font-size: 1.0625rem;
+  }
+
+  .round-row__theme-unknown {
+    color: var(--text-dim);
+    font-size: 1.0625rem;
+    font-style: italic;
+  }
+
+  .round-row__date {
+    font-size: 1rem;
+    color: var(--round-accent);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .round-row__date--unknown {
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+
+  .round-row__info {
+    font-size: 0.9375rem;
+    color: var(--text-dim);
+    white-space: nowrap;
+  }
+
+  .round-row__cta {
+    text-align: right;
+  }
+
+  .round-cta-btn {
+    font-size: 0.9375rem;
+  }
+
+  .round-badge {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .round-badge--pending,
+  .round-badge--invite {
+    color: var(--text-dim);
+  }
+
+  .round-badge--closed {
+    color: var(--text-muted);
+    text-decoration: line-through;
+  }
+
+  /* ── PRIZES ── */
+  .event-prizes {
+    display: flex;
+    flex-direction: column;
+    margin-top: 0.75rem;
+  }
+
+  .event-prize {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .event-prize__place {
+    font-size: 1.125rem;
+    color: var(--text);
+  }
+
+  .event-prize__amount {
+    font-size: 1rem;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .event-structure {
+      flex-direction: column;
+    }
+
+    .event-structure__box {
+      width: 100%;
+    }
+
+    .event-structure__arrow {
+      transform: rotate(90deg);
+    }
+
+    .round-row {
+      grid-template-columns: 1.75rem 1fr auto;
+      grid-template-rows: auto auto;
+    }
+
+    .round-row__info {
+      display: none;
+    }
+
+    .round-row__cta {
+      grid-column: 3;
+      grid-row: 1 / 3;
+      align-self: center;
+    }
+
+    .event-hero__info-grid {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
+    .event-hero__prizes-col {
+      margin: 0;
+      padding: 1.5rem;
+      border-left: none;
+      border-top: 1px solid var(--border);
+    }
+  }
+</style>
