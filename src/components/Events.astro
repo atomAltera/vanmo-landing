@@ -19,29 +19,17 @@ function typeLabel(type: string) {
 
     <div class="events-grid">
       {events.map((event) => (
-        <article class="event-card glass-card">
-          <a href={`/events/${event.slug}`} class="event-card__image-wrap" aria-label={`Подробнее: ${event.title}`}>
-            <img
-              src={event.image}
-              alt={event.title}
-              width="500"
-              height="334"
-              class="event-card__image"
-              loading="lazy"
-            />
-            <span class="event-card__badge">{typeLabel(event.type)}</span>
-          </a>
-          <div class="event-card__body">
-            <p class="event-card__dates">{event.cardDateRange}</p>
-            <h3 class="event-card__title font-display">{event.title}</h3>
-            <p class="event-card__subtitle">{event.subtitle}</p>
-            <div class="event-card__footer">
-              <a href={`/events/${event.slug}`} class="btn-secondary event-card__btn">
-                Подробнее →
-              </a>
-            </div>
-          </div>
-        </article>
+        <a href={`/events/${event.slug}`} class="event-card glass-card" aria-label={event.title}>
+          <img
+            src={event.image}
+            alt={event.title}
+            width="500"
+            height="334"
+            class="event-card__image"
+            loading="lazy"
+          />
+          <span class="event-card__badge">{typeLabel(event.type)}</span>
+        </a>
       ))}
     </div>
   </div>
@@ -55,24 +43,15 @@ function typeLabel(type: string) {
   }
 
   .event-card {
-    display: flex;
-    flex-direction: column;
+    position: relative;
+    display: block;
     overflow: hidden;
     border-radius: 4px;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, opacity 0.2s;
   }
 
   .event-card:hover {
     border-color: var(--gold-dim);
-  }
-
-  .event-card__image-wrap {
-    position: relative;
-    flex-shrink: 0;
-    display: block;
-  }
-
-  .event-card__image-wrap:hover .event-card__image {
     opacity: 0.9;
   }
 
@@ -81,7 +60,6 @@ function typeLabel(type: string) {
     aspect-ratio: 500 / 334;
     object-fit: cover;
     display: block;
-    transition: opacity 0.2s;
   }
 
   .event-card__badge {
@@ -96,42 +74,5 @@ function typeLabel(type: string) {
     text-transform: uppercase;
     padding: 0.2rem 0.6rem;
     border-radius: 2px;
-  }
-
-  .event-card__body {
-    padding: 1.25rem 1.5rem 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    flex: 1;
-  }
-
-  .event-card__dates {
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text-muted);
-  }
-
-  .event-card__title {
-    font-size: 1.5rem;
-    font-weight: 400;
-    line-height: 1.2;
-    color: var(--text);
-  }
-
-  .event-card__subtitle {
-    font-size: 0.9375rem;
-    color: var(--text-muted);
-    line-height: 1.5;
-  }
-
-  .event-card__footer {
-    margin-top: auto;
-    padding-top: 1rem;
-  }
-
-  .event-card__btn {
-    font-size: 0.875rem;
   }
 </style>
