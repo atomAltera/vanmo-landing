@@ -3,67 +3,362 @@
 
 <section id="events" class="section-padding section-edge">
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl">
-    <div class="mb-10 md:mb-14">
+    <div class="events-header">
       <p class="kicker">События</p>
       <h2 class="font-display text-[clamp(2.25rem,5vw,3.75rem)] font-light leading-tight mt-3">
         Предстоящие турниры
       </h2>
     </div>
 
-    <div class="events-grid">
-      <a href="/events/one_more_league_2026" class="event-card glass-card" aria-label="One More League 2026">
-        <img
-          src="/images/events/oml2026-cover.jpg"
-          alt="One More League 2026"
-          width="500"
-          height="334"
-          class="event-card__image"
-          loading="lazy"
-        />
-        <span class="event-card__badge">Турнир</span>
-      </a>
+    <div class="oml-spotlight">
+      <div class="oml-spotlight__glow" aria-hidden="true"></div>
+      <div class="oml-spotlight__noise" aria-hidden="true"></div>
+      <div class="oml-spotlight__watermark font-display" aria-hidden="true">2026</div>
+
+      <div class="oml-spotlight__inner">
+        <!-- LEFT: content -->
+        <div class="oml-spotlight__left">
+          <div class="oml-spotlight__tags">
+            <span class="oml-tag oml-tag--type">Турнир</span>
+            <span class="oml-tag oml-tag--level">iMafia Bronze</span>
+            <span class="oml-tag oml-tag--live">
+              <span class="oml-tag__dot"></span>Серия 1 · регистрация открыта
+            </span>
+          </div>
+
+          <h3 class="oml-spotlight__title font-display">One More League 2026</h3>
+          <p class="oml-spotlight__subtitle">Первый тематический серийный турнир по мафии в Тбилиси</p>
+
+          <div class="oml-spotlight__stats">
+            <div class="oml-stat">
+              <span class="oml-stat__value">450 EUR</span>
+              <span class="oml-stat__label">призовой фонд</span>
+            </div>
+            <div class="oml-stat-sep" aria-hidden="true">◆</div>
+            <div class="oml-stat">
+              <span class="oml-stat__value">110 GEL</span>
+              <span class="oml-stat__label">вход в серию</span>
+            </div>
+            <div class="oml-stat-sep" aria-hidden="true">◆</div>
+            <div class="oml-stat">
+              <span class="oml-stat__value">5 + финал</span>
+              <span class="oml-stat__label">серий</span>
+            </div>
+          </div>
+
+          <p class="oml-spotlight__dates">4 июля — 25 октября 2026</p>
+
+          <div class="oml-spotlight__cta">
+            <a
+              href="https://imafia.org/tournament/1755"
+              class="btn-primary"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Зарегистрироваться на Серию 1
+            </a>
+            <a href="/events/one_more_league_2026" class="oml-link-more">
+              Подробнее →
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT: prizes -->
+        <div class="oml-spotlight__right" aria-hidden="true">
+          <p class="oml-prizes__kicker">Призовые места</p>
+          <div class="oml-prizes">
+            <div class="oml-prize">
+              <span class="oml-prize__numeral font-display">I</span>
+              <span class="oml-prize__dots"></span>
+              <span class="oml-prize__amount">200 EUR</span>
+            </div>
+            <div class="oml-prize">
+              <span class="oml-prize__numeral font-display">II</span>
+              <span class="oml-prize__dots"></span>
+              <span class="oml-prize__amount">150 EUR</span>
+            </div>
+            <div class="oml-prize">
+              <span class="oml-prize__numeral font-display">III</span>
+              <span class="oml-prize__dots"></span>
+              <span class="oml-prize__amount">100 EUR</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .events-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.5rem;
+  .events-header {
+    margin-bottom: 2.5rem;
   }
 
-  .event-card {
+  /* ── SPOTLIGHT CARD ── */
+  .oml-spotlight {
     position: relative;
-    display: block;
     overflow: hidden;
-    border-radius: 4px;
-    transition: border-color 0.2s, opacity 0.2s;
+    border: 1px solid var(--border);
+    border-top: 2px solid var(--gold-dim);
+    background: var(--bg-raised);
   }
 
-  .event-card:hover {
-    border-color: var(--gold-dim);
-    opacity: 0.9;
-  }
-
-  .event-card__image {
-    width: 100%;
-    aspect-ratio: 500 / 334;
-    object-fit: cover;
-    display: block;
-  }
-
-  .event-card__badge {
+  .oml-spotlight__glow {
     position: absolute;
-    top: 0.75rem;
-    left: 0.75rem;
+    top: -60px;
+    left: -60px;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(200, 169, 106, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .oml-spotlight__noise {
+    position: absolute;
+    inset: 0;
+    opacity: 0.03;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 256px 256px;
+  }
+
+  .oml-spotlight__watermark {
+    position: absolute;
+    right: -0.05em;
+    bottom: -0.25em;
+    font-size: clamp(7rem, 18vw, 14rem);
+    font-weight: 300;
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(200, 169, 106, 0.08);
+    user-select: none;
+    pointer-events: none;
+    letter-spacing: -0.02em;
+  }
+
+  .oml-spotlight__inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    padding: 2.75rem 3rem;
+    align-items: start;
+  }
+
+  /* ── TAGS ── */
+  .oml-spotlight__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .oml-tag {
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.65rem;
+    border-radius: 2px;
+  }
+
+  .oml-tag--type {
     background: var(--accent);
     color: #fff;
-    font-size: 0.6875rem;
-    font-weight: 600;
+  }
+
+  .oml-tag--level {
+    border: 1px solid var(--gold-dim);
+    color: var(--gold);
+    background: transparent;
+  }
+
+  .oml-tag--live {
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .oml-tag__dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #4ade80;
+    flex-shrink: 0;
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* ── TITLE ── */
+  .oml-spotlight__title {
+    font-size: clamp(2rem, 4.5vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+    max-width: 18ch;
+  }
+
+  .oml-spotlight__subtitle {
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    margin-bottom: 2rem;
+    max-width: 44ch;
+  }
+
+  /* ── STATS ── */
+  .oml-spotlight__stats {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1rem;
+  }
+
+  .oml-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .oml-stat__value {
+    font-size: 1.0625rem;
+    font-weight: 500;
+    color: var(--text);
+  }
+
+  .oml-stat__label {
+    font-size: 0.625rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    padding: 0.2rem 0.6rem;
-    border-radius: 2px;
+    color: var(--text-dim);
+  }
+
+  .oml-stat-sep {
+    color: var(--gold-dim);
+    font-size: 0.4375rem;
+  }
+
+  /* ── DATES ── */
+  .oml-spotlight__dates {
+    font-size: 0.8125rem;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    margin: 0.75rem 0 1.75rem;
+  }
+
+  /* ── CTA ── */
+  .oml-spotlight__cta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .oml-link-more {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .oml-link-more:hover { color: var(--text); }
+
+  /* ── PRIZES (right column) ── */
+  .oml-spotlight__right {
+    min-width: 220px;
+    padding-top: 0.25rem;
+    border-left: 1px solid var(--border);
+    padding-left: 3rem;
+  }
+
+  .oml-prizes__kicker {
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .oml-prizes__kicker::after {
+    content: '';
+    display: block;
+    width: 1.5rem;
+    height: 1px;
+    background: var(--gold-dim);
+  }
+
+  .oml-prizes {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .oml-prize {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+    padding: 0.875rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .oml-prize:first-child { border-top: 1px solid var(--border); }
+
+  .oml-prize__numeral {
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--gold);
+    min-width: 2.5rem;
+    line-height: 1;
+  }
+  .oml-prize:nth-child(2) .oml-prize__numeral { color: var(--text-muted); }
+  .oml-prize:nth-child(3) .oml-prize__numeral { color: var(--text-dim); }
+
+  .oml-prize__dots {
+    flex: 1;
+    border-bottom: 1px dotted var(--border);
+    margin: 0 0.75rem 0.2rem;
+  }
+
+  .oml-prize__amount {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text);
+    white-space: nowrap;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .oml-spotlight__inner {
+      grid-template-columns: 1fr;
+      padding: 2rem 1.75rem;
+      gap: 2rem;
+    }
+
+    .oml-spotlight__right {
+      border-left: none;
+      border-top: 1px solid var(--border);
+      padding-left: 0;
+      padding-top: 2rem;
+    }
+
+    .oml-spotlight__watermark {
+      font-size: 30vw;
+    }
   }
 </style>
