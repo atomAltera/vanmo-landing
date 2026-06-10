@@ -122,13 +122,36 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
     z-index: 1;
   }
 
-  /* Hero stays dark in both themes — force light text regardless of theme */
+  /* Dark theme (default) — light text over dark image */
   .hero-section {
     --text: #f0ece4;
     --text-muted: rgba(240, 236, 228, 0.72);
     --text-dim: rgba(240, 236, 228, 0.45);
     --border: rgba(240, 236, 228, 0.15);
     color: #f0ece4;
+  }
+
+  /* Light theme — light image + dark text */
+  :root.day-mode .hero-section {
+    background-image: url('/images/hero-bg-light.jpg');
+    --text: #161310;
+    --text-muted: rgba(22, 19, 16, 0.72);
+    --text-dim: rgba(22, 19, 16, 0.45);
+    --border: rgba(22, 19, 16, 0.12);
+    color: #161310;
+  }
+
+  :root.day-mode .hero-section::after {
+    background: linear-gradient(
+      105deg,
+      rgba(250, 247, 242, 0.92) 0%,
+      rgba(250, 247, 242, 0.8) 45%,
+      rgba(250, 247, 242, 0.5) 100%
+    );
+  }
+
+  :root.day-mode .hero-steps {
+    background: rgba(255, 255, 255, 0.55);
   }
 
   .hero-inner {
