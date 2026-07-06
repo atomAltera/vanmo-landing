@@ -125,6 +125,17 @@ const siteData = yaml.load(readFileSync('src/data/site.yaml', 'utf8')) as {
   </div>
 </div>
 
+<script>
+  // Close the mobile menu when any menu item is clicked (needed for in-page
+  // anchors like "#events" that don't trigger a navigation).
+  const toggle = document.getElementById('mobile-menu-toggle') as HTMLInputElement | null;
+  document.querySelectorAll('.mobile-menu a').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (toggle) toggle.checked = false;
+    });
+  });
+</script>
+
 <style is:global>
   .header-bar {
     background: var(--header-bg);
