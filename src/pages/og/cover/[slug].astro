@@ -1,10 +1,21 @@
 ---
-// Snapshot source for the OG image of /events/one_more_league_2026.
-// Not linked anywhere and excluded from the sitemap — it exists so the preview
-// image can be re-rendered from the real component instead of hand-edited.
-// Regenerate with: scripts/render-og.sh
-import '../../styles/global.css';
-import OmlSpotlight from '../../components/OmlSpotlight.astro';
+// Snapshot sources for the 274×153 tournament covers.
+// Add a stage here and it becomes renderable; scripts/render-og.sh picks the
+// list up from its own COVERS array.
+import '../../../styles/global.css';
+import OmlSpotlight from '../../../components/OmlSpotlight.astro';
+
+export function getStaticPaths() {
+  return [
+    ...[1, 2, 3, 4, 5].map((n) => ({
+      params: { slug: `series-${n}` },
+      props: { label: `Серия ${n}` },
+    })),
+    { params: { slug: 'final' }, props: { label: 'Финал' } },
+  ];
+}
+
+const { label } = Astro.props;
 ---
 
 <!doctype html>
@@ -12,7 +23,7 @@ import OmlSpotlight from '../../components/OmlSpotlight.astro';
   <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="noindex, nofollow" />
-    <title>OG · One More League 2026</title>
+    <title>Cover · One More League 2026 · {label}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -21,7 +32,7 @@ import OmlSpotlight from '../../components/OmlSpotlight.astro';
     />
   </head>
   <body class="font-sans antialiased">
-    <OmlSpotlight variant="og" />
+    <OmlSpotlight variant="cover" label={label} />
   </body>
 </html>
 
@@ -30,8 +41,8 @@ import OmlSpotlight from '../../components/OmlSpotlight.astro';
   body {
     margin: 0;
     padding: 0;
-    width: 1200px;
-    height: 630px;
+    width: 1096px;
+    height: 612px;
     overflow: hidden;
     background: #0a0806;
   }

@@ -1,15 +1,19 @@
 ---
 interface Props {
   /**
-   * Render the social-preview variant: a fixed 1200×630 canvas with its own,
-   * much coarser layout. A link preview is shown at ~450px wide, so anything
-   * under ~30px here is unreadable — the OG version carries less content at
-   * far larger sizes rather than shrinking the page card.
+   * - `page`    — the card as it appears on the site.
+   * - `og`      — 1200×630 social preview. Shown at roughly a third of that,
+   *               so it carries less content at far larger sizes rather than
+   *               shrinking the page card.
+   * - `cover`   — 1096×612 canvas downsampled to a 274×153 thumbnail. Only the
+   *               title and the stage label survive at that size.
    */
-  og?: boolean;
+  variant?: 'page' | 'og' | 'cover';
+  /** Stage label for `cover`, e.g. "Серия 1" or "Финал". */
+  label?: string;
 }
 
-const { og = false } = Astro.props;
+const { variant = 'page', label } = Astro.props;
 
 // Shared between both layouts so a schedule/price change is a single edit.
 const dates = '30 августа — 25 октября 2026';
@@ -19,32 +23,34 @@ const seriesCount = '5 + финал';
 const prizes = ['200 EUR', '150 EUR', '100 EUR'];
 ---
 
-<div class:list={['oml-spotlight', og && 'oml-spotlight--og']}>
+<div class:list={['oml-spotlight', variant !== 'page' && `oml-spotlight--${variant}`]}>
   <div class="oml-spotlight__glow" aria-hidden="true"></div>
   <div class="oml-spotlight__noise" aria-hidden="true"></div>
   <div class="oml-spotlight__watermark font-display" aria-hidden="true">2026</div>
 
-  {og ? (
+  {variant !== 'page' ? (
     <div class="oml-og">
       <div class="oml-og__left">
         <h3 class="oml-og__title font-display">One More<br>League<br><em class="oml-og__year">2026</em></h3>
 
-        <p class="oml-og__dates">{dates}</p>
+        <p class="oml-og__dates">{variant === 'cover' ? label : dates}</p>
       </div>
 
-      <div class="oml-og__right">
-        <p class="oml-og__pool-label">Призовой фонд</p>
-        <p class="oml-og__pool">{prizePool}</p>
+      {variant === 'og' && (
+        <div class="oml-og__right">
+          <p class="oml-og__pool-label">Призовой фонд</p>
+          <p class="oml-og__pool">{prizePool}</p>
 
-        <div class="oml-og__prizes">
-          {prizes.map((amount, i) => (
-            <div class="oml-og__prize">
-              <span class="oml-og__numeral font-display">{'I'.repeat(i + 1)}</span>
-              <span class="oml-og__amount">{amount}</span>
-            </div>
-          ))}
+          <div class="oml-og__prizes">
+            {prizes.map((amount, i) => (
+              <div class="oml-og__prize">
+                <span class="oml-og__numeral font-display">{'I'.repeat(i + 1)}</span>
+                <span class="oml-og__amount">{amount}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   ) : (
     <div class="oml-spotlight__inner">
@@ -59,7 +65,7 @@ const prizes = ['200 EUR', '150 EUR', '100 EUR'];
         </div>
 
         <h3 class="oml-spotlight__title font-display">One More League<br><em class="oml-title-year">2026</em></h3>
-        <p class="oml-spotlight__subtitle">Первый тематический серийный турнир по мафии в Тбилиси</p>
+        <p class="oml-spotlight__subtitle">Тематический серийный турнир по мафии в Тбилиси</p>
 
         <div class="oml-spotlight__stats">
           <div class="oml-stat">
@@ -559,5 +565,50 @@ const prizes = ['200 EUR', '150 EUR', '100 EUR'];
     font-size: 20rem;
     bottom: -0.3em;
     right: 24rem;
+  }
+
+  /* ── COVER VARIANT (1096×612, shipped as a 274×153 thumbnail) ──
+     Downsampled 4×, so only the title and the stage label are left. */
+  .oml-spotlight--cover {
+    width: 1096px;
+    height: 612px;
+    border: none;
+    border-top: 5px solid var(--gold-dim);
+  }
+
+  /* no prize panel over the artwork here, so the scrim can lift a lot and let
+     the train read — it stays heavy on the left, under the title */
+  .oml-spotlight--cover::after {
+    background: linear-gradient(
+      105deg,
+      rgba(10, 8, 6, 0.78) 0%,
+      rgba(10, 8, 6, 0.5) 42%,
+      rgba(10, 8, 6, 0.14) 100%
+    );
+  }
+
+  .oml-spotlight--cover .oml-og {
+    grid-template-columns: 1fr;
+  }
+
+  .oml-spotlight--cover .oml-og__left {
+    padding: 3.5rem;
+  }
+
+  .oml-spotlight--cover .oml-og__title {
+    font-size: 8.75rem;
+    margin-bottom: 2.75rem;
+  }
+
+  .oml-spotlight--cover .oml-og__dates {
+    font-size: 4.5rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .oml-spotlight--cover .oml-spotlight__watermark {
+    font-size: 22rem;
+    bottom: -0.3em;
+    right: 1rem;
   }
 </style>
