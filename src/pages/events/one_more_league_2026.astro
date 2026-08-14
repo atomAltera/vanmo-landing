@@ -104,8 +104,9 @@ function roundAccent(round: typeof rounds[number]): string {
   return 'var(--text-dim)';
 }
 
+// Rendered from /og/one_more_league_2026 — see scripts/render-og.sh
 const ogImage = Astro.site
-  ? new URL('/images/events/oml2026-cover.jpg', Astro.site).toString()
+  ? new URL('/images/events/oml2026-og.jpg', Astro.site).toString()
   : undefined;
 ---
 
@@ -113,8 +114,8 @@ const ogImage = Astro.site
   title={`${title} — VANMO`}
   description="Серийный турнир по мафии с детективной тематикой. 5 отборочных серий, 10 финалистов, призовой фонд 450 EUR. Финал 24–25 октября 2026 в Тбилиси."
   ogImage={ogImage}
-  ogImageWidth={500}
-  ogImageHeight={334}
+  ogImageWidth={1200}
+  ogImageHeight={630}
 >
   <!-- HERO -->
   <section class="event-hero">

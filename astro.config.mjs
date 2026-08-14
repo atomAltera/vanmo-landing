@@ -21,5 +21,10 @@ export default defineConfig({
     }
   },
 
-  integrations: [sitemap()]
+  integrations: [
+    sitemap({
+      // /og/* pages exist only as sources for social preview screenshots
+      filter: (page) => !page.includes('/og/')
+    })
+  ]
 });

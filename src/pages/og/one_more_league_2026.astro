@@ -1,0 +1,43 @@
+---
+// Snapshot source for the OG image of /events/one_more_league_2026.
+// Not linked anywhere and excluded from the sitemap — it exists so the preview
+// image can be re-rendered from the real component instead of hand-edited.
+// Regenerate with: scripts/render-og.sh
+import '../../styles/global.css';
+import OmlSpotlight from '../../components/OmlSpotlight.astro';
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>OG · One More League 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="font-sans antialiased">
+    <OmlSpotlight og />
+  </body>
+</html>
+
+<style is:global>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: #0a0806;
+  }
+
+  /* keep the dev toolbar out of the screenshot */
+  astro-dev-toolbar {
+    display: none !important;
+  }
+</style>
