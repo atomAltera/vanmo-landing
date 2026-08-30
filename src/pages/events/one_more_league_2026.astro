@@ -24,21 +24,23 @@ const rounds = [
     players: 10,
     games: 8,
     advance: 2,
-    registration: 'available' as const,
-    registrationUrl: 'https://imafia.org/tournament/1755',
+    registration: 'results' as const,
+    registrationUrl: null,
+    resultsUrl: 'https://imafia.org/tournament/1755#tournament-tables',
   },
   {
     type: 'qualifier' as const,
     number: 2,
     title: 'Серия 2',
-    theme: null,
-    themeKnown: false,
-    dateLabel: null,
+    theme: 'Этюд в багровых тонах',
+    themeKnown: true,
+    dateLabel: '6 сентября 2026',
     players: 10,
     games: 8,
     advance: 2,
-    registration: 'not-available' as const,
-    registrationUrl: null,
+    registration: 'available' as const,
+    registrationUrl: 'https://imafia.org/tournament/1889',
+    resultsUrl: null,
   },
   {
     type: 'qualifier' as const,
@@ -52,6 +54,7 @@ const rounds = [
     advance: 2,
     registration: 'not-available' as const,
     registrationUrl: null,
+    resultsUrl: null,
   },
   {
     type: 'qualifier' as const,
@@ -65,6 +68,7 @@ const rounds = [
     advance: 2,
     registration: 'not-available' as const,
     registrationUrl: null,
+    resultsUrl: null,
   },
   {
     type: 'qualifier' as const,
@@ -78,6 +82,7 @@ const rounds = [
     advance: 2,
     registration: 'not-available' as const,
     registrationUrl: null,
+    resultsUrl: null,
   },
   {
     type: 'final' as const,
@@ -91,6 +96,7 @@ const rounds = [
     advance: null,
     registration: 'not-available' as const,
     registrationUrl: null,
+    resultsUrl: null,
   },
 ];
 
@@ -258,6 +264,16 @@ const ogImage = Astro.site
                   rel="noopener noreferrer"
                 >
                   Зарегистрироваться
+                </a>
+              )}
+              {round.registration === 'results' && (
+                <a
+                  href={round.resultsUrl!}
+                  class="btn-secondary round-cta-btn"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Посмотреть результаты
                 </a>
               )}
               {round.registration === 'past' && (
