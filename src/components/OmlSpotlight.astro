@@ -7,8 +7,10 @@ interface Props {
    *               shrinking the page card.
    * - `cover`   — 1096×612 canvas downsampled to a 274×153 thumbnail. Only the
    *               title and the stage label survive at that size.
+   * - `youtube` — 1920×1080 native, no top border line (YouTube crops/hides
+   *               it inconsistently across surfaces).
    */
-  variant?: 'page' | 'og' | 'cover';
+  variant?: 'page' | 'og' | 'cover' | 'youtube';
   /** Stage label for `cover`, e.g. "Серия 1" or "Финал". */
   label?: string;
 }
@@ -33,7 +35,7 @@ const prizes = ['200 EUR', '150 EUR', '100 EUR'];
       <div class="oml-og__left">
         <h3 class="oml-og__title font-display">One More<br>League<br><em class="oml-og__year">2026</em></h3>
 
-        <p class="oml-og__dates">{variant === 'cover' ? label : dates}</p>
+        <p class="oml-og__dates">{variant === 'cover' || variant === 'youtube' ? label : dates}</p>
       </div>
 
       {variant === 'og' && (
@@ -610,5 +612,48 @@ const prizes = ['200 EUR', '150 EUR', '100 EUR'];
     font-size: 22rem;
     bottom: -0.3em;
     right: 1rem;
+  }
+
+  /* ── YOUTUBE COVER VARIANT (1920×1080 native, no top border) ──
+     Same layout as `cover`, scaled ×1.75 to fill the native frame instead
+     of being downsampled — YouTube shows these at full resolution. */
+  .oml-spotlight--youtube {
+    width: 1920px;
+    height: 1080px;
+    border: none;
+  }
+
+  .oml-spotlight--youtube::after {
+    background: linear-gradient(
+      105deg,
+      rgba(10, 8, 6, 0.78) 0%,
+      rgba(10, 8, 6, 0.5) 42%,
+      rgba(10, 8, 6, 0.14) 100%
+    );
+  }
+
+  .oml-spotlight--youtube .oml-og {
+    grid-template-columns: 1fr;
+  }
+
+  .oml-spotlight--youtube .oml-og__left {
+    padding: 6.125rem;
+  }
+
+  .oml-spotlight--youtube .oml-og__title {
+    font-size: 15.3125rem;
+    margin-bottom: 4.8125rem;
+  }
+
+  .oml-spotlight--youtube .oml-og__dates {
+    font-size: 7.875rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .oml-spotlight--youtube .oml-spotlight__watermark {
+    font-size: 38.5rem;
+    bottom: -0.3em;
+    right: 1.75rem;
   }
 </style>

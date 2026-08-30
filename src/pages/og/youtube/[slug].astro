@@ -1,0 +1,54 @@
+---
+// Snapshot sources for the 1920×1080 YouTube covers (no top border).
+// Add a stage here and it becomes renderable; scripts/render-og.sh picks the
+// list up from its own STAGES array.
+import '../../../styles/global.css';
+import OmlSpotlight from '../../../components/OmlSpotlight.astro';
+
+export function getStaticPaths() {
+  return [
+    ...[1, 2, 3, 4, 5].map((n) => ({
+      params: { slug: `series-${n}` },
+      props: { label: `Серия ${n}` },
+    })),
+    { params: { slug: 'final' }, props: { label: 'Финал' } },
+  ];
+}
+
+const { label } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>YouTube cover · One More League 2026 · {label}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="font-sans antialiased">
+    <OmlSpotlight variant="youtube" label={label} />
+  </body>
+</html>
+
+<style is:global>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    background: #0a0806;
+  }
+
+  /* keep the dev toolbar out of the screenshot */
+  astro-dev-toolbar {
+    display: none !important;
+  }
+</style>

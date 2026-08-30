@@ -6,7 +6,8 @@
 #
 # Each page is shot at its own canvas size, then downsampled to the delivered
 # size. The covers are laid out to read at 274×153 but shipped at 3× that
-# (822×459) so they stay sharp on retina displays.
+# (822×459) so they stay sharp on retina displays. The YouTube covers ship
+# at their native 1920×1080, no downsampling, no top border.
 
 set -euo pipefail
 
@@ -15,6 +16,7 @@ BASE_URL="${BASE_URL:-http://127.0.0.1:4321}"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 LEAGUE_REPO="${LEAGUE_REPO:-$ROOT/../onemore-league-2026}"
 COVER_DIR="$LEAGUE_REPO/assets/covers"
+YOUTUBE_DIR="$COVER_DIR/youtube"
 TMP_DIR="$(mktemp -d)"
 trap 'rm -rf "$TMP_DIR"' EXIT
 
@@ -25,7 +27,12 @@ if [[ -z "$CHROME" ]]; then
 fi
 
 # Keep this list in sync with getStaticPaths in src/pages/og/cover/[slug].astro
+# and src/pages/og/youtube/[slug].astro
 STAGES=(series-1 series-2 series-3 series-4 series-5 final)
+
+# the youtube/ subdir isn't tracked in this repo — provision it, but only if
+# the league repo itself is actually checked out where we expect it
+[[ -d "$COVER_DIR" ]] && mkdir -p "$YOUTUBE_DIR"
 
 # route | canvas WxH | delivered WxH | output path
 TARGETS=(
@@ -33,6 +40,9 @@ TARGETS=(
 )
 for stage in "${STAGES[@]}"; do
   TARGETS+=("og/cover/$stage|1096x612|822x459|$COVER_DIR/$stage.jpg")
+done
+for stage in "${STAGES[@]}"; do
+  TARGETS+=("og/youtube/$stage|1920x1080|1920x1080|$YOUTUBE_DIR/$stage.jpg")
 done
 
 shoot() {
@@ -54,10 +64,10 @@ shoot() {
     "$out"
 }
 
-# Exact hash of the title band, which every cover shares — they differ only in
-# the stage label below it.
+# Exact hash of a crop of the title band, which every cover in a set shares —
+# they differ only in the stage label below it.
 title_hash() {
-  magick "$1" -crop 822x300+0+0 +repage -format '%#' info:
+  magick "$1" -crop "$2" +repage -format '%#' info:
 }
 
 for target in "${TARGETS[@]}"; do
@@ -75,33 +85,38 @@ done
 # The webfonts come off the network, so a shot can occasionally land before
 # Cormorant is ready and fall back to a system serif. That is invisible in a
 # file listing, so verify it instead of trusting it.
-if [[ -d "$COVER_DIR" ]]; then
+verify_stage_set() {
+  local dir="$1" route_prefix="$2" canvas="$3" delivered="$4" crop="$5"
+  [[ -d "$dir" ]] || return 0
+
   for pass in 1 2 3; do
     declare -A counts=()
     declare -A hashes=()
     for stage in "${STAGES[@]}"; do
-      h="$(title_hash "$COVER_DIR/$stage.jpg")"
+      h="$(title_hash "$dir/$stage.jpg" "$crop")"
       hashes["$stage"]="$h"
       counts["$h"]=$(( ${counts["$h"]:-0} + 1 ))
     done
 
     # the hash most covers agree on is the correctly-rendered one
-    ref=''
-    best=0
+    local ref='' best=0
     for h in "${!counts[@]}"; do
       if (( counts["$h"] > best )); then best=${counts["$h"]}; ref="$h"; fi
     done
-    (( best == ${#STAGES[@]} )) && break
+    (( best == ${#STAGES[@]} )) && return 0
 
     for stage in "${STAGES[@]}"; do
       [[ "${hashes[$stage]}" == "$ref" ]] && continue
-      echo "re-render $stage — title band differs (webfont likely missed the shot)" >&2
-      shoot "og/cover/$stage" 1096x612 822x459 "$COVER_DIR/$stage.jpg"
+      echo "re-render $stage ($route_prefix) — title band differs (webfont likely missed the shot)" >&2
+      shoot "$route_prefix/$stage" "$canvas" "$delivered" "$dir/$stage.jpg"
     done
 
     if (( pass == 3 )); then
-      echo "covers still inconsistent after 3 passes" >&2
+      echo "$route_prefix covers still inconsistent after 3 passes" >&2
       exit 1
     fi
   done
-fi
+}
+
+verify_stage_set "$COVER_DIR" "og/cover" "1096x612" "822x459" "822x300+0+0"
+verify_stage_set "$YOUTUBE_DIR" "og/youtube" "1920x1080" "1920x1080" "1920x700+0+0"
